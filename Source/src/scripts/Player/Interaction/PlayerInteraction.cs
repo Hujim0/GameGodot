@@ -12,10 +12,7 @@ namespace GodotGame.PlayerBehaviour.Interaction
 
 		int lastIndexInList = 0;
 
-        public override void _Ready()
-        {
-			DialogueSystem.OnToggled += ctx => SetProcessUnhandledInput(!ctx);
-        }
+        public override void _Ready() => DialogueSystem.OnToggled += ctx => SetProcessUnhandledInput(!ctx);
 
         public override void _UnhandledInput(InputEvent @event)
 		{

@@ -5,7 +5,7 @@ namespace GodotGame.Dialogues.UI
 {
 	public class DialogueResponceUI : Control
 	{
-		const string PathToPrefab = "res://resrc/Prefabs/ResponceButton.tscn";
+		const string PathToPrefab = "res://src/prefabs/ResponceButton.tscn";
 
 		readonly float buttonHeight = 15f;
 

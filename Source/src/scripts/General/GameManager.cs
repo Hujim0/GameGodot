@@ -36,10 +36,10 @@ namespace GodotGame.General
         {
 /*            SerializationSystem.SaveDataGeneric<Preferences>(
                 new Preferences(string.Empty, Vector2.Zero, false, false),
-                "Preferences.json");
+                PreferencesFileName);
             SerializationSystem.SaveLocalizationDataGeneric<ItemsStruct>(
-                new ItemsStruct(new Item[] { new Item(), new Item() }), 
-                @"ru\Items.json");*/
+                new ItemsStruct(new Item[] { new Item(), new Item() }),
+                $@"ru\{ItemsFileName}");*/
 
             preferences = SerializationSystem.LoadDataGeneric<Preferences>
                 (PreferencesFileName);

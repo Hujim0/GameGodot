@@ -9,7 +9,7 @@ namespace GodotGame.Dialogues.UI
 	{
 		int lastCharacterCount = 0;
 
-		const string PathToCharacterPrefab = "res://resrc/Prefabs/Character.tscn";
+		const string PathToCharacterPrefab = "res://src/prefabs/Character.tscn";
 
 		PackedScene CharacterPrefab = GD.Load<PackedScene>(PathToCharacterPrefab);
 

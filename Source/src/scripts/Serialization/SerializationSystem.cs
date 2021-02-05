@@ -212,7 +212,7 @@ namespace GodotGame.Serialization
 		public static void GetPaths()
 		{
 			
-			AbsolutePathToData = $@"{Directory.GetParent(Path.GetFullPath(PathToGodot)).Parent.FullName}\data\";
+			AbsolutePathToData = $@"{Directory.GetParent(Path.GetFullPath(PathToGodot)).Parent.FullName}\data\json\";
 
 			AbsolutePathToLanguages = $@"{AbsolutePathToData}{PathToLanguages}";
 
