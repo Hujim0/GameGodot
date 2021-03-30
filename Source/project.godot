@@ -64,10 +64,15 @@ ui_down={
  ]
 }
 
+[locale]
+
+locale_filter=[ 0, [ "en", "ru" ] ]
+
 [rendering]
 
 quality/intended_usage/framebuffer_allocation=0
 quality/intended_usage/framebuffer_allocation.mobile=1
 quality/2d/use_pixel_snap=true
 quality/filters/anisotropic_filter_level=1
+batching/precision/uv_contract=true
 environment/default_environment="res://default_env.tres"

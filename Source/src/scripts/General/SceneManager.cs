@@ -13,6 +13,8 @@ namespace GodotGame
 
 		public static Action SceneLoaded;
 
+		static bool isPlayerReady = false;
+
 		public override void _Ready()
 		{
 			currentScene = GetNode(NodePathToCurrentScene);
@@ -62,6 +64,11 @@ namespace GodotGame
 		public static void QuitApplication()
 		{
 			currentScene.GetTree().Quit();
+		}
+
+		public static void InstantiatePlayer()
+		{
+
 		}
 	}
 }

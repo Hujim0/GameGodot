@@ -77,32 +77,31 @@ namespace GodotGame.UI
 			{
 				string newSentence = currentSentence.Remove(0, lastCharIndex);
 
-/*				GD.Print(": " + newSentence);
-*/
-				string tag = newSentence.Split(tagBoundary, StringSplitOptions.RemoveEmptyEntries)[0];
+                GD.Print(": " + newSentence);
+
+                string tag = newSentence.Split(tagBoundary, StringSplitOptions.RemoveEmptyEntries)[0];
 				string keyWord = tag.Split(seperator, StringSplitOptions.RemoveEmptyEntries)[0];
-/*				GD.Print("tag: " + tag);*/
+                GD.Print("tag: " + tag);
 
-				if (keyWord.StartsWith("/")) keyWord = keyWord.Remove(0, 1);
-/*				GD.Print(keyWord);*/
+                if (keyWord.StartsWith("/")) keyWord = keyWord.Remove(0, 1);
+                GD.Print("keyword: " + keyWord);
 
-				if (isBBcodeTag(keyWord))
-				{
-					int length = tag.Length() + 2; //'[', ']'
-					lastCharIndex += length;
+                int length = tag.Length() + 2; //'[', ']'
+				lastCharIndex += length;
 
-					AppendBbcode($"[{tag}]");
+				if (tag == "PlayerName") GD.Print("Catch");
 
-					currentSentenceCharCount -= length;
+				AppendBbcode($"[{tag}]");
+
+				currentSentenceCharCount -= length;
 /*
-					GD.Print(lastCharIndex);
-					GD.Print($"{Text.Length}/{currentSentenceCharCount}");
+				GD.Print(lastCharIndex);
+				GD.Print($"{Text.Length}/{currentSentenceCharCount}");
 */
-					if (currentSentenceCharCount == Text.Length) Stop();
-					if (BbcodeText == currentSentence) Stop();
+				if (currentSentenceCharCount == Text.Length) Stop();
+				if (BbcodeText == currentSentence) Stop();
 
-					OnTimerTimeout();
-				}
+				OnTimerTimeout();
 			}
 
 			AppendBbcode(chars[lastCharIndex].ToString());
@@ -113,7 +112,7 @@ namespace GodotGame.UI
 			if (BbcodeText == currentSentence) Stop();
 		}
 
-		bool isBBcodeTag(string input)
+/*		bool isBBcodeTag(string input)
 		{
 			switch (input)
 			{
@@ -162,6 +161,6 @@ namespace GodotGame.UI
 				default:
 					return false;
 			}
-		}
+		}*/
 	}
 }

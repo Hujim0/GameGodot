@@ -37,18 +37,18 @@ namespace GodotGame.UI
 			OS.WindowFullscreen = value;
 
 			if (value)
-            {
+			{
 				OS.WindowSize = OS.GetScreenSize();
 				return;
-            }
+			}
 
 			OS.WindowSize = new Vector2(1280, 720);
 			OS.CenterWindow();
 		}
 
 		public static void SetVsync(bool value)
-        {
+		{
 			OS.VsyncEnabled = value;
-        }
+		}
 	}
 }

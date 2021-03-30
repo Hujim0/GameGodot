@@ -1,0 +1,119 @@
+{
+  "prior": 0,
+  "panels": [
+    {
+      "name": "Френк",
+      "txt": "Вульф иди сюда",
+      "time": 0.05,
+      "chars": [
+        {
+          "talk": "fr_default",
+          "end": "fr_default"
+        }
+      ]
+    },
+    {
+      "name": "Френк",
+      "txt": "я хочу [wave]пофреничть",
+      "time": 0.05,
+      "chars": [
+       {
+          "talk": "fr_shying",
+          "end": "fr_shy"
+        }
+      ]
+    },
+    {
+      "name": "Френк",
+      "txt": "[wave amp=10]Дааааааа",
+      "time": 0.1,
+      "chars": [
+       {
+          "talk": "fr_shy",
+          "end": "fr_shy"
+        }
+      ]
+    },
+    {
+      "name": "Френк",
+      "txt": "[wave amp=15 freq=10][color=gray]мммммм...",
+      "time": 0.1,
+      "chars": [
+       {
+          "talk": "fr_shy",
+          "end": "fr_shy"
+        }
+      ]
+    },
+    {
+      "name": "Френк",
+      "txt": "[wave freq=15 amp=20][shake rate=80 level=7][color=#FF69B4]Аааааххх...",
+      "time": 0.1,
+      "chars": [
+       {
+          "talk": "fr_shy",
+          "end": "fr_shy"
+        }
+      ]
+    },
+    {
+      "name": "Френк",
+      "txt": "[shake rate=100 level=15][wave freq=20 amp=20][color=#FF69B4]Дааааа папочка...",
+      "time": 0.1,
+      "chars": [
+       {
+          "talk": "fr_shy",
+          "end": "fr_shy"
+        }
+      ]
+    },
+    {
+      "name": "Френк",
+      "txt": "[wave freq=30 amp=25][shake rate=120 level=30][color=#FF69B4]ААааахх ааахх!!!",
+      "time": 0.1,
+      "chars": [
+       {
+          "talk": "fr_shy",
+          "end": "fr_shy"
+        }
+      ]
+    },
+    {
+      "name": "???",
+      "txt": "Проблемы с доступом к joycasino.com?",
+      "time": 0.0125
+    },
+	{
+      "name": "???",
+      "txt": "Ну и че с ними делать?",
+      "time": 0.0125
+    },
+	{
+      "name": "???",
+      "txt": null,
+      "time": 0.0125,
+	  "resps": [
+		{
+			"responceText": "дать леща",
+			"panels": [
+				{
+					"name": "???",
+					"txt": "дальше не придумал",
+					"time": 0.05
+				}
+			]
+		},		
+		{
+			"responceText": "сломать  колени",
+			"panels": [
+				{
+					"name": "???",
+					"txt": "дальше не придумал",
+					"time": 0.05
+				}
+			]
+		}
+	  ]
+    }
+  ]
+}

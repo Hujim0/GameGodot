@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/visuals/textures/Player/sprite_sheet.png" type="Texture" id=1]
-[ext_resource path="res://src/anims/Player/pl_idle.anim" type="Animation" id=2]
-[ext_resource path="res://src/anims/Player/pl_run.anim" type="Animation" id=3]
+[ext_resource path="res://src/visuals/anims/Player/pl_idle.anim" type="Animation" id=2]
+[ext_resource path="res://src/visuals/anims/Player/pl_run.anim" type="Animation" id=3]
+[ext_resource path="res://DontDestroyOnLoad.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/scripts/Player/Interaction/InteractionPoint.cs" type="Script" id=7]
 [ext_resource path="res://src/scripts/Player/Player.cs" type="Script" id=8]
 [ext_resource path="res://src/scripts/Camera/CameraOffset.cs" type="Script" id=13]
@@ -62,5 +63,7 @@ script = ExtResource( 17 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CurrentScene/Player/InteractionPivot/Position2D/InteractionArea"]
 self_modulate = Color( 0.54902, 0.458824, 1, 1 )
 shape = SubResource( 2 )
+
+[node name="DontDestroyOnLoad" parent="." instance=ExtResource( 4 )]
 [connection signal="body_entered" from="CurrentScene/Player/InteractionPivot/Position2D/InteractionArea" to="CurrentScene/Player/InteractionPivot/Position2D/InteractionArea" method="OnAreaEntered"]
 [connection signal="body_exited" from="CurrentScene/Player/InteractionPivot/Position2D/InteractionArea" to="CurrentScene/Player/InteractionPivot/Position2D/InteractionArea" method="OnAreaExited"]

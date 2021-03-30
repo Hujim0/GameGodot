@@ -19,5 +19,22 @@ namespace GodotGame.PlayerBehaviour.InventorySystem
         {
             Items = new Item[size];
         }
+
+        static public Inventory Empty => new Inventory
+        {
+            Items = new Item[Size]
+            {
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+            },
+        };
     }
 }

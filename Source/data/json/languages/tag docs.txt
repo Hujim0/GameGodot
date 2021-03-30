@@ -1,4 +1,0 @@
-<Player> - player name
-<Shake> </Shake> - shaky text
-<Floaty> </Floaty> - floaty text
-<Comment> </Comment> - grey text

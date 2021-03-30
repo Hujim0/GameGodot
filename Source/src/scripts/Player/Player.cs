@@ -123,7 +123,7 @@ namespace GodotGame.PlayerBehaviour
 
 			isRunning = velocity.Abs() > Vector2.Zero;
 		}
-        public override void _UnhandledInput(InputEvent @event)
+		public override void _UnhandledInput(InputEvent @event)
 		{
 			if (@event.IsEcho()) return;
 
