@@ -8,7 +8,7 @@ namespace GodotGame.General
     {
         const string ItemsFileName = "Items.json";
         const string PreferencesFileName = "Preferences.json";
-
+        const string PathToSaves = @"saves\save.json";
 
         public static readonly string[] AvalibleLanguages = { "ru", "en" };
 
@@ -31,6 +31,8 @@ namespace GodotGame.General
         }
 
         public static Item[] items;
+
+        public static GameSave СurrentSaveFile;
 
         public override void _EnterTree()
         {
@@ -60,6 +62,11 @@ namespace GodotGame.General
 
             Preferences = new Preferences(lang, preferences.resolution, preferences.fullscreen, preferences.vsync);
             LanguageChanged?.Invoke(lang);
+        }
+
+        public static void LoadSave()
+        {
+            СurrentSaveFile = SerializationSystem.LoadDataGeneric<GameSave>(PathToSaves);
         }
     }
 }

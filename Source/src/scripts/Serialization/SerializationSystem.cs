@@ -10,7 +10,6 @@ namespace GodotGame.Serialization
 		public const string PathToLanguages = @"languages\";
 		public const string PathToDialogues = @"dialogues\";
 
-		public static string AbsolutePathToLanguages = string.Empty;
 		public static string AbsolutePathToData = string.Empty;
 
 		public static bool isPathsReady = false;
@@ -26,7 +25,7 @@ namespace GodotGame.Serialization
 		/// <param name="data"></param>
 		/// <param name="path">
 		///     <summary>
-		///         Note: relative path from res:\\data\languages. Example:
+		///         Note: relative path from res:\\data\json\languages. Example:
 		///             <code>
 		///                 "{Language}\dialogues\{scene}\{npcName}\file.json"
 		///             </code>
@@ -36,7 +35,7 @@ namespace GodotGame.Serialization
 		{
 			if (!isPathsReady) GetPaths();
 
-			string truePath = $"{AbsolutePathToLanguages}{path}";
+			string truePath = $"{AbsolutePathToData}{PathToLanguages}{path}";
 
 			string dataInFile = JsonConvert.SerializeObject(data, Formatting.Indented);
 
@@ -56,7 +55,7 @@ namespace GodotGame.Serialization
 		/// <param name="data"></param>
 		/// <param name="path">
 		///     <summary>
-		///         Note: relative path from res:\\data. Example:
+		///         Note: relative path from res:\\datajson\. Example:
 		///             <code>
 		///                 "Preferences.json"
 		///             </code>
@@ -89,7 +88,7 @@ namespace GodotGame.Serialization
 		/// </summary>
 		/// <param name="directory">
 		///     <summary>
-		///         Note: relative path from res:\\data\languages\{ru||en}. No "\" at the end.
+		///         Note: relative path from res:\\data\json\languages\{ru||en}. No "\" at the end.
 		///             <code> 
 		///                 Example: "{Language}\{scene}\{npcName}\{Main||Secondary}" 
 		///             </code>
@@ -99,7 +98,7 @@ namespace GodotGame.Serialization
 		{
 			if (!isPathsReady) GetPaths();
 
-			string pathToDir = $"{AbsolutePathToLanguages}{directory}";
+			string pathToDir = $"{AbsolutePathToData}{PathToLanguages}{directory}";
 
 			Godot.GD.Print(pathToDir);
 
@@ -121,7 +120,7 @@ namespace GodotGame.Serialization
 		#endregion
 
 		/// <summary>
-		///     Note: relative path from res:\\data\languages
+		///     Note: relative path from res:\\data\json\languages
 		///         <code> 
 		///             Example for dialogue file: "{Language}\{scene}\{npcName}\{Main||Secondary}\{fileName}" 
 		///         </code>
@@ -144,7 +143,7 @@ namespace GodotGame.Serialization
 		{
 			if (!isPathsReady) GetPaths();
 
-			string pathToFile = $"{AbsolutePathToLanguages}{path}";
+			string pathToFile = $"{AbsolutePathToData}{PathToLanguages}{path}";
 
 			Godot.GD.Print(pathToFile);
 
@@ -153,7 +152,7 @@ namespace GodotGame.Serialization
 			return JsonConvert.DeserializeObject<T>(File.ReadAllText(pathToFile));
 		}
 		/// <summary>
-		///     Note: relative path from res:\\data\
+		///     Note: relative path from res:\\data\json\
 		///         <code> 
 		///             Example for file: "Preferences.json" 
 		///         </code>
@@ -162,7 +161,7 @@ namespace GodotGame.Serialization
 		/// <typeparam name="T"></typeparam>
 		/// <param name="path">
 		///     <summary>
-		///         Note: relative path from res:\\data\
+		///         Note: relative path from res:\\data\json\
 		///             <code> 
 		///                 Example for file: "Preferences.json" 
 		///             </code>
@@ -213,8 +212,6 @@ namespace GodotGame.Serialization
 		{
 			
 			AbsolutePathToData = $@"{Directory.GetParent(Path.GetFullPath(PathToGodot)).Parent.FullName}\data\json\";
-
-			AbsolutePathToLanguages = $@"{AbsolutePathToData}{PathToLanguages}";
 
 			isPathsReady = true;
 		}

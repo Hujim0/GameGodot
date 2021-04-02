@@ -1,5 +1,6 @@
 using Godot;
 using GodotGame.Dialogues;
+using GodotGame.General;
 using System;
 
 namespace GodotGame.UI
@@ -89,7 +90,7 @@ namespace GodotGame.UI
                 int length = tag.Length() + 2; //'[', ']'
 				lastCharIndex += length;
 
-				if (tag == "PlayerName") GD.Print("Catch");
+				if (tag == "PlayerName") AppendBbcode($"[{GameManager.GameSave}]");
 
 				AppendBbcode($"[{tag}]");
 

@@ -1,6 +1,6 @@
 using GodotGame.PlayerBehaviour.InventorySystem;
 
-public struct PlayerData
+public struct GameSave
 {
     public string playerName;
 
@@ -8,7 +8,9 @@ public struct PlayerData
 
     public Inventory inventory;
 
-    static public PlayerData Empty => new PlayerData
+    public int lastSavePoint;
+
+    static public GameSave Empty => new GameSave
     {
         playerName = string.Empty,
         isMale = false,
