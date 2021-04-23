@@ -5,10 +5,9 @@ namespace GodotGame.PlayerBehaviour.Interaction
 {
 	public abstract class IInteractableHighLightable : IInteractable
 	{
-		const string pathToHighlightMaterial = @"res://resrc/Shaders/OutlineShader/OutlineMaterial.material";
+		const string pathToHighlightMaterial = @"res://src/visuals/Shaders/OutlineShader/OutlineMaterial.material";
 
 		static readonly ShaderMaterial HighLightedMat = ResourceLoader.Load<ShaderMaterial>(pathToHighlightMaterial);
-
 		public override bool IsHighLighted
 		{
 			get => isHighLighted;

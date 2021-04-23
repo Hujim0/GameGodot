@@ -1,3 +1,21 @@
-[gd_scene format=2]
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/visuals/textures/Frenk/cock.png" type="Texture" id=1]
+[ext_resource path="res://src/scripts/Dialogues/Triggers/DialogueTriggerWithFlip.cs" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 4 )
 
 [node name="Node2D" type="YSort"]
+
+[node name="NPC" type="StaticBody2D" parent="."]
+
+[node name="cock" type="Sprite" parent="NPC"]
+position = Vector2( 131.311, -37.1241 )
+texture = ExtResource( 1 )
+offset = Vector2( 0, -32 )
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPC"]
+position = Vector2( 131, -39 )
+shape = SubResource( 1 )

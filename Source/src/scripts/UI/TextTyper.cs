@@ -90,7 +90,7 @@ namespace GodotGame.UI
                 int length = tag.Length() + 2; //'[', ']'
 				lastCharIndex += length;
 
-				if (tag == "PlayerName") AppendBbcode($"[{GameManager.GameSave}]");
+				if (tag == "PlayerName") AppendBbcode($"[{GameManager.ÑurrentSaveFile}]");
 
 				AppendBbcode($"[{tag}]");
 
