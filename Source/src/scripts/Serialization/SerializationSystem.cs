@@ -100,9 +100,9 @@ namespace GodotGame.Serialization
 
 			string pathToDir = $"{AbsolutePathToData}{PathToLanguages}{directory}";
 
-			Godot.GD.Print(pathToDir);
+			if (!Directory.Exists(pathToDir)) { Godot.GD.PrintErr($"Directory doesnt exist! {pathToDir}"); return null; }
 
-			if (!Directory.Exists(pathToDir)) return null;
+			Godot.GD.Print($"Directory {pathToDir}");
 
 			string[] paths =  Directory.GetFiles(pathToDir, "*");
 
@@ -145,9 +145,9 @@ namespace GodotGame.Serialization
 
 			string pathToFile = $"{AbsolutePathToData}{PathToLanguages}{path}";
 
-			Godot.GD.Print(pathToFile);
-
 			if (!File.Exists(pathToFile)) { Godot.GD.PrintErr($"Cant find file at {pathToFile}"); return default; }
+
+			Godot.GD.Print(pathToFile);
 
 			return JsonConvert.DeserializeObject<T>(File.ReadAllText(pathToFile));
 		}
