@@ -1,16 +1,12 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://resrc/Animations/Characters/Dialogue/Frenk/fr_default.anim" type="Animation" id=1]
-[ext_resource path="res://resrc/Animations/Characters/Dialogue/Frenk/fr_shy.anim" type="Animation" id=2]
-[ext_resource path="res://resrc/Animations/Characters/Dialogue/Frenk/fr_shying.anim" type="Animation" id=3]
-[ext_resource path="res://src/sprites/Dialogue/Frenk/Shy_anim/7.png" type="Texture" id=6]
+[ext_resource path="res://src/visuals/anims/Characters/Dialogue/Frenk/fr_default.anim" type="Animation" id=1]
+[ext_resource path="res://src/visuals/anims/Characters/Dialogue/Frenk/fr_shy.anim" type="Animation" id=2]
+[ext_resource path="res://src/visuals/anims/Characters/Dialogue/Frenk/fr_shying.anim" type="Animation" id=3]
+[ext_resource path="res://src/visuals/textures/Dialogue/Frenk/Shy_anim/7.png" type="Texture" id=6]
 [ext_resource path="res://src/scripts/Dialogues/CharacterScript.cs" type="Script" id=8]
 
-
-
-
-
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 resource_name = "null"
 length = 0.001
 tracks/0/type = "value"
@@ -39,6 +35,6 @@ __meta__ = {
 anims/fr_default = ExtResource( 1 )
 anims/fr_shy = ExtResource( 2 )
 anims/fr_shying = ExtResource( 3 )
-anims/null = SubResource( 2 )
+anims/null = SubResource( 1 )
 
 [node name="Tween" type="Tween" parent="."]

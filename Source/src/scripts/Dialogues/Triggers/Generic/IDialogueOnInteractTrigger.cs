@@ -51,6 +51,11 @@ namespace GodotGame.Dialogues
                 GD.Print(dil.panels[0].name);
                 GD.Print(dil.panels[0].txt);
             }
+            foreach (Dialogue dil in secondaryDialogues)
+            {
+                GD.Print(dil.panels[0].name);
+                GD.Print(dil.panels[0].txt);
+            }
         }
     }
 }

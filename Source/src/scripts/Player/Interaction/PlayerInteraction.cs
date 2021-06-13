@@ -23,6 +23,8 @@ namespace GodotGame.PlayerBehaviour.Interaction
 			if (list.Count - 1 != lastIndexInList) { lastIndexInList++; return; }
 
 			lastIndexInList = 0;
+
+			GD.Print("a");
 		}
 
 		public void OnAreaEntered(PhysicsBody2D node)

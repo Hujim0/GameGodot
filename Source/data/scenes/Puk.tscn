@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 4 )
 
-[node name="Node2D" type="YSort"]
+[node name="Puk" type="YSort"]
 
 [node name="NPC" type="StaticBody2D" parent="."]
 
