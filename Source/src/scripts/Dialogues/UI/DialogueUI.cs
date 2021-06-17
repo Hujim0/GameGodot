@@ -15,7 +15,6 @@ namespace GodotGame.Dialogues.UI
 		DialogueNameUI nameText = null;
 
 		CanvasModulate modulate = null;
-		Timer timerNode = null;
 		Tween tween = null;
 		TextTyper typer = null;
 
@@ -25,7 +24,6 @@ namespace GodotGame.Dialogues.UI
 
 		const string NodePathToTextTyper = "TextPanel/TextContainer/Text";
 		const string NodePathToName = "NamePanel/NameContainer/Label";
-		const string NodePathToTimer = "Timer";
 		const string NodePathToModulate = "CanvasModulate";
 		const string NodePathToTween = "Tween";
 
@@ -37,7 +35,6 @@ namespace GodotGame.Dialogues.UI
 		{
 			typer = GetNode<TextTyper>(NodePathToTextTyper);
 			nameText = GetNode<DialogueNameUI>(NodePathToName);
-			timerNode = GetNode<Timer>(NodePathToTimer);
 			modulate = GetNode<CanvasModulate>(NodePathToModulate);
 			tween = GetNode<Tween>(NodePathToTween);
 

@@ -2,7 +2,7 @@ using Godot;
 
 namespace GodotGame.Dialogues.UI
 {
-	public class DialogueNameUI : Label
+	public class DialogueNameUI : RichTextLabel
 	{
 		CanvasItem ParentPanel;
 
