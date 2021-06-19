@@ -75,14 +75,15 @@ namespace GodotGame.Dialogues.UI
 			for (int i = 0; i < list.Count; i++)
 			{
 				Vector2 textureSize = list[i].Texture.GetSize();
-				list[i].RectPosition = new Vector2(
-					viewportSize.x * (i + 1) / (list.Count + 1),
-					viewportSize.y)
-					//pivot offset
-					- new Vector2(textureSize.x / 2, textureSize.y);
-			}
+				float Scale = (textureSize.y * 0.075f) * (RectSize.y / RectSize.x);
 
-			GD.Print(viewportSize);
+				list[i].RectScale = new Vector2(Scale, Scale);
+				list[i].RectPosition = new Vector2(
+					RectSize.x * (i + 1) / (list.Count + 1),
+					Mathf.Floor(RectSize.y))
+					//pivot offset
+					- (new Vector2(textureSize.x / 2, textureSize.y) * Scale);
+			}
 		}
 
 		void UpdateCharactersTalk(CharacterExpression[] expressions)

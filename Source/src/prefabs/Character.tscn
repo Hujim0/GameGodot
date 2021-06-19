@@ -25,7 +25,7 @@ tracks/0/keys = {
 [node name="TextureRect" type="TextureRect"]
 size_flags_stretch_ratio = 0.0
 texture = ExtResource( 6 )
-stretch_mode = 3
+stretch_mode = 6
 script = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
