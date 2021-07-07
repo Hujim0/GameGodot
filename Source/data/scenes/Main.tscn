@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://src/visuals/textures/Player/sprite_sheet.png" type="Texture" id=1]
 [ext_resource path="res://src/visuals/anims/Player/pl_idle.anim" type="Animation" id=2]
@@ -8,20 +8,21 @@
 [ext_resource path="res://src/visuals/Shaders/Pixelate/Pixelate.shader" type="Shader" id=6]
 [ext_resource path="res://src/scripts/Player/Interaction/InteractionPoint.cs" type="Script" id=7]
 [ext_resource path="res://src/scripts/Player/Player.cs" type="Script" id=8]
-[ext_resource path="res://src/scripts/Camera/CameraOffset.cs" type="Script" id=13]
+[ext_resource path="res://src/scripts/Camera/Camera2DScript.cs" type="Script" id=9]
+[ext_resource path="res://src/scripts/Player/PlayerSpriteOffset.cs" type="Script" id=10]
 [ext_resource path="res://src/scripts/Player/Interaction/PlayerInteraction.cs" type="Script" id=17]
 [ext_resource path="res://src/scripts/General/SceneManager.cs" type="Script" id=21]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 3 )
 
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 13, 13 )
+
+[sub_resource type="ShaderMaterial" id=2]
 resource_local_to_scene = true
 shader = ExtResource( 6 )
-shader_param/size_x = 0.01
-shader_param/size_y = 0.001
-
-[sub_resource type="RectangleShape2D" id=4]
+shader_param/size = Vector2( 0.1, 0.1 )
 
 [node name="root" type="Node2D"]
 script = ExtResource( 21 )
@@ -31,48 +32,20 @@ script = ExtResource( 21 )
 [node name="Player" type="KinematicBody2D" parent="CurrentScene"]
 position = Vector2( 115, 104 )
 script = ExtResource( 8 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CurrentScene/Player"]
-position = Vector2( 0, -2 )
-shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="CurrentScene/Player"]
 texture = ExtResource( 1 )
 offset = Vector2( 0, -31 )
 hframes = 11
-frame = 3
+script = ExtResource( 10 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CurrentScene/Player"]
+position = Vector2( 0, -2 )
+shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CurrentScene/Player"]
 anims/pl_idle = ExtResource( 2 )
 anims/pl_run = ExtResource( 3 )
-
-[node name="CenterPivot" type="Position2D" parent="CurrentScene/Player"]
-position = Vector2( 1, -30 )
-
-[node name="CameraPivot" type="Position2D" parent="CurrentScene/Player/CenterPivot"]
-script = ExtResource( 13 )
-offset = Vector2( 0.3, 0.3 )
-
-[node name="Camera2D" type="Camera2D" parent="CurrentScene/Player/CenterPivot/CameraPivot"]
-modulate = Color( 0.443137, 0.443137, 0.443137, 1 )
-current = true
-zoom = Vector2( 0.3, 0.3 )
-process_mode = 0
-smoothing_enabled = true
-
-[node name="CanvasLayer" type="CanvasLayer" parent="CurrentScene/Player/CenterPivot/CameraPivot/Camera2D"]
-
-[node name="ColorRect" type="ColorRect" parent="CurrentScene/Player/CenterPivot/CameraPivot/Camera2D/CanvasLayer"]
-material = SubResource( 3 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-script = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="InteractionPivot" type="Position2D" parent="CurrentScene/Player"]
 position = Vector2( 0, -8 )
@@ -86,9 +59,34 @@ script = ExtResource( 17 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CurrentScene/Player/InteractionPivot/Position2D/InteractionArea"]
 self_modulate = Color( 0.54902, 0.458824, 1, 1 )
-shape = SubResource( 4 )
+shape = SubResource( 3 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+modulate = Color( 0.52549, 0.52549, 0.52549, 1 )
+position = Vector2( 116, 74 )
+current = true
+zoom = Vector2( 0.25, 0.25 )
+process_mode = 0
+editor_draw_drag_margin = true
+script = ExtResource( 9 )
+
+[node name="Tween" type="Tween" parent="Camera2D"]
+playback_process_mode = 0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
+
+[node name="ColorRect" type="ColorRect" parent="Camera2D/CanvasLayer"]
+visible = false
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="DontDestroyOnLoad" parent="." instance=ExtResource( 4 )]
+position = Vector2( 16.5, 6 )
 
 [connection signal="body_entered" from="CurrentScene/Player/InteractionPivot/Position2D/InteractionArea" to="CurrentScene/Player/InteractionPivot/Position2D/InteractionArea" method="OnAreaEntered"]
 [connection signal="body_exited" from="CurrentScene/Player/InteractionPivot/Position2D/InteractionArea" to="CurrentScene/Player/InteractionPivot/Position2D/InteractionArea" method="OnAreaExited"]

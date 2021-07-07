@@ -26,8 +26,6 @@ namespace GodotGame.PlayerBehaviour
 		}
 		public static Player Instance = null;
 
-		public static Camera2D cam = null;
-
 		public delegate void OnInputUpdate(Vector2 input);
 		public static OnInputUpdate InputUpdated;
 
@@ -62,7 +60,6 @@ namespace GodotGame.PlayerBehaviour
 			Instance = this;
 
 			anim = GetNode<AnimationPlayer>("AnimationPlayer");
-			cam = GetNode<Camera2D>("CenterPivot/CameraPivot/Camera2D");
 
 			DialogueSystem.OnToggled += SetPause;
 		}
@@ -154,11 +151,6 @@ namespace GodotGame.PlayerBehaviour
 			SetProcessUnhandledInput(!ctx);
 			SetPhysicsProcess(!ctx);
 			SetProcess(!ctx);
-		}
-		public static void SetSmoothing(bool state)
-		{
-			cam.SmoothingEnabled = state;
-			cam.ResetSmoothing();
 		}
 	}
 }

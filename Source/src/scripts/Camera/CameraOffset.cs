@@ -5,7 +5,14 @@ public class CameraOffset : Position2D
 {
 	[Export] public Vector2 offset;
 
-	public override void _Process(float delta)
+	public static Node2D Instance = null;
+
+    public override void _Ready()
+    {
+		Instance = this;
+    }
+
+    public override void _Process(float delta)
 	{
 		if (Player.Instance == null) return;
 

@@ -9,13 +9,38 @@ extents = Vector2( 8, 4 )
 [node name="Puk" type="YSort"]
 
 [node name="NPC" type="StaticBody2D" parent="."]
+position = Vector2( 131, -53 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="cock" type="Sprite" parent="NPC"]
-position = Vector2( 131.311, -37.1241 )
 texture = ExtResource( 1 )
 offset = Vector2( 0, -32 )
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NPC"]
-position = Vector2( 131, -39 )
 shape = SubResource( 1 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2( 122, -91 )
+rotation = 0.584803
+amount = 100
+lifetime = 2.0
+speed_scale = 0.68
+randomness = 0.1
+lifetime_randomness = 0.13
+emission_shape = 2
+emission_rect_extents = Vector2( 13.26, 2.168 )
+direction = Vector2( 1.557, 0 )
+spread = 91.49
+gravity = Vector2( 0, 96.751 )
+initial_velocity = 86.74
+initial_velocity_random = 0.22
+angular_velocity = 176.33
+angular_velocity_random = 0.22
+linear_accel = -28.04
+scale_amount = 4.0
+scale_amount_random = 1.0
+hue_variation = 1.0
+hue_variation_random = 1.0

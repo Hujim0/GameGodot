@@ -15,7 +15,7 @@ namespace GodotGame.UI
 
 		public readonly static Vector2 viewportSize = new Vector2(320, 180);
 
-		public override void _Ready()
+		public override void _EnterTree()
 		{
 			viewport = GetViewport();
 
