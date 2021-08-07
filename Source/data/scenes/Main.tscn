@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://src/visuals/textures/Player/sprite_sheet.png" type="Texture" id=1]
 [ext_resource path="res://src/visuals/anims/Player/pl_idle.anim" type="Animation" id=2]
 [ext_resource path="res://src/visuals/anims/Player/pl_run.anim" type="Animation" id=3]
+[ext_resource path="res://DontDestroyOnLoad.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/scripts/Player/Interaction/InteractionPoint.cs" type="Script" id=7]
 [ext_resource path="res://src/scripts/Player/Player.cs" type="Script" id=8]
 [ext_resource path="res://src/scripts/Camera/Camera2DScript.cs" type="Script" id=9]
@@ -97,6 +98,8 @@ script = ExtResource( 9 )
 
 [node name="Tween" type="Tween" parent="Control/ViewportContainer/Viewport/Camera2D"]
 playback_process_mode = 0
+
+[node name="DontDestroyOnLoad" parent="." instance=ExtResource( 4 )]
 
 [connection signal="body_entered" from="Control/ViewportContainer/Viewport/CurrentScene/Player/InteractionPivot/Position2D/InteractionArea" to="Control/ViewportContainer/Viewport/CurrentScene/Player/InteractionPivot/Position2D/InteractionArea" method="OnAreaEntered"]
 [connection signal="body_exited" from="Control/ViewportContainer/Viewport/CurrentScene/Player/InteractionPivot/Position2D/InteractionArea" to="Control/ViewportContainer/Viewport/CurrentScene/Player/InteractionPivot/Position2D/InteractionArea" method="OnAreaExited"]
