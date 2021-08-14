@@ -1,6 +1,7 @@
 ﻿using Godot;
 using GodotGame.PlayerBehaviour.InventorySystem;
 using GodotGame.Serialization;
+using System.Collections.Generic;
 
 namespace GodotGame.General
 {
@@ -22,7 +23,7 @@ namespace GodotGame.General
 
             set
             {
-                SerializationSystem.SaveDataGeneric<Preferences>(
+                SerializationSystem.ReplaceDataGeneric(
                     value,
                     PreferencesFileName);
 
@@ -32,7 +33,21 @@ namespace GodotGame.General
 
         public static Item[] items;
 
-        public static GameSave СurrentSaveFile;
+        static GameSave currentSaveFile;
+        public static GameSave СurrentSaveFile
+        {
+            get => currentSaveFile;
+
+            set
+            {
+                currentSaveFile = value;
+
+                GameEvents = new List<string>();
+                GameEvents.AddRange(value.currentEvents);
+            }
+        }
+
+        public static List<string> GameEvents;
 
         public override void _EnterTree()
         {
@@ -54,6 +69,17 @@ namespace GodotGame.General
             if (id >= items.Length) { GD.PrintErr("Item id beyond availible items!"); return null; }
 
             return items[id];
+        }
+
+        public static int GetRelationship(string npcname)
+        {
+            switch (npcname)
+            {
+                case "Frenk":
+                    return СurrentSaveFile.Frenk;
+                default:
+                    return 0;
+            }
         }
 
         public static void ChangeLanguage (string lang)

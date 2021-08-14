@@ -4,5 +4,5 @@ using System;
 [Serializable]
 public class NPCdata
 {
-    string npc_name;
+    public string npc_name;
 }

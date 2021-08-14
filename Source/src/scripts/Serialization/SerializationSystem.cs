@@ -1,5 +1,7 @@
 using GodotGame.Dialogues;
 using Newtonsoft.Json;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 namespace GodotGame.Serialization
@@ -14,24 +16,45 @@ namespace GodotGame.Serialization
 
 		public static bool isPathsReady = false;
 
-		#region save
+		#region getdata
 
 		/// <summary>
-		///     Save at given path. 
-		///         <code></code>
-		///     Note: read note for path param.
+		///     Gets all SubDirectory names from exact directory.
 		/// </summary>
-		/// 
-		/// <param name="data"></param>
 		/// <param name="path">
 		///     <summary>
-		///         Note: relative path from res:\\data\json\languages. Example:
-		///             <code>
-		///                 "{Language}\dialogues\{scene}\{npcName}\file.json"
+		///         Note: relative path from res:\\data\json\languages\.
+		///             <code> 
+		///                 Example: "{Language}\{scene}\{npcName}\{Main||Secondary}" 
 		///             </code>
 		///     </summary>
 		/// </param>
-		public static void SaveLocalizationDataGeneric<T>(object data, string path)
+		public static IEnumerable<string> GetDirectoryNames (string path)
+        {
+			return Directory.EnumerateDirectories($"{AbsolutePathToData}{PathToLanguages}{path}");
+        }
+
+
+        #endregion
+
+        #region save
+
+        /// <summary>
+        ///     Save at given path. 
+        ///         <code></code>
+        ///     Note: read note for path param.
+        /// </summary>
+        /// 
+        /// <param name="data"></param>
+        /// <param name="path">
+        ///     <summary>
+        ///         Note: relative path from res:\\data\json\languages. Example:
+        ///             <code>
+        ///                 "{Language}\dialogues\{scene}\{npcName}\file.json"
+        ///             </code>
+        ///     </summary>
+        /// </param>
+        public static void SaveLocalizationDataGeneric<T>(object data, string path)
 		{
 			if (!isPathsReady) GetPaths();
 
@@ -46,6 +69,8 @@ namespace GodotGame.Serialization
 			File.WriteAllText(truePath, dataInFile);
 		}
 
+
+
 		/// <summary>
 		///     Save at given path. 
 		///         <code></code>
@@ -55,13 +80,13 @@ namespace GodotGame.Serialization
 		/// <param name="data"></param>
 		/// <param name="path">
 		///     <summary>
-		///         Note: relative path from res:\\datajson\. Example:
+		///         Note: relative path from res:\\data\json\. Example:
 		///             <code>
 		///                 "Preferences.json"
 		///             </code>
 		///     </summary>
 		/// </param>
-		public static void SaveDataGeneric<T>(object data, string path)
+		public static void SaveDataGeneric(object data, string path)
 		{
 			if (!isPathsReady) GetPaths();
 
@@ -73,6 +98,36 @@ namespace GodotGame.Serialization
 
 			Godot.GD.Print(dataInFile);
 			if (!File.Exists(truePath)) Directory.CreateDirectory(Path.GetDirectoryName(truePath));
+			File.WriteAllText(truePath, dataInFile);
+		}
+
+		/// <summary>
+		///     Deletes if file already exist and saves at given path. 
+		///         <code></code>
+		///     Note: read note for path param.
+		/// </summary>
+		/// 
+		/// <param name="data"></param>
+		/// <param name="path">
+		///     <summary>
+		///         Note: relative path from res:\\data\json\. Example:
+		///             <code>
+		///                 "Preferences.json"
+		///             </code>
+		///     </summary>
+		/// </param>
+		public static void ReplaceDataGeneric(object data, string path)
+		{
+			if (!isPathsReady) GetPaths();
+
+			string truePath = $"{AbsolutePathToData}{path}";
+
+			string dataInFile = JsonConvert.SerializeObject(data, Formatting.Indented);
+
+			Godot.GD.Print(truePath);
+
+			Godot.GD.Print(dataInFile);
+			if (File.Exists(truePath)) File.Delete(truePath);
 			File.WriteAllText(truePath, dataInFile);
 		}
 
@@ -88,7 +143,7 @@ namespace GodotGame.Serialization
 		/// </summary>
 		/// <param name="directory">
 		///     <summary>
-		///         Note: relative path from res:\\data\json\languages\{ru||en}. No "\" at the end.
+		///         Note: relative path from res:\\data\json\languages\.
 		///             <code> 
 		///                 Example: "{Language}\{scene}\{npcName}\{Main||Secondary}" 
 		///             </code>

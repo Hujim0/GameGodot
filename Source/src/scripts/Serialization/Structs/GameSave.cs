@@ -1,19 +1,36 @@
 using GodotGame.PlayerBehaviour.InventorySystem;
+using System;
 
+[Serializable]
 public struct GameSave
 {
     public string playerName;
 
-    public bool isMale;
+    //public bool isMale;
+
+    public int lastSavePoint;
+
+    #region npcdata
+
+    public int Frenk;
+    //...
+
+    #endregion
 
     public Inventory inventory;
 
-    public int lastSavePoint;
+    public string[] currentEvents;
 
     static public GameSave Empty => new GameSave
     {
         playerName = string.Empty,
-        isMale = false,
+        //isMale = false,
+
+        Frenk = 0,
+
+
         inventory = Inventory.Empty,
+
+        currentEvents = new string[] { }
     };
 }
