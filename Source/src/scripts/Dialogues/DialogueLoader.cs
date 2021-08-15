@@ -14,35 +14,49 @@ public class DialogueLoader
     Dialogue[] resultdialogues;
     RandomNumberGenerator rng = new RandomNumberGenerator();
 
-    public DialogueLoader(string data_path, int arg = 0)
+    public DialogueLoader(string data_path, int arg = 0, string specialarg = "")
     {
-        string genericpath = $@"{GameManager.Preferences.language}\{SerializationSystem.PathToDialogues}{data_path}";
+        string genericpath = $@"{GameManager.Preferences.language}\{SerializationSystem.PathToDialogues}{data_path}\";
 
+  /*      SerializationSystem.SaveDataGeneric
+            (new NPCdata() { npc_name = "null" }, $@"{SerializationSystem.PathToLanguages}{genericpath}\{NPCDATAFILENAME}");
+*/
         NPCdata npc = SerializationSystem.LoadDataGeneric<NPCdata>
-            ($@"{genericpath}\{NPCDATAFILENAME}");
-        
+            ($@"{SerializationSystem.PathToLanguages}{genericpath}{NPCDATAFILENAME}");
+
         int relationship = GameManager.GetRelationship(npc.npc_name);
 
-        IEnumerable<string> events = SerializationSystem.GetDirectoryNames(genericpath);
-
-        string specialevent = string.Empty;
-
-        foreach (string eventname in events)
-        {
-            if (!GameManager.GameEvents.Contains(eventname)) continue;
-
-            specialevent = eventname;
-        }
+        GD.Print($"- NPC name: {npc.npc_name}, relationship: {relationship}");
 
         List<Dialogue> dialogues = new List<Dialogue>();
 
-        if (specialevent == string.Empty)
+        if (!string.IsNullOrEmpty(specialarg))
         {
-            dialogues.AddRange(SerializationSystem.LoadDialogues($@"{genericpath}\{STANDARTDIRECTORYNAME}\{relationship}"));
+            dialogues.AddRange(SerializationSystem.LoadDialogues($@"{genericpath}{specialarg}"));
         }
         else
         {
-            dialogues.AddRange(SerializationSystem.LoadDialogues($@"{genericpath}\{specialevent}"));
+            string specialevent = string.Empty;
+
+            IEnumerable<string> events = SerializationSystem.GetDirectoryNames(genericpath);
+
+            foreach (string eventname in events)
+            {
+                string neweventname = System.IO.Path.GetFileName(eventname);
+
+                if (!GameManager.GameEvents.Contains(neweventname)) continue;
+
+                specialevent = neweventname;
+            }
+
+            if (specialevent == string.Empty)
+            {
+                dialogues.AddRange(SerializationSystem.LoadDialogues($@"{genericpath}{STANDARTDIRECTORYNAME}{relationship}"));
+            }
+            else
+            {
+                dialogues.AddRange(SerializationSystem.LoadDialogues($@"{genericpath}{specialevent}"));
+            }
         }
 
         for (int i = 0; i < dialogues.Count; i++)

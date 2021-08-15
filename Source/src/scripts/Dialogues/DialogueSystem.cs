@@ -57,18 +57,19 @@ namespace GodotGame.Dialogues
 		}
 
 		public static void NextSentence()
-		{
-			if (dialoguePanels.Count == 0)
-			{
-				EndDialogue();
+        {
+            if (dialoguePanels.Count != 0)
+            {
+                DialoguePanel nextDialoguePanel = dialoguePanels.Dequeue();
+
+                OnPanelChanged?.Invoke(nextDialoguePanel);
+
 				return;
 			}
 
-			DialoguePanel nextDialoguePanel = dialoguePanels.Dequeue();
-
-			OnPanelChanged?.Invoke(nextDialoguePanel);
-		}
-		public static void EndDialogue()
+            EndDialogue();
+        }
+        public static void EndDialogue()
 		{
 			OnToggled?.Invoke(false);
 

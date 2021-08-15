@@ -1,11 +1,15 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/visuals/textures/Frenk/cock.png" type="Texture" id=1]
-[ext_resource path="res://src/scripts/Dialogues/Triggers/DialogueTriggerWithFlip.cs" type="Script" id=2]
+[ext_resource path="res://src/scripts/EventSystem/EventInteractionTrigger.cs" type="Script" id=2]
 [ext_resource path="res://src/visuals/textures/1626986113852.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 4 )
+
+[sub_resource type="Gradient" id=5]
+offsets = PoolRealArray( 0, 0.240741, 0.861111, 1 )
+colors = PoolColorArray( 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
 
 [sub_resource type="Shader" id=2]
 code = "// original wind shader from https://github.com/Maujoe/godot-simple-wind-shader-2d/tree/master/assets/maujoe.simple_wind_shader_2d
@@ -64,6 +68,9 @@ shader_param/distortion = 0.0
 shader_param/heightOffset = 0.746
 shader_param/offset = 0.0
 
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 16, 10 )
+
 [node name="Puk" type="YSort"]
 
 [node name="NPC" type="StaticBody2D" parent="."]
@@ -76,6 +83,7 @@ __meta__ = {
 texture = ExtResource( 1 )
 offset = Vector2( 0, -32 )
 script = ExtResource( 2 )
+data_path = "Puk\\NPC"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NPC"]
 shape = SubResource( 1 )
@@ -100,10 +108,20 @@ angular_velocity_random = 0.22
 linear_accel = -28.04
 scale_amount = 4.0
 scale_amount_random = 1.0
+color_ramp = SubResource( 5 )
 hue_variation = 1.0
 hue_variation_random = 1.0
 
-[node name="1626986113852" type="Sprite" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2( 0, 40 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="1626986113852" type="Sprite" parent="StaticBody2D"]
 material = SubResource( 3 )
-position = Vector2( -50, -195 )
 texture = ExtResource( 3 )
+offset = Vector2( 13, -150 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource( 4 )

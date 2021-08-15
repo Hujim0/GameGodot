@@ -68,35 +68,33 @@ namespace GodotGame.Dialogues.UI
 		}
 
 		void ShowNextPanel(DialoguePanel panel)
-		{
-			if (string.IsNullOrEmpty(panel.txt))
+        {
+            if (string.IsNullOrEmpty(panel.name))
             {
-				if (panel.resps == null) { GD.PrintErr("!!! Text and Responces are NULL !!!"); return; }
-
-				typer.Reset();
-
-				GD.Print(DialogueResponceUI.Instance);
-
-				DialogueResponceUI.Instance.InstantiateButtons(panel.resps);
-
-				return;
+                nameText.Hide(true);
+            }
+            else
+            {
+                nameText.Text = panel.name;
+                nameText.Hide(false);
             }
 
-			if (string.IsNullOrEmpty(panel.name))
+            if (!string.IsNullOrEmpty(panel.txt))
             {
-				nameText.Hide(true);
+                isTyping = true;
+
+                typer.TypeSentence(panel.txt, panel.time);
             }
-			else
+            else
             {
-				nameText.Text = panel.name;
-				nameText.Hide(false);
-			}
+                if (panel.resps == null) { GD.PrintErr("!!! Text and Responces are NULL !!!"); return; }
 
-			isTyping = true;
+                typer.Reset();
 
-			typer.TypeSentence(panel.txt, panel.time);
-		} 
-		void SetVisibleUI(bool visibility)
+                DialogueResponceUI.Instance.InstantiateButtons(panel.resps);
+            }
+        }
+        void SetVisibleUI(bool visibility)
 		{
 			if (visibility)
 			{

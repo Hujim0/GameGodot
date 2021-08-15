@@ -1,0 +1,17 @@
+{
+  "prior": 0,
+  "panels": [
+    {
+      "name": "",
+      "txt": "‡‡‡‡‡‡",
+      "time": 0.05,
+      "chars": [
+        {
+          "talk": "fr_default",
+          "end": "fr_default"
+        }
+      ],
+      "resps": null
+    }
+  ]
+}

@@ -11,6 +11,7 @@ namespace GodotGame.Serialization
 		public const string PathToGodot = @"res:";
 		public const string PathToLanguages = @"languages\";
 		public const string PathToDialogues = @"dialogues\";
+		public const string PathToSaves = @"saves\";
 
 		public static string AbsolutePathToData = string.Empty;
 
@@ -30,7 +31,8 @@ namespace GodotGame.Serialization
 		///     </summary>
 		/// </param>
 		public static IEnumerable<string> GetDirectoryNames (string path)
-        {
+        {		
+
 			return Directory.EnumerateDirectories($"{AbsolutePathToData}{PathToLanguages}{path}");
         }
 
@@ -141,7 +143,7 @@ namespace GodotGame.Serialization
 		/// <summary>
 		///     Gets all Dialogues from exact directory.
 		/// </summary>
-		/// <param name="directory">
+		/// <param name="path">
 		///     <summary>
 		///         Note: relative path from res:\\data\json\languages\.
 		///             <code> 
@@ -149,13 +151,15 @@ namespace GodotGame.Serialization
 		///             </code>
 		///     </summary>
 		/// </param>
-		public static Dialogue[] LoadDialogues(string directory)
+		public static Dialogue[] LoadDialogues(string path)
 		{
+			string directory = path;
+
 			if (!isPathsReady) GetPaths();
 
 			string pathToDir = $"{AbsolutePathToData}{PathToLanguages}{directory}";
 
-			Godot.GD.Print($"------------------------------- Dialogue load -------------------------------");
+			Godot.GD.Print($"	--- Dialogue load ---");
 
 			if (!Directory.Exists(pathToDir)) { Godot.GD.PrintErr($"Directory doesnt exist! {pathToDir}"); return null; }
 
@@ -170,21 +174,8 @@ namespace GodotGame.Serialization
 				Godot.GD.Print($"-- File #{i+1}");
 
 				dialogues[i] = LoadLocalizationDataGeneric<Dialogue>($@"{directory}\{Path.GetFileName(paths[i])}");
-				if (dialogues[i].panels[0].txt == null)
-				{
-					string responces = string.Empty;
 
-					foreach (DialogueResponce resp in dialogues[i].panels[0].resps)
-					{
-						responces += $"/{resp.responceText}";
-					}
-
-					Godot.GD.Print($"Choice: {responces}");
-				}
-				else
-                {
-					Godot.GD.Print($"Text: \"{dialogues[i].panels[0].txt}\"");
-                }
+				dialogues[i].DebugThisDialogue();
 
 /*				Godot.GD.Print("peenis");*/
 			}
@@ -222,7 +213,7 @@ namespace GodotGame.Serialization
 
 			if (!File.Exists(pathToFile)) { Godot.GD.PrintErr($"Cant find file at {pathToFile}"); return default; }
 
-			Godot.GD.Print(pathToFile);
+			Godot.GD.Print($"Loaded localization file from {pathToFile}");
 
 			return JsonConvert.DeserializeObject<T>(File.ReadAllText(pathToFile));
 		}
@@ -253,6 +244,8 @@ namespace GodotGame.Serialization
 			string pathToFile = $"{AbsolutePathToData}{path}";
 
 			if (!File.Exists(pathToFile)) { Godot.GD.PrintErr($"Cant find file at {pathToFile}"); return default; }
+
+			Godot.GD.Print($"Loaded generic data from {pathToFile}");
 
 			return JsonConvert.DeserializeObject<T>(File.ReadAllText(pathToFile));
 		}

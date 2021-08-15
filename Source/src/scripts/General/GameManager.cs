@@ -44,24 +44,36 @@ namespace GodotGame.General
 
                 GameEvents = new List<string>();
                 GameEvents.AddRange(value.currentEvents);
+
+                GD.Print($"- Current game events:");
+                foreach (string @event in value.currentEvents)
+                {
+                    GD.Print($"- \"{@event}\"");
+                }
+                
             }
         }
 
-        public static List<string> GameEvents;
+        public static List<string> GameEvents = new List<string>();
 
         public override void _EnterTree()
         {
-/*            SerializationSystem.SaveDataGeneric<Preferences>(
-                new Preferences(string.Empty, Vector2.Zero, false, false),
-                PreferencesFileName);
-            SerializationSystem.SaveLocalizationDataGeneric<ItemsStruct>(
-                new ItemsStruct(new Item[] { new Item(), new Item() }),
-                $@"ru\{ItemsFileName}");*/
-
+            /*            SerializationSystem.SaveDataGeneric<Preferences>(
+                            new Preferences(string.Empty, Vector2.Zero, false, false),
+                            PreferencesFileName);
+                        SerializationSystem.SaveLocalizationDataGeneric<ItemsStruct>(
+                            new ItemsStruct(new Item[] { new Item(), new Item() }),
+                            $@"ru\{ItemsFileName}");
+            */
+            
+            //SerializationSystem.ReplaceDataGeneric(new GameSave { currentEvents = new string[] { "da", "puk" } }, $@"{SerializationSystem.PathToSaves}Save.json");
+            
             preferences = SerializationSystem.LoadDataGeneric<Preferences>
                 (PreferencesFileName);
             items = SerializationSystem.LoadLocalizationDataGeneric<ItemsStruct>
                 ($@"{preferences.language}\{ItemsFileName}").items;
+            СurrentSaveFile = SerializationSystem.LoadDataGeneric<GameSave>
+                ($@"{SerializationSystem.PathToSaves}Save.json");
         }
 
         public static Item GetItem(int id)

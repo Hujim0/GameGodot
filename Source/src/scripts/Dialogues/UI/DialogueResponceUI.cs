@@ -78,8 +78,8 @@ namespace GodotGame.Dialogues.UI
 					}
 					/*<summary>
 						|--|---------|--|---------|--|
-							^       ^
-						offset button	|	|	offsetCount = responcesCount + 1
+						  ^       ^
+						offset  button	|	|	offsetCount = responcesCount + 1
 					</summary>*/
 				);
 			}

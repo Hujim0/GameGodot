@@ -20,5 +20,45 @@ namespace GodotGame.Dialogues
             prior = priority;
             panels = dialoguePanels;
         }
+
+        public void DebugThisDialogue()
+        {
+            if (panels[0].txt == null)
+            {
+                string responces = string.Empty;
+
+                foreach (DialogueResponce resp in panels[0].resps)
+                {
+                    responces += $"/{resp.responceText}";
+                }
+
+                GD.Print($"Choice: {responces}");
+            }
+            else
+            {
+                GD.Print($"Text: \"{panels[0].txt}\"");
+            }
+        }
+
+        public static void DebugDialogue(Dialogue dialogue)
+        {
+            Dialogue dil = dialogue;
+
+            if (dil.panels[0].txt == null)
+            {
+                string responces = string.Empty;
+
+                foreach (DialogueResponce resp in dil.panels[0].resps)
+                {
+                    responces += $"/{resp.responceText}";
+                }
+
+                GD.Print($"Choice: {responces}");
+            }
+            else
+            {
+                GD.Print($"Text: \"{dil.panels[0].txt}\"");
+            }
+        }
     }
 }
