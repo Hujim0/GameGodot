@@ -45,7 +45,14 @@ namespace GodotGame.EventSystem
                     break;
 
                 case EVENT_TYPE.InsertDialogue:
-                    //to do
+
+                    if (string.IsNullOrEmpty(data_path))
+                    { GD.PrintErr("!!!Event construction failed: data_path is null/empty!!!"); return; }
+
+                    DialogueLoader insertloader = new DialogueLoader(data_path, arg, specialarg);
+
+                    OnEventStarted += insertloader.StartDialogue;
+
                     break;
 
                 case EVENT_TYPE.SceneTransition:
@@ -53,14 +60,13 @@ namespace GodotGame.EventSystem
                     if (string.IsNullOrEmpty(data_path))
                     { GD.PrintErr("!!!Event construction failed: data_path is null/empty!!!"); return; }
 
-
-                    SceneManager.HardSceneChange(data_path);
+                    OnEventStarted += ChangeScene;
 
                     break;
 
                 case EVENT_TYPE.GiveItem:
-                    
-                    InventorySystem.AddItem(arg);
+
+                    OnEventStarted += GiveItem;
 
                     break;
 
@@ -73,6 +79,9 @@ namespace GodotGame.EventSystem
 
             GD.Print("  --- Event construction ended ---");
         }
+
+        void ChangeScene() => SceneManager.HardSceneChange(data_path);
+        void GiveItem() => InventorySystem.AddItem(arg);
 
         public void Invoke()
         {

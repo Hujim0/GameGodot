@@ -77,4 +77,11 @@ public class DialogueLoader
 
         DialogueSystem.StartDialogue(resultdialogues[rng.RandiRange(0, resultdialogues.Length - 1)]);
     }
+
+    public void InsertDialogues()
+    {
+        if (resultdialogues.Length == 1) { DialogueSystem.InsertDialoguePanels(resultdialogues[0].panels); return; }
+
+        DialogueSystem.InsertDialoguePanels(resultdialogues[rng.RandiRange(0, resultdialogues.Length - 1)].panels);
+    }
 }

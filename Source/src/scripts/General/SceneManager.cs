@@ -11,7 +11,11 @@ namespace GodotGame
 
 		public static Node currentScene = null;
 
-		public static Action SceneLoaded;
+		public static Action SceneStartedLoading;
+
+		public static bool isInLoad = false;
+
+		public static PackedScene sceneToApply = null;
 
 		static bool isPlayerReady = false;
 
@@ -19,7 +23,7 @@ namespace GodotGame
 		{
 			currentScene = GetNode(NodePathToCurrentScene);
 
-			HardSceneChange("Puk");
+			ChangeScene("Puk");
 		}
 
 		public static void HardSceneChange(string sceneName)
@@ -32,30 +36,69 @@ namespace GodotGame
 
 			currentScene.AddChild(scene, true);
 
-			SceneLoaded?.Invoke();
+			SceneStartedLoading?.Invoke();
 		}
 
-/*		public static void ChangeScene(string sceneName)
+		public static void ChangeScene(string sceneName)
 		{
+			GD.Print($"--- Loading scene: \"{sceneName}\" ---");
+
+			isInLoad = true;
+
+			SceneStartedLoading?.Invoke();
+
 			string path = $@"{PathToSceneFolder}/{sceneName}.tscn";
 
 			ResourceInteractiveLoader loader = ResourceLoader.LoadInteractive(path, "PackedScene");
 
-			Resource res = new Resource();
-			res.
+			while (true)
+			{
+				Error err = loader.Poll();
 
-			CleanScenes();
+				switch (err)
+				{
+					case Error.Ok:
+						
+						GD.Print($"- {Mathf.Floor((float)loader.GetStage() / (float)loader.GetStageCount() * 100f)}%");
+						
+						break;
 
-			currentScene.AddChild(scene, true);
+					case Error.FileEof:
 
-			SceneLoaded?.Invoke();
-		}*/
+						Resource res = loader.GetResource();
+
+						loader.Dispose();
+
+						GD.Print("- 100%");
+
+						if (res is PackedScene scene)
+							/*currentScene.AddChild(scene.Instance(), true);*/
+							sceneToApply = scene;
+
+						isInLoad = false;
+
+						return;
+
+					default:
+
+						GD.PrintErr($"!!! Scene load failed! {err} !!!");
+
+						return;
+				}
+			}
+		}
+
+		public static void ApplyChanges()
+		{
+			if (sceneToApply == null) return;
+			currentScene.AddChild(sceneToApply.Instance(), true);
+		}
 
 		public static void CleanScenes()
 		{
 			foreach (Node child in currentScene.GetChildren())
 			{
-				if (child.Name == "Player") continue;
+				if (child.Name == "Player" || child.Name == "Camera2D") continue;
 
 				child.QueueFree();
 			}
@@ -64,11 +107,6 @@ namespace GodotGame
 		public static void QuitApplication()
 		{
 			currentScene.GetTree().Quit();
-		}
-
-		public static void InstantiatePlayer()
-		{
-
 		}
 	}
 }

@@ -26,6 +26,7 @@ GameManager="*res://src/scripts/General/GameManager.cs"
 
 window/size/width=1280
 window/size/height=720
+window/size/resizable=false
 window/size/test_width=1280
 window/size/test_height=720
 window/vsync/use_vsync=false

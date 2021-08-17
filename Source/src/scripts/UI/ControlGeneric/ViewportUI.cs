@@ -15,16 +15,23 @@ namespace GodotGame.UI
 
 		public readonly static Vector2 viewportSize = new Vector2(320, 180);
 
+
+
 		public override void _EnterTree()
 		{
 			viewport = GetViewport();
 
 			viewport.Connect("size_changed", this, nameof(SizeChange));
+
+			RectSize = viewport.Size;
+
+			
 		}
 
 		public void SizeChange()
 		{
 			OnSizeChange?.Invoke(viewport.Size);
+			RectSize = viewport.Size;
 		}
 
 		public static void ChangeResolution(Vector2 res)
