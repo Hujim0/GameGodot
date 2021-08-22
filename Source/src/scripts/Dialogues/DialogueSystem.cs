@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace GodotGame.Dialogues
 {
-	public class DialogueSystem : Control
+	public static class DialogueSystem
 	{
 		#region VARIEBLES
 		public static bool IsDialogue { get; private set; }

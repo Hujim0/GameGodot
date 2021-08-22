@@ -5,6 +5,8 @@ using System;
 
 public class LoadingScreenUI : ColorRect
 {
+    const float TRANSITION_SPEED = 1f;
+
     Tween tween;
 
     public override void _Ready()
@@ -12,8 +14,6 @@ public class LoadingScreenUI : ColorRect
         tween = GetNode<Tween>("Tween");
 
         SceneManager.SceneStartedLoading += StartTransition;
-
-        tween.Connect("tween_completed", null, "LoadScene");
     }
 
     void StartTransition()
@@ -22,15 +22,19 @@ public class LoadingScreenUI : ColorRect
 
         Material.Set("shader_param/reverse", false);
 
-        tween.InterpolateProperty(this,
+        Material.Set("shader_param/progress", 0f);
+
+        tween.InterpolateProperty(Material,
             "shader_param/progress",
             0,
-            0.7f,
-            10f);
+            0.75f,
+            TRANSITION_SPEED);
         tween.Start();
+
+        tween.Connect("tween_completed", this, "InstantiateScene");
     }
 
-    public void LoadScene()
+    public void InstantiateScene(Godot.Object _, NodePath __)
     {
         while (SceneManager.isInLoad) { /*wait*/ }
 
@@ -40,11 +44,22 @@ public class LoadingScreenUI : ColorRect
 
         Material.Set("shader_param/reverse", true);
 
-        tween.InterpolateProperty(this,
+        Material.Set("shader_param/progress", 1f);
+
+        tween.InterpolateProperty(Material,
             "shader_param/progress",
             1,
-            0.3f,
-            10f);
+            0.25f,
+            TRANSITION_SPEED);
         tween.Start();
+
+        tween.Disconnect("tween_completed", this, "InstantiateScene");
+        tween.Connect("tween_completed", this, "StopTransition");
+    }
+
+    public void StopTransition(Godot.Object _, NodePath __)
+    {
+        SceneManager.inTransition = false;
+        tween.Disconnect("tween_completed", this, "StopTransition");
     }
 }

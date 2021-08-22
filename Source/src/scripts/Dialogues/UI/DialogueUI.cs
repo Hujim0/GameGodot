@@ -4,7 +4,7 @@ using System;
 
 namespace GodotGame.Dialogues.UI
 {
-	public class DialogueUI : DialogueSystem
+	public class DialogueUI : Control
 	{
 		public static Action TalkEnded;
 
@@ -38,10 +38,10 @@ namespace GodotGame.Dialogues.UI
 			modulate = GetNode<CanvasModulate>(NodePathToModulate);
 			tween = GetNode<Tween>(NodePathToTween);
 
-			OnToggled += SetVisibleUI;
-            OnToggled += SetProcessInput;
-		
-			OnPanelChanged += ShowNextPanel;
+			DialogueSystem.OnToggled += SetVisibleUI;
+			DialogueSystem.OnToggled += SetProcessInput;
+
+			DialogueSystem.OnPanelChanged += ShowNextPanel;
 
 			typer.StopedTyping += ResetTyping;
 
@@ -57,7 +57,7 @@ namespace GodotGame.Dialogues.UI
 			{
 				if (isTyping) { typer.Stop(); return; }
 
-				NextSentence();
+				DialogueSystem.NextSentence();
 			}
 		}
 

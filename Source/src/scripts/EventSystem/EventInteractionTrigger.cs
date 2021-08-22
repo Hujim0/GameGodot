@@ -10,7 +10,7 @@ namespace GodotGame.EventSystem
 
 		[Export] public string data_path;
 
-		[Export] public int arg;
+		[Export] public Vector2 arg;
 
 
 

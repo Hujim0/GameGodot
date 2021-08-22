@@ -5,87 +5,89 @@ using System;
 
 namespace GodotGame.EventSystem
 {
-    public enum EVENT_TYPE { StartDialogue, InsertDialogue, SceneTransition, GiveItem, SelfDestroy };
+	public enum EVENT_TYPE { StartDialogue, InsertDialogue, SceneTransition, GiveItem, SelfDestroy };
 
-    [Serializable]
-    public class Event : IEvent
-    {
+	[Serializable]
+	public class Event : IEvent
+	{
 
-        [Export] public EVENT_TYPE type;
+		[Export] public EVENT_TYPE type;
 
-        [Export] public string data_path = string.Empty;
+		[Export] public string data_path = string.Empty;
 
-        [Export] public int arg = 0;
+		[Export] public Vector2 arg = Vector2.Zero;
 
-        [Export] public string specialarg = string.Empty;
+		[Export] public string specialarg = string.Empty;
 
-        public Action OnEventStarted;
+		public Action OnEventStarted;
 
-        public Event(EVENT_TYPE type, string data_path, int arg = 0, string specialarg = "")
-        {
-            GD.Print("  --- Event construction ---");
-            GD.Print($"Type: {type}");
+		public Event(EVENT_TYPE type, string data_path, Vector2 arg = default, string specialarg = "")
+		{
+			GD.Print("  --- Event construction ---");
+			GD.Print($"Type: {type}");
 
-            this.type = type;
-            this.data_path = data_path;
-            this.arg = arg;
-            this.specialarg = specialarg;
+			this.type = type;
+			this.data_path = data_path;
+			this.arg = arg;
+			this.specialarg = specialarg;
 
-            switch (type)
-            {
-                case EVENT_TYPE.StartDialogue:
+			switch (type)
+			{
+				case EVENT_TYPE.StartDialogue:
 
-                    if (string.IsNullOrEmpty(data_path))
-                    { GD.PrintErr("!!!Event construction failed: data_path is null/empty!!!"); return; }
+					if (string.IsNullOrEmpty(data_path))
+					{ GD.PrintErr("!!!Event construction failed: data_path is null/empty!!!"); return; }
 
-                    DialogueLoader loader = new DialogueLoader(data_path, arg, specialarg);
+					DialogueLoader loader = new DialogueLoader(data_path, Mathf.FloorToInt(arg.x), specialarg);
 
-                    OnEventStarted += loader.StartDialogue;
+					OnEventStarted += loader.StartDialogue;
 
-                    break;
+					break;
 
-                case EVENT_TYPE.InsertDialogue:
+				case EVENT_TYPE.InsertDialogue:
 
-                    if (string.IsNullOrEmpty(data_path))
-                    { GD.PrintErr("!!!Event construction failed: data_path is null/empty!!!"); return; }
+					if (string.IsNullOrEmpty(data_path))
+					{ GD.PrintErr("!!!Event construction failed: data_path is null/empty!!!"); return; }
 
-                    DialogueLoader insertloader = new DialogueLoader(data_path, arg, specialarg);
+					DialogueLoader insertloader = new DialogueLoader(data_path, Mathf.FloorToInt(arg.x), specialarg);
 
-                    OnEventStarted += insertloader.StartDialogue;
+					OnEventStarted += insertloader.StartDialogue;
 
-                    break;
+					break;
 
-                case EVENT_TYPE.SceneTransition:
+				case EVENT_TYPE.SceneTransition:
 
-                    if (string.IsNullOrEmpty(data_path))
-                    { GD.PrintErr("!!!Event construction failed: data_path is null/empty!!!"); return; }
+					if (string.IsNullOrEmpty(data_path))
+					{ GD.PrintErr("!!!Event construction failed: data_path is null/empty!!!"); return; }
 
-                    OnEventStarted += ChangeScene;
+					OnEventStarted += ChangeScene;
 
-                    break;
+					GD.Print($"Scene name: \"{data_path}\"");
 
-                case EVENT_TYPE.GiveItem:
+					break;
 
-                    OnEventStarted += GiveItem;
+				case EVENT_TYPE.GiveItem:
 
-                    break;
+					OnEventStarted += GiveItem;
+
+					break;
 
 
-                default:
-                    GD.PrintErr("!!!Event construction failed: type is undefined!!!"); 
-                    return;
+				default:
+					GD.PrintErr("!!!Event construction failed: type is undefined!!!"); 
+					return;
 
-            }
+			}
 
-            GD.Print("  --- Event construction ended ---");
-        }
+			GD.Print("  --- Event construction ended ---");
+		}
 
-        void ChangeScene() => SceneManager.HardSceneChange(data_path);
-        void GiveItem() => InventorySystem.AddItem(arg);
+		void ChangeScene() => SceneManager.ChangeScene(data_path, arg);
+		void GiveItem() => InventorySystem.AddItem(Mathf.FloorToInt(arg.x));
 
-        public void Invoke()
-        {
-            OnEventStarted.Invoke();
-        }
-    }
+		public void Invoke()
+		{
+			OnEventStarted.Invoke();
+		}
+	}
 }

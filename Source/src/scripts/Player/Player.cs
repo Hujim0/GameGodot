@@ -62,9 +62,11 @@ namespace GodotGame.PlayerBehaviour
 			anim = GetNode<AnimationPlayer>("AnimationPlayer");
 
 			DialogueSystem.OnToggled += SetPause;
+			SceneManager.PlayerPosApply += ChangePosition;
 		}
 
-		public override void _Process(float delta)
+
+        public override void _Process(float delta)
 		{
 			//0.375 for first step
 			//0.45 for one step
@@ -152,5 +154,9 @@ namespace GodotGame.PlayerBehaviour
 			SetPhysicsProcess(!ctx);
 			SetProcess(!ctx);
 		}
+        private void ChangePosition(Vector2 pos)
+        {
+			Position = pos;
+        }
 	}
 }

@@ -1,17 +1,21 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/visuals/textures/Frenk/cock.png" type="Texture" id=1]
 [ext_resource path="res://src/scripts/EventSystem/EventInteractionTrigger.cs" type="Script" id=2]
 [ext_resource path="res://src/visuals/textures/1626986113852.png" type="Texture" id=3]
+[ext_resource path="res://src/visuals/textures/Scenes/Test/Atlases/Door.atlastex" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 26, 5 )
+
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 8, 4 )
 
-[sub_resource type="Gradient" id=5]
+[sub_resource type="Gradient" id=3]
 offsets = PoolRealArray( 0, 0.240741, 0.861111, 1 )
 colors = PoolColorArray( 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="Shader" id=2]
+[sub_resource type="Shader" id=4]
 code = "// original wind shader from https://github.com/Maujoe/godot-simple-wind-shader-2d/tree/master/assets/maujoe.simple_wind_shader_2d
 // original script modified by HungryProton so that the assets are moving differently : https://pastebin.com/VL3AfV8D
 //
@@ -56,8 +60,8 @@ void vertex() {
     VERTEX.x += getWind(VERTEX.xy, UV, time);
 }"
 
-[sub_resource type="ShaderMaterial" id=3]
-shader = SubResource( 2 )
+[sub_resource type="ShaderMaterial" id=5]
+shader = SubResource( 4 )
 shader_param/speed = 1.0
 shader_param/minStrength = 0.067
 shader_param/maxStrength = 0.01
@@ -68,13 +72,27 @@ shader_param/distortion = 0.0
 shader_param/heightOffset = 0.746
 shader_param/offset = 0.0
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 16, 10 )
 
 [node name="Puk" type="YSort"]
+position = Vector2( 1, 0 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2( 192, -147 )
+
+[node name="Door" type="Sprite" parent="StaticBody2D2"]
+texture = ExtResource( 4 )
+offset = Vector2( 0, -32 )
+script = ExtResource( 2 )
+type = 2
+data_path = "Room"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+shape = SubResource( 1 )
 
 [node name="NPC" type="StaticBody2D" parent="."]
-position = Vector2( 131, -53 )
+position = Vector2( 67, -128 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -86,10 +104,10 @@ script = ExtResource( 2 )
 data_path = "Puk\\NPC"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NPC"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-position = Vector2( 122, -91 )
+position = Vector2( 58, -166 )
 rotation = 0.584803
 amount = 100
 lifetime = 2.0
@@ -108,20 +126,20 @@ angular_velocity_random = 0.22
 linear_accel = -28.04
 scale_amount = 4.0
 scale_amount_random = 1.0
-color_ramp = SubResource( 5 )
+color_ramp = SubResource( 3 )
 hue_variation = 1.0
 hue_variation_random = 1.0
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2( 0, 40 )
+position = Vector2( -64, -35 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="1626986113852" type="Sprite" parent="StaticBody2D"]
-material = SubResource( 3 )
+material = SubResource( 5 )
 texture = ExtResource( 3 )
 offset = Vector2( 13, -150 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-shape = SubResource( 4 )
+shape = SubResource( 6 )

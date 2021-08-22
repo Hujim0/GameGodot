@@ -13,17 +13,23 @@ namespace GodotGame
 
 		public static Action SceneStartedLoading;
 
+		public  delegate void OnPlayerPosApply(Vector2 pos);
+		public static event OnPlayerPosApply PlayerPosApply;
+
 		public static bool isInLoad = false;
+		public static bool inTransition = false;
 
 		public static PackedScene sceneToApply = null;
 
-		static bool isPlayerReady = false;
+		public static Vector2 playerPosToApply = Vector2.Zero;
 
+/*		static bool isPlayerReady = false;
+*/
 		public override void _Ready()
 		{
 			currentScene = GetNode(NodePathToCurrentScene);
 
-			ChangeScene("Puk");
+			ChangeScene("Puk", Vector2.Zero);
 		}
 
 		public static void HardSceneChange(string sceneName)
@@ -39,11 +45,16 @@ namespace GodotGame
 			SceneStartedLoading?.Invoke();
 		}
 
-		public static void ChangeScene(string sceneName)
+		public static void ChangeScene(string sceneName, Vector2 playerPos)
 		{
-			GD.Print($"--- Loading scene: \"{sceneName}\" ---");
+			if (inTransition) return;
+
+			GD.Print($"--- Loading scene: \"{sceneName}\" -------------");
 
 			isInLoad = true;
+			inTransition = true;
+
+			playerPosToApply = playerPos;
 
 			SceneStartedLoading?.Invoke();
 
@@ -91,7 +102,13 @@ namespace GodotGame
 		public static void ApplyChanges()
 		{
 			if (sceneToApply == null) return;
+
+			PlayerPosApply?.Invoke(playerPosToApply);
+
+			CleanScenes();
 			currentScene.AddChild(sceneToApply.Instance(), true);
+
+			GD.Print("--- Scene instantiated -------------");
 		}
 
 		public static void CleanScenes()

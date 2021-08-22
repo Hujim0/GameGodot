@@ -14,7 +14,7 @@ dest_files=[ "res://.import/stinka.png-dcd5b42f0c645f8b2701f35f23ae234a.stex" ]
 
 [params]
 
-compress/mode=3
+compress/mode=0
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

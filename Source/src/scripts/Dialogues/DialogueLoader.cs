@@ -22,7 +22,7 @@ public class DialogueLoader
             (new NPCdata() { npc_name = "null" }, $@"{SerializationSystem.PathToLanguages}{genericpath}\{NPCDATAFILENAME}");
 */
         NPCdata npc = SerializationSystem.LoadDataGeneric<NPCdata>
-            ($@"{SerializationSystem.PathToLanguages}{genericpath}{NPCDATAFILENAME}");
+            ($"{SerializationSystem.PathToLanguages}{genericpath}{NPCDATAFILENAME}");
 
         int relationship = GameManager.GetRelationship(npc.npc_name);
 
@@ -32,7 +32,7 @@ public class DialogueLoader
 
         if (!string.IsNullOrEmpty(specialarg))
         {
-            dialogues.AddRange(SerializationSystem.LoadDialogues($@"{genericpath}{specialarg}"));
+            dialogues.AddRange(SerializationSystem.LoadDialogues($"{genericpath}{specialarg}"));
         }
         else
         {
@@ -51,11 +51,11 @@ public class DialogueLoader
 
             if (specialevent == string.Empty)
             {
-                dialogues.AddRange(SerializationSystem.LoadDialogues($@"{genericpath}{STANDARTDIRECTORYNAME}{relationship}"));
+                dialogues.AddRange(SerializationSystem.LoadDialogues($"{genericpath}{STANDARTDIRECTORYNAME}{relationship}"));
             }
             else
             {
-                dialogues.AddRange(SerializationSystem.LoadDialogues($@"{genericpath}{specialevent}"));
+                dialogues.AddRange(SerializationSystem.LoadDialogues($"{genericpath}{specialevent}"));
             }
         }
 
