@@ -1,11 +1,10 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://src/visuals/textures/Player/sprite_sheet.png" type="Texture" id=1]
 [ext_resource path="res://src/visuals/anims/Player/pl_idle.anim" type="Animation" id=2]
 [ext_resource path="res://src/visuals/anims/Player/pl_run.anim" type="Animation" id=3]
 [ext_resource path="res://DontDestroyOnLoad.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/scripts/UI/LoadingScreenUI.cs" type="Script" id=5]
-[ext_resource path="res://src/visuals/Shaders/DiamodsTransition/DiamondsTransition.shader" type="Shader" id=6]
 [ext_resource path="res://src/scripts/Player/Interaction/InteractionPoint.cs" type="Script" id=7]
 [ext_resource path="res://src/scripts/Player/Player.cs" type="Script" id=8]
 [ext_resource path="res://src/scripts/Camera/Camera2DScript.cs" type="Script" id=9]
@@ -24,12 +23,6 @@ extents = Vector2( 7, 3 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 13, 13 )
-
-[sub_resource type="ShaderMaterial" id=5]
-shader = ExtResource( 6 )
-shader_param/progress = null
-shader_param/reverse = false
-shader_param/diamondPixelSize = 10.0
 
 [node name="root" type="Node2D"]
 script = ExtResource( 21 )
@@ -116,7 +109,7 @@ mouse_filter = 2
 input_pass_on_modal_close_click = false
 
 [node name="ColorRect" type="ColorRect" parent="Control/ViewportContainer/Viewport/LoadingTransition/Control"]
-material = SubResource( 5 )
+modulate = Color( 0, 0, 0, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )

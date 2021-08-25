@@ -34,6 +34,8 @@ namespace GodotGame.Dialogues
 
 		public static void StartDialogue(Dialogue _dialogue)
 		{
+			if (IsDialogue) return;
+
 			if (_dialogue == null) { GD.PrintErr($"!!! Dialogue is Null !!!"); return; }
 
 			if (_dialogue.panels == null || _dialogue.panels.Length == 0)

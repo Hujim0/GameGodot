@@ -1,5 +1,6 @@
 using Godot;
 using GodotGame.Dialogues;
+using GodotGame.EventSystem;
 using GodotGame.General;
 using GodotGame.Serialization;
 using System;
@@ -51,6 +52,21 @@ public class DialogueLoader
 
             if (specialevent == string.Empty)
             {
+/*                SerializationSystem.SaveDataGeneric(new Dialogue(
+
+                    0,
+                    new DialoguePanel[]
+                    {
+                        new DialoguePanel("asdasd",
+                        "text",
+                        0.05f,
+                        null,
+                        null,
+                        new Event(EVENT_TYPE.SceneTransition, "Room", Vector2.Zero)),
+                    }
+                ),
+                $"{genericpath}{STANDARTDIRECTORYNAME}{relationship}");
+*/
                 dialogues.AddRange(SerializationSystem.LoadDialogues($"{genericpath}{STANDARTDIRECTORYNAME}{relationship}"));
             }
             else
