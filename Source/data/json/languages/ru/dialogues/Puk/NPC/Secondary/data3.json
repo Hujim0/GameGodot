@@ -25,7 +25,16 @@
                   "end": "fr_default"
                 }
               ],
-              "resps": null
+              "resps": null,
+              "evnt": {
+                "type": 1,
+                "data_path": "Puk/NPC",
+                "arg": {
+                  "x": 0.0,
+                  "y": 0.0
+                },
+                "specialarg": null
+              }
             }
           ]
         },

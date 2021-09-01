@@ -1,4 +1,5 @@
 using Godot;
+using GodotGame.EventSystem;
 using GodotGame.UI;
 using System;
 
@@ -69,6 +70,15 @@ namespace GodotGame.Dialogues.UI
 
 		void ShowNextPanel(DialoguePanel panel)
         {
+/*			if (panel.evnt != null)
+            {
+				Event exec = new Event(panel.evnt.type, panel.evnt.data_path, panel.evnt.arg, panel.evnt.specialarg);
+
+				exec.Invoke();
+
+				DialogueSystem.NextSentence();
+            }*/
+
             if (string.IsNullOrEmpty(panel.name))
             {
                 nameText.Hide(true);

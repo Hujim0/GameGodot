@@ -5,7 +5,7 @@ namespace GodotGame
 {
 	public class SceneManager : Node
 	{
-		const string PathToSceneFolder = "res://data/Scenes";
+		const string PathToSceneFolder = "res://src/Scenes";
 
 		const string NodePathToCurrentScene = "Control/ViewportContainer/Viewport/CurrentScene";
 

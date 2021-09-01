@@ -30,12 +30,8 @@ namespace GodotGame.Serialization
 		///             </code>
 		///     </summary>
 		/// </param>
-		public static IEnumerable<string> GetDirectoryNames (string path)
-        {		
-
-			return Directory.EnumerateDirectories($"{AbsolutePathToData}{PathToLanguages}{path}");
-        }
-
+		public static IEnumerable<string> GetDirectoryNames (string path) => 
+			Directory.EnumerateDirectories($"{AbsolutePathToData}{PathToLanguages}{path}");
 
         #endregion
 
@@ -67,6 +63,7 @@ namespace GodotGame.Serialization
 			Godot.GD.Print(truePath);
 
 			Godot.GD.Print(dataInFile);
+
 			if(!File.Exists(truePath)) Directory.CreateDirectory(Path.GetDirectoryName(truePath));
 			File.WriteAllText(truePath, dataInFile);
 		}
@@ -132,7 +129,6 @@ namespace GodotGame.Serialization
 			if (File.Exists(truePath)) File.Delete(truePath);
 			File.WriteAllText(truePath, dataInFile);
 		}
-
 
 		#endregion
 
@@ -213,10 +209,11 @@ namespace GodotGame.Serialization
 
 			if (!File.Exists(pathToFile)) { Godot.GD.PrintErr($"Cant find file at {pathToFile}"); return default; }
 
-			Godot.GD.Print($"Loaded localization file from {pathToFile}");
+			Godot.GD.Print($"Loaded localization file from \"{pathToFile}\"");
 
 			return JsonConvert.DeserializeObject<T>(File.ReadAllText(pathToFile));
 		}
+
 		/// <summary>
 		///     Note: relative path from res:\\data\json\
 		///         <code> 
@@ -245,7 +242,7 @@ namespace GodotGame.Serialization
 
 			if (!File.Exists(pathToFile)) { Godot.GD.PrintErr($"Cant find file at {pathToFile}"); return default; }
 
-			Godot.GD.Print($"Loaded generic data from {pathToFile}");
+			Godot.GD.Print($"Loaded generic data from \"{pathToFile}\"");
 
 			return JsonConvert.DeserializeObject<T>(File.ReadAllText(pathToFile));
 		}
@@ -278,7 +275,6 @@ namespace GodotGame.Serialization
 
 		public static void GetPaths()
 		{
-			
 			AbsolutePathToData = $@"{Directory.GetParent(Path.GetFullPath(PathToGodot)).Parent.FullName}\data\json\";
 
 			isPathsReady = true;

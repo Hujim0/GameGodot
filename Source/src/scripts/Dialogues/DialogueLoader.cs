@@ -12,8 +12,8 @@ public class DialogueLoader
 
     const string STANDARTDIRECTORYNAME = @"Standart\";
 
-    Dialogue[] resultdialogues;
-    RandomNumberGenerator rng = new RandomNumberGenerator();
+    Dialogue[] resultdialogues = null;
+    readonly RandomNumberGenerator rng = new RandomNumberGenerator();
 
     public DialogueLoader(string data_path, int arg = 0, string specialarg = "")
     {
@@ -28,6 +28,8 @@ public class DialogueLoader
         int relationship = GameManager.GetRelationship(npc.npc_name);
 
         GD.Print($"- NPC name: {npc.npc_name}, relationship: {relationship}");
+
+        GD.Print($"- Targeted priority: {arg}");
 
         List<Dialogue> dialogues = new List<Dialogue>();
 
@@ -52,25 +54,31 @@ public class DialogueLoader
 
             if (specialevent == string.Empty)
             {
-/*                SerializationSystem.SaveDataGeneric(new Dialogue(
+                /*                SerializationSystem.SaveDataGeneric(new Event(EVENT_TYPE.SceneTransition, "Room", Vector2.Zero)*//*new Dialogue(
 
-                    0,
-                    new DialoguePanel[]
-                    {
-                        new DialoguePanel("asdasd",
-                        "text",
-                        0.05f,
-                        null,
-                        null,
-                        new Event(EVENT_TYPE.SceneTransition, "Room", Vector2.Zero)),
-                    }
-                ),
-                $"{genericpath}{STANDARTDIRECTORYNAME}{relationship}");
-*/
+                                    0,
+                                    new DialoguePanel[]
+                                    {
+                                                        new DialoguePanel("asdasd",
+                                                        "text",
+                                                        0.05f,
+                                                        null,
+                                                        null,
+                                                        null),*//*)*//*
+                                    //}
+                                ,
+                                $@"{genericpath}{STANDARTDIRECTORYNAME}{relationship}\datatest.json");
+                */
+
+                GD.Print($"- No Special Event found, loading standart");
+
+
                 dialogues.AddRange(SerializationSystem.LoadDialogues($"{genericpath}{STANDARTDIRECTORYNAME}{relationship}"));
             }
             else
             {
+                GD.Print($"- Special Event found: \"{specialevent}\"");
+
                 dialogues.AddRange(SerializationSystem.LoadDialogues($"{genericpath}{specialevent}"));
             }
         }
@@ -84,11 +92,20 @@ public class DialogueLoader
             i--;
         }
 
+        if (dialogues.Count == 0) 
+        { 
+            GD.PrintErr
+                ($"!!! Failed to find any dialogues with {npc.npc_name}, in \"{data_path}\", arg: {arg}, special_events: \"{specialarg}\" !!!");
+            return;
+        }
+
         resultdialogues = dialogues.ToArray();
     }
 
     public void StartDialogue()
     {
+        if (resultdialogues == null) return;
+
         if (resultdialogues.Length == 1) { DialogueSystem.StartDialogue(resultdialogues[0]); return; }
 
         DialogueSystem.StartDialogue(resultdialogues[rng.RandiRange(0, resultdialogues.Length - 1)]);

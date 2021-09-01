@@ -1,12 +1,11 @@
 {
   "playerName": null,
   "lastSavePoint": 0,
-  "Frenk": 0,
+  "Frenk": 1,
   "inventory": {
     "Items": null
   },
   "currentEvents": [
-    "niggers",
-    "puk"
+    "Secondary"
   ]
 }

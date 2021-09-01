@@ -63,6 +63,8 @@ namespace GodotGame.EventSystem
 					OnEventStarted += ChangeScene;
 
 					GD.Print($"Scene name: \"{data_path}\"");
+					GD.Print($"Spawn at: {arg}");
+
 
 					break;
 
