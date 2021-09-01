@@ -12,11 +12,9 @@ namespace GodotGame.EventSystem
 
 		[Export] public Vector2 arg;
 
-
-
 		public Action OnEventStarted;
 
-		IEvent @event;
+		Event @event;
 
 		public override void _Ready()
 		{

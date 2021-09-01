@@ -1,21 +1,17 @@
 using Godot;
 using System;
 
-public class EventData : Node
+namespace GodotGame.EventSystem
 {
-    // Declare member variables here. Examples:
-    // private int a = 2;
-    // private string b = "text";
+	[Serializable]
+	public class EventData
+	{
+		[Export] public EVENT_TYPE type;
 
-    // Called when the node enters the scene tree for the first time.
-    public override void _Ready()
-    {
-        
-    }
+		[Export] public string data_path = string.Empty;
 
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
+		[Export] public Vector2 arg = Vector2.Zero;
+
+		[Export] public string specialarg = string.Empty;
+	}
 }

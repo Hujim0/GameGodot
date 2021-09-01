@@ -20,6 +20,8 @@ namespace GodotGame.Dialogues
 
         public static void InsertDialoguePanels(DialoguePanel[] panels)
         {
+			GD.Print("!! Inserting dialogues");
+
 			DialoguePanel[] currentPanels = new DialoguePanel[dialoguePanels.Count];
 			dialoguePanels.CopyTo(currentPanels, 0);
 

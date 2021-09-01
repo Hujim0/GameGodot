@@ -25,7 +25,9 @@
                   "end": "fr_default"
                 }
               ],
-              "resps": null,
+              "resps": null
+            },
+            {
               "evnt": {
                 "type": 1,
                 "data_path": "Puk/NPC",

@@ -7,18 +7,8 @@ namespace GodotGame.EventSystem
 {
 	public enum EVENT_TYPE { StartDialogue, InsertDialogue, SceneTransition, GiveItem, SelfDestroy };
 
-	[Serializable]
-	public class Event : IEvent
+	public class Event : EventData
 	{
-
-		[Export] public EVENT_TYPE type;
-
-		[Export] public string data_path = string.Empty;
-
-		[Export] public Vector2 arg = Vector2.Zero;
-
-		[Export] public string specialarg = string.Empty;
-
 		public Action OnEventStarted;
 
 		public Event(EVENT_TYPE type, string data_path, Vector2 arg = default, string specialarg = "")
@@ -51,7 +41,7 @@ namespace GodotGame.EventSystem
 
 					DialogueLoader insertloader = new DialogueLoader(data_path, Mathf.FloorToInt(arg.x), specialarg);
 
-					OnEventStarted += insertloader.StartDialogue;
+					OnEventStarted += insertloader.InsertDialogues;
 
 					break;
 

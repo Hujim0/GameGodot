@@ -16,7 +16,7 @@ namespace GodotGame.Dialogues
 
         [Export] public DialogueResponce[] resps;
 
-        [Export] public Event evnt = null;
+        [Export] public EventData evnt = null;
 
         /*        [Export] public Sound sound;*/
 
@@ -26,7 +26,7 @@ namespace GodotGame.Dialogues
         /// <param name="characters"></param>
         /// <param name="responces"></param>
         /// <param name="event"></param>
-        public DialoguePanel(string name, string text, float timeBetweenCharacters = 0.05f, CharacterExpression[] characters = null, DialogueResponce[] responces = null, Event @event = null)
+        public DialoguePanel(string name, string text, float timeBetweenCharacters = 0.05f, CharacterExpression[] characters = null, DialogueResponce[] responces = null, EventData @event = null)
         {
             this.name = name;
             txt = text;

@@ -54,7 +54,7 @@ namespace GodotGame.Dialogues.UI
 		{
 			if (DialogueResponceUI.inChoose) return;
 
-			if (Input.IsActionJustPressed(INPUT_NEXT))
+			if (Input.IsActionJustReleased(INPUT_NEXT))
 			{
 				if (isTyping) { typer.Stop(); return; }
 
@@ -70,14 +70,13 @@ namespace GodotGame.Dialogues.UI
 
 		void ShowNextPanel(DialoguePanel panel)
         {
-/*			if (panel.evnt != null)
+            if (panel.evnt != null)
             {
-				Event exec = new Event(panel.evnt.type, panel.evnt.data_path, panel.evnt.arg, panel.evnt.specialarg);
+                new Event(panel.evnt.type, panel.evnt.data_path, panel.evnt.arg, panel.evnt.specialarg).Invoke();
 
-				exec.Invoke();
-
-				DialogueSystem.NextSentence();
-            }*/
+                DialogueSystem.NextSentence();
+				return;
+            }
 
             if (string.IsNullOrEmpty(panel.name))
             {
