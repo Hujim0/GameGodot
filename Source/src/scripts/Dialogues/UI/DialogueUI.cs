@@ -18,6 +18,7 @@ namespace GodotGame.Dialogues.UI
 		CanvasModulate modulate = null;
 		Tween tween = null;
 		TextTyper typer = null;
+		Timer timer = null;
 
 		#region consts
 
@@ -38,6 +39,7 @@ namespace GodotGame.Dialogues.UI
 			nameText = GetNode<DialogueNameUI>(NodePathToName);
 			modulate = GetNode<CanvasModulate>(NodePathToModulate);
 			tween = GetNode<Tween>(NodePathToTween);
+			timer = GetNode<Timer>("Timer");
 
 			DialogueSystem.OnToggled += SetVisibleUI;
 			DialogueSystem.OnToggled += SetProcessInput;

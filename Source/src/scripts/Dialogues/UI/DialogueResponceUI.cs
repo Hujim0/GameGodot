@@ -17,7 +17,7 @@ namespace GodotGame.Dialogues.UI
 
 		[Export] public Vector2 offset = new Vector2(20f, 20f);
 
-		static PackedScene prefab = GD.Load<PackedScene>(PathToPrefab);
+		static readonly PackedScene prefab = GD.Load<PackedScene>(PathToPrefab);
 
 
 		public override void _Ready()
@@ -74,13 +74,14 @@ namespace GodotGame.Dialogues.UI
 					position: new Vector2
 					{
 						x = (buttonWidth * i) + (offset.x * (i + 1)),
-						y = (marginSize.y - buttonHeight) / 2,
-					}
+						y = ((marginSize.y - buttonHeight) / 2) + ResponceScript.ANIM_HEIGHT,
+					},
 					/*<summary>
 						|--|---------|--|---------|--|
 						  ^       ^
 						offset  button	|	|	offsetCount = responcesCount + 1
 					</summary>*/
+					i
 				);
 			}
 		}
@@ -90,7 +91,10 @@ namespace GodotGame.Dialogues.UI
 			inChoose = false;
 
 			foreach (Node node in responcesList)
+            {
+				if (node.Name == "Tween") continue;
 				node.QueueFree();
+            }
 
 			responcesList.Clear();
 			
