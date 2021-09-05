@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/visuals/textures/Frenk/cock.png" type="Texture" id=1]
 [ext_resource path="res://src/scripts/EventSystem/EventInteractionTrigger.cs" type="Script" id=2]
-[ext_resource path="res://src/visuals/textures/1626986113852.png" type="Texture" id=3]
+[ext_resource path="res://src/visuals/textures/Scenes/1630849937695 (1).png" type="Texture" id=3]
 [ext_resource path="res://src/visuals/textures/Scenes/Test/Atlases/Door.atlastex" type="Texture" id=4]
+[ext_resource path="res://src/visuals/textures/Scenes/1630849928335.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 26, 5 )
@@ -135,6 +136,10 @@ position = Vector2( -64, -35 )
 __meta__ = {
 "_edit_group_": true
 }
+
+[node name="1630849928335" type="Sprite" parent="StaticBody2D"]
+position = Vector2( 13, -150 )
+texture = ExtResource( 5 )
 
 [node name="1626986113852" type="Sprite" parent="StaticBody2D"]
 material = SubResource( 5 )
