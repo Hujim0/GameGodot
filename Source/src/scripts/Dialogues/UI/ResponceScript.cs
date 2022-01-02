@@ -39,15 +39,15 @@ namespace GodotGame.Dialogues.UI
 
 		public void OnTimerTimeOut()
 		{
-            tween.InterpolateProperty(
-                this,
-                "rect_position",
-                null,
-                RectPosition - new Vector2(0, ANIM_HEIGHT),
-                ANIM_DURATION,
-                Tween.TransitionType.Circ,
-                Tween.EaseType.Out);
-            tween.InterpolateProperty(
+			tween.InterpolateProperty(
+				this,
+				"rect_position",
+				null,
+				RectPosition - new Vector2(0, ANIM_HEIGHT),
+				ANIM_DURATION,
+				Tween.TransitionType.Circ,
+				Tween.EaseType.Out);
+			tween.InterpolateProperty(
 				this,
 				"modulate",
 				new Color(1, 1, 1, 0),

@@ -2,7 +2,7 @@
   "prior": 0,
   "panels": [
     {
-      "name": "Френк",
+      "name": null,
       "txt": null,
       "time": 0.05,
       "chars": [
@@ -22,7 +22,8 @@
               "chars": [
                 {
                   "talk": "fr_default",
-                  "end": "fr_default"
+                  "end": "fr_default",
+                  "hl": true
                 }
               ],
               "resps": null
@@ -50,7 +51,8 @@
               "chars": [
                 {
                   "talk": "fr_shying",
-                  "end": null
+                  "end": null,
+                  "hl": true
                 }
               ],
               "resps": null
@@ -67,7 +69,113 @@
               "chars": [
                 {
                   "talk": "fr_shying",
-                  "end": null
+                  "end": null,
+                  "hl": true
+                }
+              ],
+              "resps": null
+            }
+          ]
+        },
+        {
+          "responceText": "зацените",
+          "panels": [
+            {
+              "name": "Френк 1",
+              "txt": "[wave]нас двое?",
+              "time": 0.05,
+              "chars": [
+                {
+                  "talk": "fr_default",
+                  "end": "fr_default",
+                  "hl": true,
+                  "flip": false
+                },
+                {
+                  "talk": "fr_default",
+                  "end": "fr_default",
+                  "hl": false,
+                  "flip": true
+                }
+              ],
+              "resps": null
+            },
+            {
+              "name": "Френк 2",
+              "txt": "бля ну да",
+              "time": 0.05,
+              "chars": [
+                {
+                  "talk": "fr_default",
+                  "end": "fr_default",
+                  "hl": false,
+                  "flip": false
+                },
+                {
+                  "talk": "fr_default",
+                  "end": "fr_default",
+                  "hl": true,
+                  "flip": true
+                }
+              ],
+              "resps": null
+            },
+            {
+              "name": "Френк 1",
+              "txt": "пизда)",
+              "time": 0.05,
+              "chars": [
+                {
+                  "talk": "fr_default",
+                  "end": "fr_default",
+                  "hl": true,
+                  "flip": false
+                },
+                {
+                  "talk": "fr_default",
+                  "end": "fr_default",
+                  "hl": false,
+                  "flip": true
+                }
+              ],
+              "resps": null
+            },
+            {
+              "name": "Френк 2",
+              "txt": "бро, ну ты просто познал комедию...",
+              "time": 0.05,
+              "chars": [
+                {
+                  "talk": "fr_default",
+                  "end": "fr_default",
+                  "hl": false,
+                  "flip": false
+                },
+                {
+                  "talk": "fr_default",
+                  "end": "fr_default",
+                  "hl": true,
+                  "flip": true
+                }
+              ],
+              "resps": null
+            },
+            {
+              "name": "Френк 1",
+              "txt": "хуемедию)",
+              "time": 0.05,
+              "chars": [
+                {
+                  "talk": "fr_shying",
+                  "end": "fr_shying",
+                  "hl": true,
+                  "flip": false
+                },
+                {
+                  "talk": "fr_default",
+                  "end": "fr_default",
+                  "hl": false,
+                  "flip": true
                 }
               ],
               "resps": null

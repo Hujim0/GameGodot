@@ -74,7 +74,7 @@ namespace GodotGame.Dialogues.UI
         {
             if (panel.evnt != null)
             {
-                new Event(panel.evnt.type, panel.evnt.data_path, panel.evnt.arg, panel.evnt.specialarg).Invoke();
+				new Event(panel.evnt).Invoke();
 
                 DialogueSystem.NextSentence();
 				return;

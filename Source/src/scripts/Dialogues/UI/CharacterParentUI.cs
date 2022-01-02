@@ -19,71 +19,84 @@ namespace GodotGame.Dialogues.UI
 
 		public override void _Ready()
 		{
-			DialogueSystem.OnPanelChanged += OnChildUpdate;
+			DialogueSystem.OnPanelChanged += OnPanelChanged;
 			DialogueUI.TalkEnded += StopCharactersTalk;
 
+			DialogueSystem.OnToggled += _ => ClearCharactersList();
 			ViewportUI.OnSizeChange += UpdatePositions;
 		}
 
-		void OnChildUpdate(DialoguePanel panel)
+		void OnPanelChanged(DialoguePanel panel)
 		{
 			//safety checks
+			if (panel.evnt != null) return;
+
 			if (panel.chars == null || panel.chars.Length == 0)
 			{
 				//delete existing
-				foreach (CharacterScript character in list)
-					character.QueueFree();
-
-				list.Clear();
+				ClearCharactersList();
 
 				return;
 			}
 
 			currentExpressions = panel.chars;
 
-			if (panel.chars.Length == lastCharacterCount)
+			if (currentExpressions.Length == lastCharacterCount)
 			{
-				UpdateCharactersTalk(panel.chars);
+				UpdateCharactersTalk(currentExpressions);
 				return;
 			}
 
-
 			//delete existing
-			foreach (CharacterScript character in list)
-				character.QueueFree();
+			ClearCharactersList();
 			
 			list.Clear();
 
-			//instanciate new
-			foreach (CharacterExpression expression in panel.chars)
-			{
+            //instanciate new
+            for (int i = 0; i < currentExpressions.Length; i++)
+            {
 				Node Instance = CharacterPrefab.Instance();
 				AddChild(Instance, true);
 
 				CharacterScript newCharacter = GetNode<CharacterScript>(Instance.Name);
 				list.Add(newCharacter);
-
-				newCharacter.anim.Play(expression.talk);
 			}
 
-			UpdatePositions(ViewportUI.viewport.Size);
+			lastCharacterCount = currentExpressions.Length;
 
+			UpdatePositions(ViewportUI.viewport.Size);
+			UpdateCharactersTalk(currentExpressions);
 		}
 
-		private void UpdatePositions(Vector2 viewportSize)
+		void ClearCharactersList()
+        {
+			foreach (CharacterScript character in list)
+				character.QueueFree();
+
+			list.Clear();
+
+			lastCharacterCount = 0;
+
+			GD.Print("cock");
+		}
+
+		void UpdatePositions(Vector2 viewportSize)
 		{
 			for (int i = 0; i < list.Count; i++)
 			{
 				Vector2 textureSize = list[i].Texture.GetSize();
+				Vector2 pivotOffset = new Vector2(textureSize.x / 2, textureSize.y);
 				float Scale = (textureSize.y * 0.075f) * (RectSize.y / RectSize.x);
 
-				list[i].RectScale = new Vector2(Scale, Scale);
-				list[i].RectPosition = new Vector2(
-					RectSize.x * (i + 1) / (list.Count + 1),
-					Mathf.Floor(RectSize.y))
+                list[i].RectPivotOffset = pivotOffset;
+
+				list[i].RectScale = new Vector2(Scale, Scale) * 0.8f; // is unhighlighted
+                list[i].RectPosition = new Vector2(
+					x: RectSize.x * (i + 1) / (list.Count + 1),
+					y: Mathf.Floor(RectSize.y))
 					//pivot offset
-					- (new Vector2(textureSize.x / 2, textureSize.y) * Scale);
-			}
+					- pivotOffset;
+            }
 		}
 
 		void UpdateCharactersTalk(CharacterExpression[] expressions)
@@ -91,7 +104,11 @@ namespace GodotGame.Dialogues.UI
 			if (list.Count == 0) return;
 
 			for (int i = 0; i < list.Count; i++)
+            {
+				list[i].FlipH = expressions[i].flip;
 				list[i].anim.Play(expressions[i].talk);
+				list[i].IsHighlighted = expressions[i].hl;
+            }
 		}
 
 		void StopCharactersTalk()

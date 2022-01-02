@@ -74,6 +74,70 @@ namespace GodotGame.EventSystem
 			GD.Print("  --- Event construction ended ---");
 		}
 
+		public Event(EventData eventData)
+		{
+			GD.Print("  --- Event construction ---");
+			GD.Print($"Type: {type}");
+
+			type = eventData.type;
+			data_path = eventData.data_path;
+			arg = eventData.arg;
+			specialarg = eventData.specialarg;
+
+			switch (type)
+			{
+				case EVENT_TYPE.StartDialogue:
+
+					if (string.IsNullOrEmpty(data_path))
+					{ GD.PrintErr("!!!Event construction failed: data_path is null/empty!!!"); return; }
+
+					DialogueLoader loader = new DialogueLoader(data_path, Mathf.FloorToInt(arg.x), specialarg);
+
+					OnEventStarted += loader.StartDialogue;
+
+					break;
+
+				case EVENT_TYPE.InsertDialogue:
+
+					if (string.IsNullOrEmpty(data_path))
+					{ GD.PrintErr("!!!Event construction failed: data_path is null/empty!!!"); return; }
+
+					DialogueLoader insertloader = new DialogueLoader(data_path, Mathf.FloorToInt(arg.x), specialarg);
+
+					OnEventStarted += insertloader.InsertDialogues;
+
+					break;
+
+				case EVENT_TYPE.SceneTransition:
+
+					if (string.IsNullOrEmpty(data_path))
+					{ GD.PrintErr("!!!Event construction failed: data_path is null/empty!!!"); return; }
+
+					OnEventStarted += ChangeScene;
+
+					GD.Print($"Scene name: \"{data_path}\"");
+					GD.Print($"Spawn at: {arg}");
+
+
+					break;
+
+				case EVENT_TYPE.GiveItem:
+
+					OnEventStarted += GiveItem;
+
+					break;
+
+
+				default:
+					GD.PrintErr("!!!Event construction failed: type is undefined!!!");
+					return;
+
+			}
+
+			GD.Print("  --- Event construction ended ---");
+		}
+
+
 		void ChangeScene() => SceneManager.ChangeScene(data_path, arg);
 		void GiveItem() => InventorySystem.AddItem(Mathf.FloorToInt(arg.x));
 
