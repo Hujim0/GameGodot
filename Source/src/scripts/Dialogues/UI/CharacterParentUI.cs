@@ -11,7 +11,7 @@ namespace GodotGame.Dialogues.UI
 
 		const string PathToCharacterPrefab = "res://src/prefabs/Character.tscn";
 
-		PackedScene CharacterPrefab = GD.Load<PackedScene>(PathToCharacterPrefab);
+		readonly PackedScene CharacterPrefab = GD.Load<PackedScene>(PathToCharacterPrefab);
 
 		List<CharacterScript> list = new List<CharacterScript>();
 
@@ -77,7 +77,6 @@ namespace GodotGame.Dialogues.UI
 
 			lastCharacterCount = 0;
 
-			GD.Print("cock");
 		}
 
 		void UpdatePositions(Vector2 viewportSize)
