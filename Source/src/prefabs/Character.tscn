@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/visuals/anims/Characters/Dialogue/Frenk/fr_default.anim" type="Animation" id=1]
 [ext_resource path="res://src/visuals/anims/Characters/Dialogue/Frenk/fr_shy.anim" type="Animation" id=2]
 [ext_resource path="res://src/visuals/anims/Characters/Dialogue/Frenk/fr_shying.anim" type="Animation" id=3]
-[ext_resource path="res://src/visuals/textures/Dialogue/Frenk/Shy_anim/7.png" type="Texture" id=6]
 [ext_resource path="res://src/scripts/Dialogues/CharacterScript.cs" type="Script" id=8]
 
 [sub_resource type="Animation" id=1]
@@ -24,7 +23,6 @@ tracks/0/keys = {
 
 [node name="TextureRect" type="TextureRect"]
 size_flags_stretch_ratio = 0.0
-texture = ExtResource( 6 )
 stretch_mode = 6
 script = ExtResource( 8 )
 __meta__ = {

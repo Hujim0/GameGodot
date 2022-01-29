@@ -2,19 +2,19 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/cock.png-59addb0d91091d948e9bbd3fcc0036af.stex"
+path="res://.import/kholli_khodba_obnova.png-c946918cd2fc0078c00263032cdbd320.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/visuals/textures/Frenk/cock.png"
-dest_files=[ "res://.import/cock.png-59addb0d91091d948e9bbd3fcc0036af.stex" ]
+source_file="res://src/visuals/textures/Player/kholli_khodba_obnova.png"
+dest_files=[ "res://.import/kholli_khodba_obnova.png-c946918cd2fc0078c00263032cdbd320.stex" ]
 
 [params]
 
-compress/mode=3
+compress/mode=0
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=false

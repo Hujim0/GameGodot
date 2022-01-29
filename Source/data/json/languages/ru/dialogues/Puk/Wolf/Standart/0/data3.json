@@ -1,0 +1,92 @@
+{
+  "prior": 0,
+  "panels": [
+    {
+      "name": "Вульф",
+      "txt": "[wave]...Холли!",
+      "time": 0.05,
+      "chars": [
+        {
+        }
+      ],
+      "resps": null
+    },
+    {
+      "name": "Холли",
+      "txt": null,
+      "time": 0.05,
+      "chars": [
+        {
+        }
+      ],
+      "resps": [
+        {
+          "responceText": "Пойдем поиграем!",
+          "panels": [
+            {
+              "name": "Вульф",
+              "txt": "[wave]Ну....",
+              "time": 0.05,
+              "chars": [
+                {
+                }
+              ],
+              "resps": null
+            },
+            {
+              "name": "Вульф",
+              "txt": "Пошли, у меня есть идея",
+              "time": 0.05,
+              "chars": [
+                {
+                }
+              ],
+              "resps": null
+            }
+          ]
+        },
+        {
+          "responceText": "Я хочу поговорить",
+          "panels": [
+            {
+              "name": "Вульф",
+              "txt": "Ну и о чем же?",
+              "time": 0.05,
+              "chars": [
+                {
+                }
+              ]
+            },
+            {
+              "name": "Вульф",
+              "txt": null,
+              "time": 0.05,
+              "chars": [
+                {
+                }
+              ],
+              "resps": [
+                {
+                  "responceText": "я",
+                  "panels": null
+                },
+                {
+                  "responceText": "пока",
+                  "panels": null
+                },
+                {
+                  "responceText": "не",
+                  "panels": null
+                },
+                {
+                  "responceText": "придумал",
+                  "panels": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

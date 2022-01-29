@@ -1,11 +1,13 @@
 using Godot;
+using GodotGame.General;
 using GodotGame.PlayerBehaviour.InventorySystem;
 using GodotGame.Serialization;
 using System;
+using System.Collections.Generic;
 
 namespace GodotGame.EventSystem
 {
-	public enum EVENT_TYPE { StartDialogue, InsertDialogue, SceneTransition, GiveItem, SelfDestroy };
+	public enum EVENT_TYPE { StartDialogue, InsertDialogue, SceneTransition, EditGameEvents, GiveItem, SelfDestroy };
 
 	public class Event : EventData
 	{
@@ -55,6 +57,32 @@ namespace GodotGame.EventSystem
 					GD.Print($"Scene name: \"{data_path}\"");
 					GD.Print($"Spawn at: {arg}");
 
+
+					break;
+
+				case EVENT_TYPE.EditGameEvents:
+
+					if (string.IsNullOrEmpty(data_path))
+					{ GD.PrintErr("!!!Event construction failed: data_path is null/empty!!!"); return; }
+
+
+					string[] events = data_path.Split(new char[] { ',', ' ' });
+
+					if ((arg == null || arg.x == 0))
+                    {
+                        foreach (string @event in events)
+							GameManager.GameEvents.Remove(@event);
+
+						GD.Print("Deleted game events: ");
+						GD.Print(events);
+					}
+					else
+                    {
+						GameManager.GameEvents.AddRange(events);
+
+						GD.Print("Added game events: ");
+						GD.Print(events);
+					}
 
 					break;
 

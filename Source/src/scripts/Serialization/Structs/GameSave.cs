@@ -13,6 +13,8 @@ public struct GameSave
     #region npcdata
 
     public int Frenk;
+
+    public int Wolf;
     //...
 
     #endregion

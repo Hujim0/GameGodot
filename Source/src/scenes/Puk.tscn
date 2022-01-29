@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://src/visuals/textures/Frenk/cock.png" type="Texture" id=1]
+[ext_resource path="res://src/visuals/textures/Characters/characters.tres" type="Texture" id=1]
 [ext_resource path="res://src/scripts/EventSystem/EventInteractionTrigger.cs" type="Script" id=2]
 [ext_resource path="res://src/visuals/textures/Scenes/1630849937695 (1).png" type="Texture" id=3]
 [ext_resource path="res://src/visuals/textures/Scenes/Test/Atlases/Door.atlastex" type="Texture" id=4]
@@ -100,15 +100,15 @@ __meta__ = {
 
 [node name="cock" type="Sprite" parent="NPC"]
 texture = ExtResource( 1 )
-offset = Vector2( 0, -32 )
+offset = Vector2( 5, -25 )
 script = ExtResource( 2 )
-data_path = "Puk\\NPC"
+data_path = "Puk\\Wolf"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NPC"]
 shape = SubResource( 2 )
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-position = Vector2( 58, -166 )
+position = Vector2( 180.191, -177.297 )
 rotation = 0.584803
 amount = 100
 lifetime = 2.0

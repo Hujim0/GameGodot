@@ -15,7 +15,7 @@ namespace GodotGame.Dialogues.UI
 
 		List<CharacterScript> list = new List<CharacterScript>();
 
-		CharacterExpression[] currentExpressions;
+		List<CharacterExpression> currentExpressions = new List<CharacterExpression>();
 
 		public override void _Ready()
 		{
@@ -38,12 +38,20 @@ namespace GodotGame.Dialogues.UI
 
 				return;
 			}
+			
+			currentExpressions.AddRange(panel.chars);
 
-			currentExpressions = panel.chars;
+			foreach (CharacterExpression exp in panel.chars)
+            {
+				if (string.IsNullOrEmpty(exp.talk))
+					currentExpressions.Remove(exp);
+			}
 
-			if (currentExpressions.Length == lastCharacterCount)
+			if (currentExpressions.Count == 0) return;
+
+			if (currentExpressions.Count == lastCharacterCount)
 			{
-				UpdateCharactersTalk(currentExpressions);
+				UpdateCharactersTalk();
 				return;
 			}
 
@@ -53,7 +61,7 @@ namespace GodotGame.Dialogues.UI
 			list.Clear();
 
             //instanciate new
-            for (int i = 0; i < currentExpressions.Length; i++)
+            for (int i = 0; i < currentExpressions.Count; i++)
             {
 				Node Instance = CharacterPrefab.Instance();
 				AddChild(Instance, true);
@@ -62,10 +70,10 @@ namespace GodotGame.Dialogues.UI
 				list.Add(newCharacter);
 			}
 
-			lastCharacterCount = currentExpressions.Length;
+			lastCharacterCount = currentExpressions.Count;
 
 			UpdatePositions(ViewportUI.viewport.Size);
-			UpdateCharactersTalk(currentExpressions);
+			UpdateCharactersTalk();
 		}
 
 		void ClearCharactersList()
@@ -98,15 +106,15 @@ namespace GodotGame.Dialogues.UI
             }
 		}
 
-		void UpdateCharactersTalk(CharacterExpression[] expressions)
+		void UpdateCharactersTalk()
 		{
 			if (list.Count == 0) return;
 
 			for (int i = 0; i < list.Count; i++)
             {
-				list[i].FlipH = expressions[i].flip;
-				list[i].anim.Play(expressions[i].talk);
-				list[i].IsHighlighted = expressions[i].hl;
+				list[i].FlipH = currentExpressions[i].flip;
+				list[i].anim.Play(currentExpressions[i].talk);
+				list[i].IsHighlighted = currentExpressions[i].hl;
             }
 		}
 
