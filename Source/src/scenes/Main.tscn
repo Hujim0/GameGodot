@@ -58,7 +58,7 @@ render_target_update_mode = 3
 [node name="CurrentScene" type="YSort" parent="Control/ViewportContainer/Viewport"]
 
 [node name="Player" type="KinematicBody2D" parent="Control/ViewportContainer/Viewport/CurrentScene"]
-position = Vector2( 115, 104 )
+position = Vector2( 40, 40 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="Control/ViewportContainer/Viewport/CurrentScene/Player"]

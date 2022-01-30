@@ -11,10 +11,12 @@ namespace GodotGame
 
 		public static Node currentScene = null;
 
-		public static Action SceneStartedLoading;
+		public static Action OnSceneStartedLoading;
 
-		public  delegate void OnPlayerPosApply(Vector2 pos);
-		public static event OnPlayerPosApply PlayerPosApply;
+		public delegate void SceneInstanced(Vector2 pos);
+		public static event SceneInstanced OnSceneInstance;
+
+		public static Action FadeScreen;
 
 		public static bool isInLoad = false;
 		public static bool inTransition = false;
@@ -42,7 +44,7 @@ namespace GodotGame
 
 			currentScene.AddChild(scene, true);
 
-			SceneStartedLoading?.Invoke();
+			OnSceneStartedLoading?.Invoke();
 		}
 
 		public static void ChangeScene(string sceneName, Vector2 playerPos)
@@ -56,7 +58,7 @@ namespace GodotGame
 
 			playerPosToApply = playerPos;
 
-			SceneStartedLoading?.Invoke();
+			OnSceneStartedLoading?.Invoke();
 
 			string path = $@"{PathToSceneFolder}/{sceneName}.tscn";
 
@@ -103,12 +105,29 @@ namespace GodotGame
 		{
 			if (sceneToApply == null) return;
 
-			PlayerPosApply?.Invoke(playerPosToApply);
+			OnSceneInstance?.Invoke(playerPosToApply);
 
 			CleanScenes();
 			currentScene.AddChild(sceneToApply.Instance(), true);
 
 			GD.Print("--- Scene instantiated -------------");
+		}
+
+		public static void ScreenFade()
+		{
+			if (inTransition) return;
+
+			GD.Print($"--- FadeScreen In -------------");
+
+			inTransition = true;
+
+			FadeScreen?.Invoke();
+		}
+
+		public static void InvokeOnSceneInstance()
+		{
+			OnSceneInstance?.Invoke(Vector2.Zero);
+			GD.Print($"--- FadeScreen Out -------------");
 		}
 
 		public static void CleanScenes()

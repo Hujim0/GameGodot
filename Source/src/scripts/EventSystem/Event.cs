@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace GodotGame.EventSystem
 {
-	public enum EVENT_TYPE { StartDialogue, InsertDialogue, SceneTransition, EditGameEvents, GiveItem, SelfDestroy };
+	public enum EVENT_TYPE { StartDialogue, InsertDialogue, SceneTransition, EditGameEvents, GiveItem, ScreenFade };
 
 	public class Event : EventData
 	{
@@ -16,12 +16,13 @@ namespace GodotGame.EventSystem
 		public Event(EVENT_TYPE type, string data_path, Vector2 arg = default, string specialarg = "")
 		{
 			GD.Print("  --- Event construction ---");
-			GD.Print($"Type: {type}");
 
 			this.type = type;
 			this.data_path = data_path;
 			this.arg = arg;
 			this.specialarg = specialarg;
+			
+			GD.Print($"Type: {type}");
 
 			switch (type)
 			{
@@ -92,6 +93,12 @@ namespace GodotGame.EventSystem
 
 					break;
 
+				case EVENT_TYPE.ScreenFade:
+
+					OnEventStarted += SceneManager.ScreenFade;
+
+					break;
+
 
 				default:
 					GD.PrintErr("!!!Event construction failed: type is undefined!!!"); 
@@ -105,12 +112,13 @@ namespace GodotGame.EventSystem
 		public Event(EventData eventData)
 		{
 			GD.Print("  --- Event construction ---");
-			GD.Print($"Type: {type}");
 
 			type = eventData.type;
 			data_path = eventData.data_path;
 			arg = eventData.arg;
 			specialarg = eventData.specialarg;
+			
+			GD.Print($"Type: {type}");
 
 			switch (type)
 			{
@@ -149,6 +157,40 @@ namespace GodotGame.EventSystem
 
 					break;
 
+
+				case EVENT_TYPE.EditGameEvents:
+
+					if (string.IsNullOrEmpty(data_path))
+					{ GD.PrintErr("!!!Event construction failed: data_path is null/empty!!!"); return; }
+
+
+					string[] events = data_path.Split(new char[] { ',', ' ' });
+
+					if ((arg == null || arg.x == 0))
+					{
+						foreach (string @event in events)
+							GameManager.GameEvents.Remove(@event);
+
+						GD.Print("Deleted game events: ");
+						GD.Print(events);
+					}
+					else
+					{
+						GameManager.GameEvents.AddRange(events);
+
+						GD.Print("Added game events: ");
+						GD.Print(events);
+					}
+
+					break;
+
+				case EVENT_TYPE.ScreenFade:
+
+					OnEventStarted += SceneManager.ScreenFade;
+
+					break;
+
+
 				case EVENT_TYPE.GiveItem:
 
 					OnEventStarted += GiveItem;
@@ -171,7 +213,7 @@ namespace GodotGame.EventSystem
 
 		public void Invoke()
 		{
-			OnEventStarted.Invoke();
+			OnEventStarted?.Invoke();
 		}
 	}
 }

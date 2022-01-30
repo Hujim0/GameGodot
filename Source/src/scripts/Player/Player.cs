@@ -62,9 +62,12 @@ namespace GodotGame.PlayerBehaviour
 			anim = GetNode<AnimationPlayer>("AnimationPlayer");
 
 			DialogueSystem.OnToggled += SetPause;
-			SceneManager.PlayerPosApply += ChangePosition;
+			SceneManager.OnSceneInstance += ChangePosition;
+			SceneManager.OnSceneInstance += _ => SetPause(false);
+			SceneManager.OnSceneStartedLoading += SetPauseTrue;
 		}
 
+		private void SetPauseTrue() => SetPause(true);
 
         public override void _Process(float delta)
 		{
@@ -156,6 +159,7 @@ namespace GodotGame.PlayerBehaviour
 		}
         private void ChangePosition(Vector2 pos)
         {
+			if (pos == Vector2.Zero) return;
 			Position = pos;
         }
 	}

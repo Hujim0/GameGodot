@@ -35,13 +35,53 @@
             },
             {
               "name": "Вульф",
-              "txt": "Пошли, у меня есть идея",
+              "txt": "Пошли, у меня есть идея.",
+              "time": 0.025,
+              "chars": [
+                {
+                }
+              ],
+              "resps": null
+            },
+            {
+              "name": "Вульф",
+              "txt": "[color=gray][wave]...Хммммм",
+              "time": 0.1,
+              "chars": [
+                {
+                }
+              ],
+              "resps": null
+            },
+            {
+              "name": "Вульф",
+              "txt": "Поиграем в прятки!",
               "time": 0.05,
               "chars": [
                 {
                 }
               ],
               "resps": null
+            },
+            {
+              "evnt": {
+                "type": 3,
+                "data_path": "wolf_game_0",
+                "arg": {
+                  "x": 1,
+                  "y": 0
+                }
+              }
+            },
+            {
+              "evnt": {
+                "type": 5,
+                "data_path": "",
+                "arg": {
+                  "x": 0,
+                  "y": 0
+                }
+              }
             }
           ]
         },
