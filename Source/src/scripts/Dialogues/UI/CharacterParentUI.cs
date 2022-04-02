@@ -22,7 +22,7 @@ namespace GodotGame.Dialogues.UI
 			DialogueSystem.OnPanelChanged += OnPanelChanged;
 			DialogueUI.TalkEnded += StopCharactersTalk;
 
-			DialogueSystem.OnToggled += _ => ClearCharactersList();
+			DialogueSystem.OnToggled += _ => ClearCharactersListFully();
 			ViewportUI.OnSizeChange += UpdatePositions;
 		}
 
@@ -38,7 +38,8 @@ namespace GodotGame.Dialogues.UI
 
 				return;
 			}
-			
+
+			currentExpressions.Clear();
 			currentExpressions.AddRange(panel.chars);
 
 			foreach (CharacterExpression exp in panel.chars)
@@ -47,7 +48,11 @@ namespace GodotGame.Dialogues.UI
 					currentExpressions.Remove(exp);
 			}
 
-			if (currentExpressions.Count == 0) return;
+			if (currentExpressions.Count == 0)
+            {
+				lastCharacterCount = 0;
+				return;
+			}
 
 			if (currentExpressions.Count == lastCharacterCount)
 			{
@@ -57,8 +62,6 @@ namespace GodotGame.Dialogues.UI
 
 			//delete existing
 			ClearCharactersList();
-			
-			list.Clear();
 
             //instanciate new
             for (int i = 0; i < currentExpressions.Count; i++)
@@ -82,9 +85,18 @@ namespace GodotGame.Dialogues.UI
 				character.QueueFree();
 
 			list.Clear();
+		}
+
+		void ClearCharactersListFully()
+		{
+			foreach (CharacterScript character in list)
+				character.QueueFree();
+
+			list.Clear();
 
 			lastCharacterCount = 0;
 
+			currentExpressions.Clear();
 		}
 
 		void UpdatePositions(Vector2 viewportSize)

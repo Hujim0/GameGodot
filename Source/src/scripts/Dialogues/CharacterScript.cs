@@ -76,8 +76,6 @@ namespace GodotGame.Dialogues
 			anim = GetNode<AnimationPlayer>(nodePathToAnim);
 			tween = GetNode<Tween>(nodePathToTween);
 			Modulate = new Color(0.75f, 0.75f, 0.75f, 1f);
-
-			GD.Print("asdsad");
 		}
 	}
 }

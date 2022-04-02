@@ -1,0 +1,75 @@
+ {
+  "prior": 0,
+  "panels": [
+    {
+      "name": "Вульф",
+      "txt": "[shake rate=15 level=15]А!...",
+      "time": 0.01,
+      "chars": [
+        {
+        }
+      ],
+      "resps": null
+    },
+    {
+      "name": "Вульф",
+      "txt": "[color=gray][wave]Ха-ха-ха, как же быстро ты меня нашла ха-ха-ха....",
+      "time": 0.06,
+      "chars": [
+        {
+        }
+      ],
+      "resps": null
+    },
+    {
+      "name": "Вульф",
+      "txt": "Молодец, Холли!",
+      "time": 0.05,
+      "chars": [
+        {
+        }
+      ],
+      "resps": null
+    },
+    {
+      "name": "Вульф",
+      "txt": "Давай играть дальше, закрывай глаза и считай до пяти!",
+      "time": 0.05,
+      "chars": [
+        {
+        }
+      ],
+      "resps": null
+    },
+    {
+      "evnt": {
+        "type": 3,
+        "data_path": "wolf_game_0",
+        "arg": {
+          "x": 0,
+          "y": 0
+        }
+      }
+    },
+    {
+      "evnt": {
+        "type": 3,
+        "data_path": "wolf_game_1",
+        "arg": {
+          "x": 1,
+          "y": 0
+        }
+      }
+    },
+    {
+      "evnt": {
+        "type": 5,
+        "data_path": "",
+        "arg": {
+          "x": 0,
+          "y": 0
+        }
+      }
+    }
+  ]
+}

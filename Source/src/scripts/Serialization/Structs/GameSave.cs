@@ -1,6 +1,9 @@
 using GodotGame.PlayerBehaviour.InventorySystem;
 using System;
 
+
+namespace GodotGame.General
+{
 [Serializable]
 public struct GameSave
 {
@@ -35,4 +38,6 @@ public struct GameSave
 
         currentEvents = new string[] { }
     };
+}
+
 }

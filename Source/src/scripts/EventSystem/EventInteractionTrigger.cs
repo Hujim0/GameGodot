@@ -18,12 +18,19 @@ namespace GodotGame.EventSystem
 
 		public override void _Ready()
 		{
+			SceneManager.OnSceneInstance += ctx => UpdateEvent();
+
+			UpdateEvent();
+		}
+
+        private void UpdateEvent()
+        {
 			if (data_path == "Null") GD.PrintErr($"At {this} data_path is null!");
 
 			@event = new Event(type, data_path, arg);
 		}
 
-		public override void OnInteracted()
+        public override void OnInteracted()
 		{
 			@event.Invoke();
 		}

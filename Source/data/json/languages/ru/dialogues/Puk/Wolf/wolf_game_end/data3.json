@@ -1,0 +1,69 @@
+ {
+  "prior": 0,
+  "panels": [
+    {
+      "name": "Вульф",
+      "txt": "Ну что, хочешь еще поиграть?",
+      "time": 0.01,
+      "chars": [
+        {
+        }
+      ],
+      "resps": null
+    },
+    {
+      "name": "Вульф",
+      "resps": [
+        {
+          "responceText": "Да!",
+          "panels": [
+            {
+              "name": "Вульф",
+              "txt": "Тогда закрывай глаза и считай до пяти!",
+              "time": 0.01,
+              "chars": [
+                {
+                }
+              ],
+              "resps": null
+            },
+            {
+              "evnt": {
+                "type": 3,
+                "data_path": "wolf_game_0",
+                "arg": {
+                  "x": 1,
+                  "y": 0
+                }
+              }
+            },
+            {
+              "evnt": {
+                "type": 3,
+                "data_path": "wolf_game_end",
+                "arg": {
+                  "x": 0,
+                  "y": 0
+                }
+              }
+            },
+            {
+              "evnt": {
+                "type": 5,
+                "data_path": "",
+                "arg": {
+                  "x": 0,
+                  "y": 0
+                }
+              }
+            }
+          ]
+        },
+        {
+          "responceText": "Нет, я еще погуляю...",
+          "panels": null
+        }
+      ]
+    }
+   ]
+}

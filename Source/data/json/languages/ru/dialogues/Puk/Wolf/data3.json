@@ -1,0 +1,188 @@
+{
+  "prior": 0,
+  "panels": [
+    {
+      "name": null,
+      "txt": null,
+      "time": 0.05,
+      "chars": [
+        {
+          "talk": "fr_default",
+          "end": "fr_default"
+        }
+      ],
+      "resps": [
+        {
+          "responceText": "Отрыжка?",
+          "panels": [
+            {
+              "name": "Френк",
+              "txt": "[color=gray][wave]отрыжка",
+              "time": 0.05,
+              "chars": [
+                {
+                  "talk": "fr_default",
+                  "end": "fr_default",
+                  "hl": true
+                }
+              ],
+              "resps": null
+            },
+            {
+              "evnt": {
+                "type": 1,
+                "data_path": "Puk/NPC",
+                "arg": {
+                  "x": 0.0,
+                  "y": 0.0
+                },
+                "specialarg": null
+              }
+            }
+          ]
+        },
+        {
+          "responceText": "пить будш?",
+          "panels": [
+            {
+              "name": "Френк",
+              "txt": "[rainbow][wave]пиво?",
+              "time": 0.05,
+              "chars": [
+                {
+                  "talk": "fr_shying",
+                  "end": null,
+                  "hl": true
+                }
+              ],
+              "resps": null
+            }
+          ]
+        },
+        {
+          "responceText": "пенис?",
+          "panels": [
+            {
+              "name": "Френк",
+              "txt": "[rainbow][wave]вульфа))))",
+              "time": 0.05,
+              "chars": [
+                {
+                  "talk": "fr_shying",
+                  "end": null,
+                  "hl": true
+                }
+              ],
+              "resps": null
+            }
+          ]
+        },
+        {
+          "responceText": "зацените",
+          "panels": [
+            {
+              "name": "Френк 1",
+              "txt": "[wave]нас двое?",
+              "time": 0.05,
+              "chars": [
+                {
+                  "talk": "fr_default",
+                  "end": "fr_default",
+                  "hl": true,
+                  "flip": false
+                },
+                {
+                  "talk": "fr_default",
+                  "end": "fr_default",
+                  "hl": false,
+                  "flip": true
+                }
+              ],
+              "resps": null
+            },
+            {
+              "name": "Френк 2",
+              "txt": "бля ну да",
+              "time": 0.05,
+              "chars": [
+                {
+                  "talk": "fr_default",
+                  "end": "fr_default",
+                  "hl": false,
+                  "flip": false
+                },
+                {
+                  "talk": "fr_default",
+                  "end": "fr_default",
+                  "hl": true,
+                  "flip": true
+                }
+              ],
+              "resps": null
+            },
+            {
+              "name": "Френк 1",
+              "txt": "пизда)",
+              "time": 0.05,
+              "chars": [
+                {
+                  "talk": "fr_default",
+                  "end": "fr_default",
+                  "hl": true,
+                  "flip": false
+                },
+                {
+                  "talk": "fr_default",
+                  "end": "fr_default",
+                  "hl": false,
+                  "flip": true
+                }
+              ],
+              "resps": null
+            },
+            {
+              "name": "Френк 2",
+              "txt": "бро, ну ты просто познал комедию...",
+              "time": 0.05,
+              "chars": [
+                {
+                  "talk": "fr_default",
+                  "end": "fr_default",
+                  "hl": false,
+                  "flip": false
+                },
+                {
+                  "talk": "fr_default",
+                  "end": "fr_default",
+                  "hl": true,
+                  "flip": true
+                }
+              ],
+              "resps": null
+            },
+            {
+              "name": "Френк 1",
+              "txt": "хуемедию)",
+              "time": 0.05,
+              "chars": [
+                {
+                  "talk": "fr_shying",
+                  "end": "fr_shying",
+                  "hl": true,
+                  "flip": false
+                },
+                {
+                  "talk": "fr_default",
+                  "end": "fr_default",
+                  "hl": false,
+                  "flip": true
+                }
+              ],
+              "resps": null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
