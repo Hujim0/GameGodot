@@ -1,13 +1,14 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://src/visuals/textures/Characters/characters.tres" type="Texture" id=1]
 [ext_resource path="res://src/scripts/EventSystem/EventInteractionTrigger.cs" type="Script" id=2]
-[ext_resource path="res://src/visuals/textures/Scenes/tree1.atlastex" type="Texture" id=3]
+[ext_resource path="res://src/visuals/textures/Scenes/tree3.png" type="Texture" id=3]
 [ext_resource path="res://src/visuals/textures/Scenes/Test/Atlases/Door.atlastex" type="Texture" id=4]
-[ext_resource path="res://src/visuals/textures/Scenes/tree2.atlastex" type="Texture" id=5]
-[ext_resource path="res://src/visuals/textures/Scenes/tree4.atlastex" type="Texture" id=6]
-[ext_resource path="res://src/visuals/textures/Scenes/tree3.atlastex" type="Texture" id=7]
+[ext_resource path="res://src/visuals/textures/Scenes/tree1.png" type="Texture" id=5]
+[ext_resource path="res://src/visuals/textures/Scenes/tree4.png" type="Texture" id=6]
+[ext_resource path="res://src/visuals/textures/Scenes/tree2.png" type="Texture" id=7]
 [ext_resource path="res://src/scripts/Specific/WolfTest.cs" type="Script" id=8]
+[ext_resource path="res://src/visuals/Shaders/tree.shader" type="Shader" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 26, 5 )
@@ -15,18 +16,114 @@ extents = Vector2( 26, 5 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 8, 4 )
 
-[sub_resource type="Gradient" id=3]
-offsets = PoolRealArray( 0, 0.240741, 0.861111, 1 )
-colors = PoolColorArray( 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
+[sub_resource type="ShaderMaterial" id=15]
+shader = ExtResource( 9 )
+shader_param/speed = 0.4
+shader_param/minStrength = 0.05
+shader_param/maxStrength = 0.01
+shader_param/strengthScale = 100.0
+shader_param/interval = 3.5
+shader_param/detail = 5.0
+shader_param/distortion = null
+shader_param/heightOffset = 0.347
+shader_param/offset = 0.0
+
+[sub_resource type="ArrayMesh" id=16]
+surfaces/0 = {
+"aabb": AABB( -52, -69.5, 0, 104, 139, 0 ),
+"array_data": PoolByteArray( 0, 0, 112, 65, 51, 51, 136, 194, 79, 236, 36, 63, 202, 4, 37, 60, 0, 0, 80, 66, 51, 51, 47, 194, 0, 0, 128, 63, 90, 84, 61, 62, 0, 0, 80, 66, 0, 0, 72, 65, 0, 0, 128, 63, 134, 5, 23, 63, 0, 0, 80, 65, 204, 204, 220, 65, 0, 0, 32, 63, 231, 212, 50, 63, 0, 0, 80, 65, 204, 204, 82, 66, 0, 0, 32, 63, 26, 15, 97, 63, 52, 51, 171, 65, 0, 0, 139, 66, 75, 173, 52, 63, 0, 0, 128, 63, 0, 0, 224, 193, 0, 0, 139, 66, 197, 78, 108, 62, 0, 0, 128, 63, 0, 0, 224, 193, 52, 51, 129, 66, 197, 78, 108, 62, 190, 249, 118, 63, 0, 0, 128, 193, 102, 102, 58, 66, 20, 59, 177, 62, 16, 211, 85, 63, 0, 0, 128, 193, 0, 0, 8, 66, 20, 59, 177, 62, 99, 158, 62, 63, 154, 153, 141, 193, 204, 204, 192, 65, 142, 220, 168, 62, 183, 98, 44, 63, 0, 0, 16, 194, 0, 0, 132, 65, 217, 137, 29, 62, 116, 99, 30, 63, 0, 0, 16, 194, 152, 153, 105, 65, 217, 137, 29, 62, 163, 227, 26, 63, 0, 0, 60, 194, 192, 204, 44, 64, 79, 236, 68, 61, 0, 249, 4, 63, 0, 0, 60, 194, 0, 205, 204, 62, 79, 236, 68, 61, 152, 188, 0, 63, 0, 0, 80, 194, 152, 153, 249, 192, 0, 0, 0, 0, 226, 68, 227, 62, 0, 0, 80, 194, 205, 204, 14, 194, 0, 0, 0, 0, 94, 0, 121, 62, 205, 204, 46, 194, 0, 0, 70, 194, 55, 114, 163, 61, 144, 86, 19, 62, 205, 204, 40, 194, 0, 0, 70, 194, 16, 252, 192, 61, 144, 86, 19, 62, 0, 0, 156, 193, 0, 0, 139, 194, 0, 0, 160, 62, 0, 0, 0, 0, 0, 0, 112, 65, 0, 0, 139, 194, 79, 236, 36, 63, 0, 0, 0, 0 ),
+"array_index_data": PoolByteArray( 0, 0, 1, 0, 2, 0, 4, 0, 5, 0, 6, 0, 6, 0, 7, 0, 8, 0, 10, 0, 11, 0, 12, 0, 12, 0, 13, 0, 14, 0, 14, 0, 15, 0, 16, 0, 16, 0, 17, 0, 18, 0, 18, 0, 19, 0, 20, 0, 0, 0, 2, 0, 3, 0, 3, 0, 4, 0, 6, 0, 10, 0, 12, 0, 14, 0, 14, 0, 16, 0, 18, 0, 18, 0, 20, 0, 0, 0, 3, 0, 6, 0, 8, 0, 10, 0, 14, 0, 18, 0, 18, 0, 0, 0, 3, 0, 3, 0, 8, 0, 9, 0, 10, 0, 18, 0, 3, 0, 3, 0, 9, 0, 10, 0 ),
+"blend_shape_data": [  ],
+"format": 262417,
+"index_count": 57,
+"primitive": 4,
+"skeleton_aabb": [  ],
+"vertex_count": 21
+}
 
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 16.5, 2.5 )
 
+[sub_resource type="ShaderMaterial" id=17]
+shader = ExtResource( 9 )
+shader_param/speed = 0.4
+shader_param/minStrength = 0.05
+shader_param/maxStrength = 0.01
+shader_param/strengthScale = 75.0
+shader_param/interval = 3.5
+shader_param/detail = 5.0
+shader_param/distortion = null
+shader_param/heightOffset = 0.427
+shader_param/offset = 0.14
+
+[sub_resource type="ArrayMesh" id=18]
+surfaces/0 = {
+"aabb": AABB( -65.5, -82, 0, 131, 164, 0 ),
+"array_data": PoolByteArray( 0, 0, 140, 65, 0, 0, 163, 194, 207, 50, 34, 63, 12, 206, 71, 59, 0, 0, 140, 65, 102, 102, 158, 194, 207, 50, 34, 63, 9, 221, 139, 60, 152, 153, 165, 65, 0, 0, 152, 194, 176, 115, 40, 63, 137, 218, 21, 61, 0, 0, 22, 66, 0, 0, 152, 194, 78, 72, 73, 63, 137, 218, 21, 61, 0, 0, 22, 66, 102, 102, 146, 194, 78, 72, 73, 63, 14, 201, 91, 61, 0, 0, 131, 66, 205, 204, 52, 194, 0, 0, 128, 63, 142, 198, 101, 62, 0, 0, 131, 66, 104, 102, 130, 193, 0, 0, 128, 63, 184, 28, 205, 62, 52, 51, 119, 66, 0, 0, 64, 192, 252, 196, 120, 63, 87, 162, 246, 62, 154, 153, 111, 66, 0, 0, 64, 192, 118, 14, 117, 63, 87, 162, 246, 62, 52, 51, 47, 66, 0, 0, 96, 65, 10, 152, 85, 63, 137, 218, 21, 63, 102, 102, 32, 66, 0, 0, 96, 65, 5, 93, 78, 63, 137, 218, 21, 63, 0, 0, 148, 65, 204, 204, 176, 65, 21, 39, 36, 63, 96, 127, 34, 63, 0, 0, 148, 65, 0, 0, 188, 65, 21, 39, 36, 63, 212, 174, 36, 63, 0, 0, 72, 65, 52, 51, 37, 66, 111, 109, 24, 63, 226, 119, 64, 63, 0, 0, 72, 65, 0, 0, 56, 66, 111, 109, 24, 63, 12, 206, 71, 63, 208, 204, 100, 65, 204, 204, 124, 66, 238, 241, 27, 63, 86, 167, 98, 63, 0, 0, 208, 65, 154, 153, 161, 66, 37, 207, 50, 63, 120, 32, 126, 63, 52, 51, 203, 65, 0, 0, 164, 66, 251, 162, 49, 63, 0, 0, 128, 63, 0, 0, 252, 193, 0, 0, 164, 66, 176, 226, 132, 62, 0, 0, 128, 63, 0, 0, 252, 193, 0, 0, 152, 66, 176, 226, 132, 62, 87, 162, 118, 63, 0, 0, 164, 193, 0, 0, 116, 66, 188, 224, 175, 62, 50, 56, 95, 63, 0, 0, 164, 193, 52, 51, 99, 66, 188, 224, 175, 62, 214, 169, 88, 63, 204, 204, 124, 193, 52, 51, 199, 65, 81, 63, 194, 62, 73, 222, 38, 63, 154, 153, 165, 193, 0, 0, 160, 65, 159, 24, 175, 62, 50, 56, 31, 63, 0, 0, 176, 193, 0, 0, 160, 65, 233, 3, 170, 62, 50, 56, 31, 63, 0, 0, 74, 194, 48, 51, 51, 65, 250, 128, 234, 61, 161, 123, 17, 63, 0, 0, 74, 194, 104, 102, 22, 65, 250, 128, 234, 61, 85, 172, 14, 63, 0, 0, 131, 194, 160, 153, 153, 192, 0, 0, 0, 0, 190, 3, 241, 62, 0, 0, 131, 194, 0, 0, 248, 193, 0, 0, 0, 0, 50, 56, 159, 62, 0, 0, 94, 194, 51, 51, 15, 194, 252, 85, 156, 61, 241, 59, 144, 62, 102, 102, 98, 194, 0, 0, 108, 194, 145, 35, 139, 61, 25, 156, 15, 62, 0, 0, 86, 194, 0, 0, 108, 194, 98, 154, 187, 61, 25, 156, 15, 62, 154, 153, 185, 193, 0, 0, 164, 194, 64, 83, 165, 62, 0, 0, 0, 0, 152, 153, 105, 65, 0, 0, 164, 194, 3, 136, 28, 63, 0, 0, 0, 0 ),
+"array_index_data": PoolByteArray( 33, 0, 0, 0, 1, 0, 2, 0, 3, 0, 4, 0, 4, 0, 5, 0, 6, 0, 6, 0, 7, 0, 8, 0, 8, 0, 9, 0, 10, 0, 11, 0, 12, 0, 13, 0, 15, 0, 16, 0, 17, 0, 17, 0, 18, 0, 19, 0, 20, 0, 21, 0, 22, 0, 23, 0, 24, 0, 25, 0, 26, 0, 27, 0, 28, 0, 29, 0, 30, 0, 31, 0, 31, 0, 32, 0, 33, 0, 33, 0, 1, 0, 2, 0, 2, 0, 4, 0, 6, 0, 6, 0, 8, 0, 10, 0, 15, 0, 17, 0, 19, 0, 23, 0, 25, 0, 26, 0, 26, 0, 28, 0, 29, 0, 29, 0, 31, 0, 33, 0, 33, 0, 2, 0, 6, 0, 6, 0, 10, 0, 11, 0, 14, 0, 15, 0, 19, 0, 23, 0, 26, 0, 29, 0, 29, 0, 33, 0, 6, 0, 13, 0, 14, 0, 19, 0, 22, 0, 23, 0, 29, 0, 29, 0, 6, 0, 11, 0, 11, 0, 13, 0, 19, 0, 22, 0, 29, 0, 11, 0, 11, 0, 19, 0, 20, 0, 20, 0, 22, 0, 11, 0 ),
+"blend_shape_data": [  ],
+"format": 262417,
+"index_count": 96,
+"primitive": 4,
+"skeleton_aabb": [  ],
+"vertex_count": 34
+}
+
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 20, 3 )
 
+[sub_resource type="ShaderMaterial" id=19]
+shader = ExtResource( 9 )
+shader_param/speed = 0.4
+shader_param/minStrength = 0.05
+shader_param/maxStrength = 0.01
+shader_param/strengthScale = 100.0
+shader_param/interval = 3.5
+shader_param/detail = 5.0
+shader_param/distortion = null
+shader_param/heightOffset = 0.347
+shader_param/offset = 0.0
+
+[sub_resource type="ArrayMesh" id=20]
+surfaces/0 = {
+"aabb": AABB( -47.5, -73.5, 0, 95, 147, 0 ),
+"array_data": PoolByteArray( 0, 0, 18, 66, 0, 0, 134, 194, 159, 91, 98, 63, 155, 29, 53, 61, 0, 0, 18, 66, 102, 102, 129, 194, 159, 91, 98, 63, 230, 51, 117, 61, 0, 0, 46, 66, 102, 102, 98, 194, 151, 56, 117, 63, 73, 115, 235, 61, 0, 0, 46, 66, 0, 0, 62, 194, 151, 56, 117, 63, 155, 29, 53, 62, 0, 0, 62, 66, 102, 102, 226, 193, 0, 0, 128, 63, 105, 110, 157, 62, 0, 0, 62, 66, 0, 0, 32, 193, 0, 0, 128, 63, 138, 43, 221, 62, 102, 102, 14, 66, 96, 102, 102, 64, 193, 238, 95, 63, 246, 68, 6, 63, 204, 204, 26, 66, 0, 0, 72, 65, 75, 73, 104, 63, 202, 196, 21, 63, 204, 204, 10, 66, 0, 0, 72, 65, 226, 129, 93, 63, 202, 196, 21, 63, 152, 153, 157, 65, 0, 0, 220, 65, 24, 22, 53, 63, 35, 228, 47, 63, 0, 0, 112, 65, 0, 0, 220, 65, 202, 107, 40, 63, 35, 228, 47, 63, 0, 0, 40, 65, 104, 102, 230, 65, 116, 75, 28, 63, 181, 39, 50, 63, 0, 0, 40, 65, 0, 0, 6, 66, 116, 75, 28, 63, 19, 87, 58, 63, 152, 153, 73, 65, 0, 0, 147, 66, 36, 244, 33, 63, 0, 0, 128, 63, 0, 0, 180, 193, 0, 0, 147, 66, 162, 188, 134, 62, 0, 0, 128, 63, 0, 0, 180, 193, 154, 153, 138, 66, 162, 188, 134, 62, 139, 175, 120, 63, 0, 0, 112, 193, 152, 153, 193, 65, 108, 40, 175, 62, 235, 36, 42, 63, 0, 0, 6, 194, 152, 153, 177, 65, 191, 231, 22, 62, 70, 169, 38, 63, 0, 0, 6, 194, 52, 51, 159, 65, 191, 231, 22, 62, 226, 167, 34, 63, 0, 0, 38, 194, 104, 102, 78, 65, 237, 88, 129, 61, 30, 119, 22, 63, 0, 0, 38, 194, 160, 153, 185, 64, 237, 88, 129, 61, 199, 25, 10, 63, 0, 0, 44, 194, 128, 102, 102, 191, 100, 5, 66, 61, 132, 221, 252, 62, 0, 0, 62, 194, 96, 102, 70, 192, 0, 0, 0, 0, 230, 51, 245, 62, 0, 0, 62, 194, 51, 51, 3, 194, 0, 0, 0, 0, 1, 194, 141, 62, 205, 204, 38, 194, 0, 0, 74, 194, 84, 18, 122, 61, 186, 55, 32, 62, 102, 102, 32, 194, 0, 0, 74, 194, 71, 135, 159, 61, 186, 55, 32, 62, 205, 204, 240, 193, 0, 0, 131, 194, 190, 141, 59, 62, 92, 233, 94, 61, 102, 102, 226, 193, 0, 0, 131, 194, 175, 244, 78, 62, 92, 233, 94, 61, 52, 51, 107, 193, 0, 0, 147, 194, 85, 198, 176, 62, 0, 0, 0, 0, 0, 0, 228, 65, 0, 0, 147, 194, 205, 204, 76, 63, 0, 0, 0, 0 ),
+"array_index_data": PoolByteArray( 29, 0, 0, 0, 1, 0, 1, 0, 2, 0, 3, 0, 3, 0, 4, 0, 5, 0, 6, 0, 7, 0, 8, 0, 8, 0, 9, 0, 10, 0, 12, 0, 13, 0, 14, 0, 14, 0, 15, 0, 16, 0, 16, 0, 17, 0, 18, 0, 18, 0, 19, 0, 20, 0, 21, 0, 22, 0, 23, 0, 23, 0, 24, 0, 25, 0, 25, 0, 26, 0, 27, 0, 27, 0, 28, 0, 29, 0, 29, 0, 1, 0, 3, 0, 3, 0, 5, 0, 6, 0, 6, 0, 8, 0, 10, 0, 11, 0, 12, 0, 14, 0, 16, 0, 18, 0, 20, 0, 20, 0, 21, 0, 23, 0, 23, 0, 25, 0, 27, 0, 27, 0, 29, 0, 3, 0, 3, 0, 6, 0, 10, 0, 11, 0, 14, 0, 16, 0, 16, 0, 20, 0, 23, 0, 23, 0, 27, 0, 3, 0, 3, 0, 10, 0, 11, 0, 11, 0, 16, 0, 23, 0, 23, 0, 3, 0, 11, 0 ),
+"blend_shape_data": [  ],
+"format": 262417,
+"index_count": 84,
+"primitive": 4,
+"skeleton_aabb": [  ],
+"vertex_count": 30
+}
+
 [sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 11.5, 2.5 )
+
+[sub_resource type="ShaderMaterial" id=13]
+shader = ExtResource( 9 )
+shader_param/speed = 0.4
+shader_param/minStrength = 0.05
+shader_param/maxStrength = 0.01
+shader_param/strengthScale = 80.0
+shader_param/interval = 3.5
+shader_param/detail = 5.0
+shader_param/distortion = 0.333
+shader_param/heightOffset = 0.347
+shader_param/offset = 0.25
+
+[sub_resource type="ArrayMesh" id=14]
+surfaces/0 = {
+"aabb": AABB( -71, -82, 0, 142, 164, 0 ),
+"array_data": PoolByteArray( 0, 0, 16, 66, 51, 51, 148, 194, 195, 230, 64, 63, 172, 78, 69, 61, 0, 0, 16, 66, 51, 51, 145, 194, 195, 230, 64, 63, 78, 197, 106, 61, 0, 0, 124, 66, 205, 204, 94, 194, 213, 147, 113, 63, 242, 54, 36, 62, 0, 0, 124, 66, 51, 51, 81, 194, 213, 147, 113, 63, 164, 113, 57, 62, 52, 51, 130, 66, 154, 153, 55, 194, 7, 93, 117, 63, 165, 103, 97, 62, 0, 0, 142, 66, 205, 204, 38, 194, 0, 0, 128, 63, 23, 161, 123, 62, 0, 0, 142, 66, 48, 51, 59, 193, 0, 0, 128, 63, 34, 121, 219, 62, 204, 204, 136, 66, 0, 0, 0, 0, 11, 80, 123, 63, 0, 0, 0, 63, 0, 0, 132, 66, 0, 0, 0, 0, 101, 252, 118, 63, 0, 0, 0, 63, 0, 0, 84, 66, 104, 102, 38, 65, 159, 140, 95, 63, 241, 59, 16, 63, 0, 0, 84, 66, 48, 51, 115, 65, 159, 140, 95, 63, 17, 186, 23, 63, 204, 204, 60, 66, 0, 0, 168, 65, 204, 23, 85, 63, 206, 199, 32, 63, 52, 51, 45, 66, 0, 0, 168, 65, 222, 15, 78, 63, 206, 199, 32, 63, 0, 0, 144, 65, 104, 102, 218, 65, 97, 115, 32, 63, 89, 157, 42, 63, 0, 0, 144, 65, 0, 0, 224, 65, 97, 115, 32, 63, 19, 181, 43, 63, 0, 0, 112, 65, 0, 0, 0, 66, 209, 10, 27, 63, 131, 243, 49, 63, 0, 0, 112, 65, 52, 51, 99, 66, 209, 10, 27, 63, 214, 169, 88, 63, 0, 0, 0, 66, 52, 51, 143, 66, 173, 176, 57, 63, 16, 196, 111, 63, 0, 0, 0, 66, 102, 102, 150, 66, 173, 176, 57, 63, 167, 98, 117, 63, 0, 0, 248, 65, 0, 0, 164, 66, 40, 227, 55, 63, 0, 0, 128, 63, 160, 153, 217, 64, 0, 0, 164, 66, 88, 66, 12, 63, 0, 0, 128, 63, 96, 102, 134, 64, 204, 204, 158, 66, 99, 146, 7, 63, 3, 241, 123, 63, 0, 204, 76, 190, 0, 0, 164, 66, 101, 71, 255, 62, 0, 0, 128, 63, 0, 0, 32, 194, 0, 0, 164, 66, 159, 140, 95, 62, 0, 0, 128, 63, 0, 0, 32, 194, 0, 0, 162, 66, 159, 140, 95, 62, 100, 112, 126, 63, 205, 204, 38, 194, 0, 0, 146, 66, 70, 74, 83, 62, 131, 243, 113, 63, 154, 153, 25, 194, 0, 0, 146, 66, 90, 22, 107, 62, 131, 243, 113, 63, 0, 0, 192, 193, 0, 0, 92, 66, 252, 118, 169, 62, 137, 218, 85, 63, 0, 0, 192, 193, 52, 51, 81, 66, 252, 118, 169, 62, 151, 163, 81, 63, 0, 0, 144, 193, 52, 51, 33, 66, 61, 25, 191, 62, 70, 232, 62, 63, 0, 0, 144, 193, 104, 102, 242, 65, 61, 25, 191, 62, 45, 76, 47, 63, 102, 102, 198, 193, 0, 0, 208, 65, 142, 148, 166, 62, 219, 149, 40, 63, 0, 0, 48, 194, 0, 0, 208, 65, 72, 180, 66, 62, 219, 149, 40, 63, 0, 0, 48, 194, 0, 0, 184, 65, 72, 180, 66, 62, 6, 231, 35, 63, 0, 0, 70, 194, 0, 0, 128, 65, 209, 10, 27, 62, 194, 249, 24, 63, 51, 51, 79, 194, 0, 0, 128, 65, 211, 116, 10, 62, 194, 249, 24, 63, 0, 0, 130, 194, 208, 204, 12, 65, 7, 18, 45, 61, 145, 188, 13, 63, 0, 0, 130, 194, 0, 0, 192, 64, 7, 18, 45, 61, 169, 93, 9, 63, 154, 153, 131, 194, 96, 102, 38, 192, 142, 254, 21, 61, 8, 226, 247, 62, 0, 0, 142, 194, 160, 153, 201, 192, 0, 0, 0, 0, 234, 84, 236, 62, 0, 0, 142, 194, 0, 0, 228, 193, 0, 0, 0, 0, 62, 6, 167, 62, 102, 102, 124, 194, 0, 0, 24, 194, 69, 224, 99, 61, 169, 93, 137, 62, 102, 102, 134, 194, 0, 0, 72, 194, 248, 56, 219, 60, 12, 206, 71, 62, 154, 153, 123, 194, 0, 0, 72, 194, 36, 165, 105, 61, 12, 206, 71, 62, 0, 0, 96, 194, 102, 102, 90, 194, 137, 86, 216, 61, 59, 21, 43, 62, 0, 0, 96, 194, 154, 153, 115, 194, 137, 86, 216, 61, 16, 191, 3, 62, 102, 102, 82, 194, 0, 0, 132, 194, 244, 175, 4, 62, 12, 206, 199, 61, 0, 0, 76, 194, 0, 0, 132, 194, 177, 57, 16, 62, 12, 206, 199, 61, 0, 0, 252, 193, 0, 0, 164, 194, 43, 108, 142, 62, 0, 0, 0, 0, 104, 102, 110, 65, 0, 0, 164, 194, 170, 220, 26, 63, 0, 0, 0, 0 ),
+"array_index_data": PoolByteArray( 49, 0, 0, 0, 1, 0, 1, 0, 2, 0, 3, 0, 4, 0, 5, 0, 6, 0, 6, 0, 7, 0, 8, 0, 9, 0, 10, 0, 11, 0, 13, 0, 14, 0, 15, 0, 16, 0, 17, 0, 18, 0, 18, 0, 19, 0, 20, 0, 21, 0, 22, 0, 23, 0, 24, 0, 25, 0, 26, 0, 27, 0, 28, 0, 29, 0, 31, 0, 32, 0, 33, 0, 34, 0, 35, 0, 36, 0, 38, 0, 39, 0, 40, 0, 41, 0, 42, 0, 43, 0, 44, 0, 45, 0, 46, 0, 47, 0, 48, 0, 49, 0, 49, 0, 1, 0, 3, 0, 3, 0, 4, 0, 6, 0, 6, 0, 8, 0, 9, 0, 9, 0, 11, 0, 12, 0, 16, 0, 18, 0, 20, 0, 21, 0, 23, 0, 24, 0, 24, 0, 26, 0, 27, 0, 31, 0, 33, 0, 34, 0, 34, 0, 36, 0, 37, 0, 38, 0, 40, 0, 41, 0, 41, 0, 43, 0, 44, 0, 44, 0, 46, 0, 47, 0, 47, 0, 49, 0, 3, 0, 3, 0, 6, 0, 9, 0, 9, 0, 12, 0, 13, 0, 15, 0, 16, 0, 20, 0, 21, 0, 24, 0, 27, 0, 31, 0, 34, 0, 37, 0, 37, 0, 38, 0, 41, 0, 41, 0, 44, 0, 47, 0, 47, 0, 3, 0, 9, 0, 15, 0, 20, 0, 21, 0, 21, 0, 27, 0, 29, 0, 31, 0, 37, 0, 41, 0, 41, 0, 47, 0, 9, 0, 15, 0, 21, 0, 29, 0, 30, 0, 31, 0, 41, 0, 41, 0, 9, 0, 13, 0, 13, 0, 15, 0, 29, 0, 30, 0, 41, 0, 13, 0, 13, 0, 29, 0, 30, 0 ),
+"blend_shape_data": [  ],
+"format": 262417,
+"index_count": 144,
+"primitive": 4,
+"skeleton_aabb": [  ],
+"vertex_count": 50
+}
 
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 25.5, 3 )
@@ -37,6 +134,10 @@ extents = Vector2( 14.5, 4 )
 [sub_resource type="Environment" id=11]
 background_mode = 1
 background_color = Color( 0.501961, 0.431373, 0.431373, 1 )
+
+[sub_resource type="Gradient" id=21]
+offsets = PoolRealArray( 0, 0.113636, 0.856061, 1 )
+colors = PoolColorArray( 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
 
 [node name="Puk" type="YSort"]
 position = Vector2( 1, 0 )
@@ -77,40 +178,17 @@ cords = PoolVector2Array( 101, -74, 62, -39, -42, -96, -99, -46 )
 eventNames = PoolStringArray( "wolf_game_0", "wolf_game_1" )
 endEventName = "wolf_game_end"
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-visible = false
-position = Vector2( 180.191, -177.297 )
-rotation = 0.584803
-amount = 100
-lifetime = 2.0
-speed_scale = 0.68
-randomness = 0.1
-lifetime_randomness = 0.13
-emission_shape = 2
-emission_rect_extents = Vector2( 13.26, 2.168 )
-direction = Vector2( 1.557, 0 )
-spread = 91.49
-gravity = Vector2( 0, 96.751 )
-initial_velocity = 86.74
-initial_velocity_random = 0.22
-angular_velocity = 176.33
-angular_velocity_random = 0.22
-linear_accel = -28.04
-scale_amount = 4.0
-scale_amount_random = 1.0
-color_ramp = SubResource( 3 )
-hue_variation = 1.0
-hue_variation_random = 1.0
-
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2( 101.711, -67.3507 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="NewAtlastexture" type="Sprite" parent="StaticBody2D"]
-texture = ExtResource( 3 )
-offset = Vector2( 4, -69 )
+[node name="NewAtlastexture" type="MeshInstance2D" parent="StaticBody2D"]
+material = SubResource( 15 )
+position = Vector2( 3, -65 )
+mesh = SubResource( 16 )
+texture = ExtResource( 5 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( 1.00508, 0.937363 )
@@ -122,9 +200,11 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="NewAtlastexture" type="Sprite" parent="StaticBody2D4"]
-texture = ExtResource( 7 )
-offset = Vector2( 4, -79 )
+[node name="NewAtlastexture" type="MeshInstance2D" parent="StaticBody2D4"]
+material = SubResource( 17 )
+position = Vector2( 3, -79 )
+mesh = SubResource( 18 )
+texture = ExtResource( 6 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D4"]
 position = Vector2( 0.403015, -1.22217 )
@@ -136,9 +216,11 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="NewAtlastexture" type="Sprite" parent="StaticBody2D5"]
-texture = ExtResource( 6 )
-offset = Vector2( 4, -72 )
+[node name="NewAtlastexture" type="MeshInstance2D" parent="StaticBody2D5"]
+material = SubResource( 19 )
+position = Vector2( 3, -72 )
+mesh = SubResource( 20 )
+texture = ExtResource( 3 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D5"]
 position = Vector2( -1.5, -2.5 )
@@ -150,9 +232,11 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Tree2" type="Sprite" parent="StaticBody2D3"]
-texture = ExtResource( 5 )
-offset = Vector2( 6, -78 )
+[node name="Sprite" type="MeshInstance2D" parent="StaticBody2D3"]
+material = SubResource( 13 )
+position = Vector2( 6, -80 )
+mesh = SubResource( 14 )
+texture = ExtResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
 position = Vector2( 3.549, -1 )
@@ -164,3 +248,27 @@ shape = SubResource( 8 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 11 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2( -99, -101 )
+z_index = 3
+z_as_relative = false
+lifetime = 5.0
+lifetime_randomness = 0.32
+emission_shape = 2
+emission_rect_extents = Vector2( 10, 1 )
+spread = 29.44
+gravity = Vector2( 0, 5 )
+angular_velocity = 25.0
+angular_velocity_random = 1.0
+linear_accel = -2.0
+linear_accel_random = 1.0
+tangential_accel = -2.0
+tangential_accel_random = 1.0
+angle = 180.0
+angle_random = 1.0
+scale_amount = 4.0
+color = Color( 0.309804, 0.596078, 0.392157, 1 )
+color_ramp = SubResource( 21 )
+hue_variation = 0.03
+hue_variation_random = 1.0
