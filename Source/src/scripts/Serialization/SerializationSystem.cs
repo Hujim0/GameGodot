@@ -64,9 +64,9 @@ namespace GodotGame.Serialization
 
 			Godot.GD.Print(dataInFile);
 
-			if(!File.Exists(truePath)) Directory.CreateDirectory(Path.GetDirectoryName(truePath));
-			File.WriteAllText(truePath, dataInFile);
-		}
+            if (!File.Exists(truePath)) Directory.CreateDirectory(Path.GetDirectoryName(truePath));
+            File.WriteAllText(truePath, dataInFile);
+        }
 
 
 
