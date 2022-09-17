@@ -7,13 +7,13 @@ namespace GodotGame
 	[Serializable]
 	public class WolfTest : Node2D
 	{
-		[Export] Vector2 defaultPos;
+		[Export] public Vector2 defaultPos;
 
-		[Export] Vector2[] cords;
+		[Export] public Vector2[] cords;
 
-		[Export] string[] eventNames;
+		[Export] public string[] eventNames;
 
-		[Export] string endEventName;
+		[Export] public string endEventName;
 
 		Node2D parent;
 

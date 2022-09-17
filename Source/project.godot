@@ -16,6 +16,8 @@ _global_script_class_icons={
 
 config/name="Godot- Game"
 run/main_scene="res://src/scenes/Main.tscn"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="res://data"
 config/icon="res://icon.png"
 
 [autoload]
@@ -89,6 +91,11 @@ ui_pause={
 [locale]
 
 locale_filter=[ 0, [ "en", "ru" ] ]
+
+[logging]
+
+file_logging/enable_file_logging=true
+file_logging/log_path="res://bin/logs/godot.log"
 
 [rendering]
 

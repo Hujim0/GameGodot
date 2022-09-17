@@ -13,15 +13,6 @@ public struct GameSave
 
     public int lastSavePoint;
 
-    #region npcdata
-
-    public int Frenk;
-
-    public int Wolf;
-    //...
-
-    #endregion
-
     public Inventory inventory;
 
     public string[] currentEvents;
@@ -30,9 +21,6 @@ public struct GameSave
     {
         playerName = string.Empty,
         //isMale = false,
-
-        Frenk = 0,
-
 
         inventory = Inventory.Empty,
 

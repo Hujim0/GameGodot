@@ -8,7 +8,7 @@ namespace GodotGame.Serialization
 {
 	public static class SerializationSystem
 	{
-		public const string PathToGodot = @"res:";
+		public const string PathToGodot = @"res://";
 		public const string PathToLanguages = @"languages\";
 		public const string PathToDialogues = @"dialogues\";
 		public const string PathToSaves = @"saves\";
@@ -17,21 +17,26 @@ namespace GodotGame.Serialization
 
 		public static bool isPathsReady = false;
 
-		#region getdata
+        ///	TO DO: async load with creating loadIntent with Action field triggering when its loaded
+			
+        #region getdata
 
-		/// <summary>
-		///     Gets all SubDirectory names from exact directory.
-		/// </summary>
-		/// <param name="path">
-		///     <summary>
-		///         Note: relative path from res:\\data\json\languages\.
-		///             <code> 
-		///                 Example: "{Language}\{scene}\{npcName}\{Main||Secondary}" 
-		///             </code>
-		///     </summary>
-		/// </param>
-		public static IEnumerable<string> GetDirectoryNames (string path) => 
-			Directory.EnumerateDirectories($"{AbsolutePathToData}{PathToLanguages}{path}");
+        /// <summary>
+        ///     Gets all SubDirectory names from exact directory.
+        /// </summary>
+        /// <param name="path">
+        ///     <summary>
+        ///         Relative path from res:\\data\json\languages\.
+        ///             <code> 
+        ///                 Example: "{Language}\{scene}\{npcName}\{Main||Secondary}" 
+        ///             </code>
+        ///     </summary>
+        /// </param>
+        public static IEnumerable<string> GetDirectoryNames (string path)
+		{
+			if (!isPathsReady) GetPaths ();
+			return Directory.EnumerateDirectories($"{AbsolutePathToData}{PathToLanguages}{path}");
+		}
 
         #endregion
 
@@ -46,7 +51,7 @@ namespace GodotGame.Serialization
         /// <param name="data"></param>
         /// <param name="path">
         ///     <summary>
-        ///         Note: relative path from res:\\data\json\languages. Example:
+        ///         Relative path from res:\\data\json\languages. Example:
         ///             <code>
         ///                 "{Language}\dialogues\{scene}\{npcName}\file.json"
         ///             </code>
@@ -64,16 +69,24 @@ namespace GodotGame.Serialization
 
 			Godot.GD.Print(dataInFile);
 
-            if (!File.Exists(truePath)) Directory.CreateDirectory(Path.GetDirectoryName(truePath));
-            File.WriteAllText(truePath, dataInFile);
-        }
+			try
+			{
+                File.WriteAllText(truePath, dataInFile);
+            }
+			catch (FileNotFoundException)
+			{
+                Directory.CreateDirectory(Path.GetDirectoryName(truePath));
+                File.WriteAllText(truePath, dataInFile);
+            }
+			
+		}
 
 
 
 		/// <summary>
 		///     Save at given path. 
 		///         <code></code>
-		///     Note: read note for path param.
+		///     Read note for path param.
 		/// </summary>
 		/// 
 		/// <param name="data"></param>
@@ -126,28 +139,37 @@ namespace GodotGame.Serialization
 			Godot.GD.Print(truePath);
 
 			Godot.GD.Print(dataInFile);
-			if (File.Exists(truePath)) File.Delete(truePath);
-			File.WriteAllText(truePath, dataInFile);
-		}
 
-		#endregion
+            try
+            {
+                File.WriteAllText(truePath, dataInFile);
+            }
+            catch (FileNotFoundException)
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(truePath));
+                File.WriteAllText(truePath, dataInFile);
+            }
 
-		#region load
+        }
 
-		#region dialogues
+        #endregion
 
-		/// <summary>
-		///     Gets all Dialogues from exact directory.
-		/// </summary>
-		/// <param name="path">
-		///     <summary>
-		///         Note: relative path from res:\\data\json\languages\.
-		///             <code> 
-		///                 Example: "{Language}\{scene}\{npcName}\{Main||Secondary}" 
-		///             </code>
-		///     </summary>
-		/// </param>
-		public static Dialogue[] LoadDialogues(string path)
+        #region load
+
+        #region dialogues
+
+        /// <summary>
+        ///     Gets all Dialogues from exact directory.
+        /// </summary>
+        /// <param name="path">
+        ///     <summary>
+        ///         Relative path from res:\\data\json\languages\.
+        ///             <code> 
+        ///                 Example: "{Language}\{scene}\{npcName}\{Main||Secondary}" 
+        ///             </code>
+        ///     </summary>
+        /// </param>
+        public static Dialogue[] LoadDialogues(string path)
 		{
 			string directory = path;
 
@@ -157,32 +179,38 @@ namespace GodotGame.Serialization
 
 			Godot.GD.Print($"	--- Dialogue load ---");
 
-			if (!Directory.Exists(pathToDir)) { Godot.GD.PrintErr($"Directory doesnt exist! {pathToDir}"); return null; }
-
-			Godot.GD.Print($"Dialogue directory: \"{pathToDir}\"");
-
-			string[] paths =  Directory.GetFiles(pathToDir, "*");
-
-			Dialogue[] dialogues = new Dialogue[paths.Length];
-
-			for (int i = 0; i < paths.Length; i++)
+			try
 			{
-				Godot.GD.Print($"-- File #{i+1}");
+                Godot.GD.Print($"Dialogue directory: \"{pathToDir}\"");
 
-				dialogues[i] = LoadLocalizationDataGeneric<Dialogue>($@"{directory}\{Path.GetFileName(paths[i])}");
+                string[] paths = Directory.GetFiles(pathToDir, "*");
 
-				dialogues[i].DebugThisDialogue();
+                Dialogue[] dialogues = new Dialogue[paths.Length];
 
-/*				Godot.GD.Print("peenis");*/
-			}
+                for (int i = 0; i < paths.Length; i++)
+                {
+                    Godot.GD.Print($"-- File #{i + 1}");
 
-			return dialogues;
+                    dialogues[i] = LoadLocalizationDataGeneric<Dialogue>($@"{directory}\{Path.GetFileName(paths[i])}");
+
+                    dialogues[i].DebugThisDialogue();
+                }
+
+				return dialogues;
+            }
+			catch (FileNotFoundException)
+			{
+                Godot.GD.PrintErr($"Directory doesnt exist! {pathToDir}");
+				throw;
+            }
+			
+
 		}
 
 		#endregion
 
 		/// <summary>
-		///     Note: relative path from res:\\data\json\languages
+		///     Relative path from res:\\data\json\languages
 		///         <code> 
 		///             Example for dialogue file: "{Language}\{scene}\{npcName}\{Main||Secondary}\{fileName}" 
 		///         </code>
@@ -191,7 +219,7 @@ namespace GodotGame.Serialization
 		/// <typeparam name="T"></typeparam>
 		/// <param name="path">
 		///     <summary>
-		///         Note: relative path from res:\\data\languages
+		///         Relative path from res:\\data\languages
 		///             <code> 
 		///                 Example for dialogue file: "{Language}\{scene}\{npcName}\{Main||Secondary}\{fileName}" 
 		///             </code>
@@ -207,15 +235,20 @@ namespace GodotGame.Serialization
 
 			string pathToFile = $"{AbsolutePathToData}{PathToLanguages}{path}";
 
-			if (!File.Exists(pathToFile)) { Godot.GD.PrintErr($"Cant find file at {pathToFile}"); return default; }
-
-			Godot.GD.Print($"Loaded localization file from \"{pathToFile}\"");
-
-			return JsonConvert.DeserializeObject<T>(File.ReadAllText(pathToFile));
+			try
+			{
+				Godot.GD.Print($"Loaded localization file from \"{pathToFile}\"");
+                return JsonConvert.DeserializeObject<T>(File.ReadAllText(pathToFile));
+            }
+			catch (FileNotFoundException)
+			{
+                Godot.GD.PrintErr($"Cant find file at {pathToFile}"); 
+				throw;
+            }		
 		}
 
 		/// <summary>
-		///     Note: relative path from res:\\data\json\
+		///     Relative path from res:\\data\json\
 		///         <code> 
 		///             Example for file: "Preferences.json" 
 		///         </code>
@@ -224,7 +257,7 @@ namespace GodotGame.Serialization
 		/// <typeparam name="T"></typeparam>
 		/// <param name="path">
 		///     <summary>
-		///         Note: relative path from res:\\data\json\
+		///         Relative path from res:\\data\json\
 		///             <code> 
 		///                 Example for file: "Preferences.json" 
 		///             </code>
@@ -240,12 +273,17 @@ namespace GodotGame.Serialization
 
 			string pathToFile = $"{AbsolutePathToData}{path}";
 
-			if (!File.Exists(pathToFile)) { Godot.GD.PrintErr($"Cant find file at {pathToFile}"); return default; }
-
-			Godot.GD.Print($"Loaded generic data from \"{pathToFile}\"");
-
-			return JsonConvert.DeserializeObject<T>(File.ReadAllText(pathToFile));
-		}
+            try
+            {
+                Godot.GD.Print($"Loaded localization file from \"{pathToFile}\"");
+                return JsonConvert.DeserializeObject<T>(File.ReadAllText(pathToFile));
+            }
+            catch (FileNotFoundException)
+            {
+                Godot.GD.PrintErr($"Cant find file at {pathToFile}");
+                throw;
+            }
+        }
 
 		/*        /// <summary>
 				///     Note: relative path from res:\\
@@ -275,9 +313,10 @@ namespace GodotGame.Serialization
 
 		public static void GetPaths()
 		{
-			AbsolutePathToData = $@"{Directory.GetParent(Path.GetFullPath(PathToGodot)).Parent.FullName}\data\json\";
+			AbsolutePathToData = $@"{Directory.GetParent(Path.GetFullPath(PathToGodot)).Parent.Parent.FullName}/data/json/";
+			//AbsolutePathToData = @"C:/code/GameGodot/Source/bin/Debug/data/json/";
 
-			isPathsReady = true;
+            isPathsReady = true;
 		}
 	}
 }

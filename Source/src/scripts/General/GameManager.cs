@@ -83,17 +83,6 @@ namespace GodotGame.General
             return items[id];
         }
 
-        public static int GetRelationship(string npcname)
-        {
-            switch (npcname)
-            {
-                case "Frenk":
-                    return СurrentSaveFile.Frenk;
-                default:
-                    return 0;
-            }
-        }
-
         public static void ChangeLanguage (string lang)
         {
             if (lang == Preferences.language) return;

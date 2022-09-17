@@ -8,34 +8,39 @@ using System.Collections.Generic;
 
 public class DialogueLoader
 {
-    const string NPCDATAFILENAME = "npcdata.json";
-
     const string STANDARTDIRECTORYNAME = @"Standart\";
 
     Dialogue[] resultdialogues = null;
     readonly RandomNumberGenerator rng = new RandomNumberGenerator();
 
-    public DialogueLoader(string data_path, int arg = 0, string specialarg = "")
+    /// <summary>
+    ///     Class for loading Dialogues
+    /// </summary>
+    /// <param name="data_path">
+    ///     It's saved as {SceneName}/{NPCName}
+    ///     <code>
+    ///         Example: "Main/Wolf"
+    ///     </code>
+    /// </param>
+    /// <param name="dialogue_priority"></param>
+    /// 
+    /// <param name="force_eventName">
+    ///     Use this if you want to load dialogue from specific event, regardless exists it in SaveFile or not.
+    /// </param>
+    public DialogueLoader(string data_path, int dialogue_priority = 0, string force_eventName = "")
     {
         string genericpath = $@"{GameManager.Preferences.language}\{SerializationSystem.PathToDialogues}{data_path}\";
 
   /*      SerializationSystem.SaveDataGeneric
             (new NPCdata() { npc_name = "null" }, $@"{SerializationSystem.PathToLanguages}{genericpath}\{NPCDATAFILENAME}");
 */
-        NPCdata npc = SerializationSystem.LoadDataGeneric<NPCdata>
-            ($"{SerializationSystem.PathToLanguages}{genericpath}{NPCDATAFILENAME}");
-
-        int relationship = GameManager.GetRelationship(npc.npc_name);
-
-        GD.Print($"- NPC name: {npc.npc_name}, relationship: {relationship}");
-
-        GD.Print($"- Targeted priority: {arg}");
+        GD.Print($"- Targeted priority: {dialogue_priority}");
 
         List<Dialogue> dialogues = new List<Dialogue>();
 
-        if (!string.IsNullOrEmpty(specialarg))
+        if (!string.IsNullOrEmpty(force_eventName))
         {
-            dialogues.AddRange(SerializationSystem.LoadDialogues($"{genericpath}{specialarg}"));
+            dialogues.AddRange(SerializationSystem.LoadDialogues($"{genericpath}{force_eventName}"));
         }
         else
         {
@@ -52,40 +57,27 @@ public class DialogueLoader
                 specialevent = neweventname;
             }
 
+            string tempFileName = null;
+
             if (specialevent == string.Empty)
             {
-                /*                SerializationSystem.SaveDataGeneric(new Event(EVENT_TYPE.SceneTransition, "Room", Vector2.Zero)*//*new Dialogue(
-
-                                    0,
-                                    new DialoguePanel[]
-                                    {
-                                                        new DialoguePanel("asdasd",
-                                                        "text",
-                                                        0.05f,
-                                                        null,
-                                                        null,
-                                                        null),*//*)*//*
-                                    //}
-                                ,
-                                $@"{genericpath}{STANDARTDIRECTORYNAME}{relationship}\datatest.json");
-                */
 
                 GD.Print($"- No Special Event found, loading standart");
-
-
-                dialogues.AddRange(SerializationSystem.LoadDialogues($"{genericpath}{STANDARTDIRECTORYNAME}{relationship}"));
+                tempFileName = STANDARTDIRECTORYNAME;
             }
             else
             {
                 GD.Print($"- Special Event found: \"{specialevent}\"");
+                tempFileName = specialevent;
 
-                dialogues.AddRange(SerializationSystem.LoadDialogues($"{genericpath}{specialevent}"));
             }
+
+            dialogues.AddRange(SerializationSystem.LoadDialogues($"{genericpath}{tempFileName}"));
         }
 
         for (int i = 0; i < dialogues.Count; i++)
         {
-            if (dialogues[i].prior == arg) continue;
+            if (dialogues[i].prior == dialogue_priority) continue;
 
             dialogues.RemoveAt(i);
 
@@ -95,7 +87,7 @@ public class DialogueLoader
         if (dialogues.Count == 0) 
         { 
             GD.PrintErr
-                ($"!!! Failed to find any dialogues with {npc.npc_name}, in \"{data_path}\", arg: {arg}, special_events: \"{specialarg}\" !!!");
+                ($"!!! Failed to find any dialogues in \"{data_path}\", arg: {dialogue_priority}, special_events: \"{force_eventName}\" !!!");
             return;
         }
 
@@ -113,6 +105,8 @@ public class DialogueLoader
 
     public void InsertDialogues()
     {
+        if (resultdialogues == null) return;
+
         if (resultdialogues.Length == 1) { DialogueSystem.InsertDialoguePanels(resultdialogues[0].panels); return; }
 
         DialogueSystem.InsertDialoguePanels(resultdialogues[rng.RandiRange(0, resultdialogues.Length - 1)].panels);
