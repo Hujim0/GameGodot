@@ -1,22 +1,22 @@
 using Godot;
 using System;
 
-namespace GodotGame.PlayerBehaviour.Interaction
+namespace GodotGame.PlayerBehavior.Interaction
 {
     /// <summary>
-    ///	Note: put the Node with IInterctable component first on a Sprite node
+    ///	Note: put the Node with IIntractable component first on a Sprite node
     /// </summary>
-    public abstract class IInteractable : Sprite
+    public abstract partial class IIntractable : Sprite2D
     {
-        bool isInteractable = true;
-        public bool IsInteractable
+        bool isIntractable = true;
+        public bool IsIntractable
         {
-            get => isInteractable;
+            get => isIntractable;
 
             set
             {
                 if (!value) IsHighLighted = false;
-                isInteractable = value;
+                isIntractable = value;
             }
         }
         protected bool isHighLighted = false;

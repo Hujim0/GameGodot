@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-namespace GodotGame.PlayerBehaviour.InventorySystem
+namespace GodotGame.PlayerBehavior.InventorySystem
 {
     [Serializable]
     public struct Inventory

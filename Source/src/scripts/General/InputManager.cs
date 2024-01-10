@@ -14,6 +14,6 @@ public static class InputManager
         InputMap.ActionAddEvent(actionName, newEvent);
     }
 
-    public static Array GetControls() => InputMap.GetActions();
-    public static void ResetControls() => InputMap.LoadFromGlobals();
+    public static Array<StringName> GetControls() => InputMap.GetActions();
+    public static void ResetControls() => InputMap.LoadFromProjectSettings();
 }

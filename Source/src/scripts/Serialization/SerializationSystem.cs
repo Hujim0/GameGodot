@@ -1,3 +1,4 @@
+using Godot;
 using GodotGame.Dialogues;
 using Newtonsoft.Json;
 using System.Collections;
@@ -32,10 +33,10 @@ namespace GodotGame.Serialization
         ///             </code>
         ///     </summary>
         /// </param>
-        public static IEnumerable<string> GetDirectoryNames (string path)
+        public static string[] GetDirectoryNames (string path)
 		{
 			if (!isPathsReady) GetPaths ();
-			return Directory.EnumerateDirectories($"{AbsolutePathToData}{PathToLanguages}{path}");
+			return DirAccess.GetDirectoriesAt($"{AbsolutePathToData}{PathToLanguages}{path}");
 		}
 
         #endregion
@@ -75,7 +76,7 @@ namespace GodotGame.Serialization
             }
 			catch (FileNotFoundException)
 			{
-                Directory.CreateDirectory(Path.GetDirectoryName(truePath));
+                DirAccess.MakeDirRecursiveAbsolute(Path.GetDirectoryName(truePath));
                 File.WriteAllText(truePath, dataInFile);
             }
 			
@@ -109,7 +110,7 @@ namespace GodotGame.Serialization
 			Godot.GD.Print(truePath);
 
 			Godot.GD.Print(dataInFile);
-			if (!File.Exists(truePath)) Directory.CreateDirectory(Path.GetDirectoryName(truePath));
+			if (!File.Exists(truePath)) DirAccess.MakeDirRecursiveAbsolute(Path.GetDirectoryName(truePath));
 			File.WriteAllText(truePath, dataInFile);
 		}
 
@@ -146,7 +147,7 @@ namespace GodotGame.Serialization
             }
             catch (FileNotFoundException)
             {
-                Directory.CreateDirectory(Path.GetDirectoryName(truePath));
+                DirAccess.MakeDirRecursiveAbsolute(Path.GetDirectoryName(truePath));
                 File.WriteAllText(truePath, dataInFile);
             }
 
@@ -183,7 +184,7 @@ namespace GodotGame.Serialization
 			{
                 Godot.GD.Print($"Dialogue directory: \"{pathToDir}\"");
 
-                string[] paths = Directory.GetFiles(pathToDir, "*");
+                string[] paths = DirAccess.GetFilesAt(path);
 
                 Dialogue[] dialogues = new Dialogue[paths.Length];
 
@@ -200,7 +201,7 @@ namespace GodotGame.Serialization
             }
 			catch (FileNotFoundException)
 			{
-                Godot.GD.PrintErr($"Directory doesnt exist! {pathToDir}");
+                Godot.GD.PrintErr($"DirAccess doesn't exist! {pathToDir}");
 				throw;
             }
 			
@@ -313,7 +314,7 @@ namespace GodotGame.Serialization
 
 		public static void GetPaths()
 		{
-			AbsolutePathToData = $@"{Directory.GetParent(Path.GetFullPath(PathToGodot)).Parent.Parent.FullName}/data/json/";
+			AbsolutePathToData = $@"res://data/json/";
 			//AbsolutePathToData = @"C:/code/GameGodot/Source/bin/Debug/data/json/";
 
             isPathsReady = true;

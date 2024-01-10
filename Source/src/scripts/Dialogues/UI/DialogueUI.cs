@@ -5,7 +5,7 @@ using System;
 
 namespace GodotGame.Dialogues.UI
 {
-	public class DialogueUI : Control
+	public partial class DialogueUI : Control
 	{
 		public static Action TalkEnded;
 
@@ -46,7 +46,7 @@ namespace GodotGame.Dialogues.UI
 
 			DialogueSystem.OnPanelChanged += ShowNextPanel;
 
-			typer.StopedTyping += ResetTyping;
+			typer.StoppedTyping += ResetTyping;
 
 			modulate.Color = new Color(1, 1, 1, 0);
 
@@ -54,7 +54,7 @@ namespace GodotGame.Dialogues.UI
 		}
         public override void _Input(InputEvent @event)
 		{
-			if (DialogueResponceUI.inChoose) return;
+			if (DialogueResponseUI.inChoose) return;
 
 			if (Input.IsActionJustReleased(INPUT_NEXT))
 			{
@@ -98,34 +98,30 @@ namespace GodotGame.Dialogues.UI
             }
             else
             {
-                if (panel.resps == null) { GD.PrintErr("!!! Text and Responces are NULL !!!"); return; }
+                if (panel.resps == null) { GD.PrintErr("!!! Text and Responses are NULL !!!"); return; }
 
                 typer.Reset();
 
-                DialogueResponceUI.Instance.InstantiateButtons(panel.resps);
+                DialogueResponseUI.Instance.InstantiateButtons(panel.resps);
             }
         }
         void SetVisibleUI(bool visibility)
 		{
 			if (visibility)
 			{
-				tween.InterpolateProperty(modulate, "color", 
-					null,
+				tween.TweenProperty(modulate, "color", 
 					new Color(1, 1, 1, 1), 
-					AnimationDuration, 
-					Tween.TransitionType.Linear, 
-					Tween.EaseType.In);
-				tween.Start();
+					AnimationDuration).AsRelative().SetTrans(Tween.TransitionType.Linear);
+					// Tween.EaseType.In);
+				tween.Play();
 			}
 			else
             {
-				tween.InterpolateProperty(modulate, "color",
-					null,
+				tween.TweenProperty(modulate, "color",
 					new Color(1, 1, 1, 0),
-					AnimationDuration,
-					Tween.TransitionType.Linear,
-					Tween.EaseType.Out);
-				tween.Start();
+					AnimationDuration).AsRelative().SetTrans(Tween.TransitionType.Linear);
+					// Tween.EaseType.Out);
+				tween.Play();
 			}
 		}
 	}

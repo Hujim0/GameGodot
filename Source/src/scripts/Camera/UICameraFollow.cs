@@ -1,20 +1,20 @@
 using Godot;
 using GodotGame.UI;
 
-namespace GodotGame.Camera
+namespace GodotGame.Camera3D
 {
-	public class UICameraFollow : Position2D
+	public partial class UICameraFollow : Marker2D
 	{
 		Camera2D cam = null;
 
 		public override void _Ready()
 		{
-			cam = GetNode<Camera2D>($"{PlayerBehaviour.Player.Instance.GetPath()}/CenterPivot/CameraPivot/Camera2D");
+			cam = GetNode<Camera2D>($"{PlayerBehavior.Player.Instance.GetPath()}/CenterPivot/CameraPivot/Camera2D");
 		}
 
-		public override void _Process(float delta)
+		public override void _Process(double delta)
 		{
-			Position = cam.GetCameraScreenCenter() - (GetViewportRect().Size / 2);
+			Position = cam.GetScreenCenterPosition() - (GetViewportRect().Size / 2);
 		}
 	}
 }

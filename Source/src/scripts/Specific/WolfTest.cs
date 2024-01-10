@@ -5,7 +5,7 @@ using System;
 namespace GodotGame
 {
 	[Serializable]
-	public class WolfTest : Node2D
+	public partial class WolfTest : Node2D
 	{
 		[Export] public Vector2 defaultPos;
 
@@ -17,7 +17,7 @@ namespace GodotGame
 
 		Node2D parent;
 
-		Sprite parentSprite;
+		Sprite2D parentSprite;
 
 		RandomNumberGenerator rng = new RandomNumberGenerator();
 
@@ -26,7 +26,7 @@ namespace GodotGame
 			SceneManager.OnSceneInstance += UpdatePos;
 
 			parent = GetNode<Node2D>("..");
-			parentSprite = GetNode<Sprite>("../Sprite");
+			parentSprite = GetNode<Sprite2D>("../Sprite2D");
 
 			rng = new RandomNumberGenerator();
 
@@ -64,12 +64,12 @@ namespace GodotGame
 			if (facingRight)
 			{
 				parentSprite.FlipH = true;
-				parentSprite.Offset = new Vector2(-5f, parentSprite.Offset.y);
+				parentSprite.Offset = new Vector2(-5f, parentSprite.Offset.Y);
 			}
 			else
 			{
 				parentSprite.FlipH = false;
-				parentSprite.Offset = new Vector2(5f, parentSprite.Offset.y);
+				parentSprite.Offset = new Vector2(5f, parentSprite.Offset.Y);
 			}
 		}
 	}

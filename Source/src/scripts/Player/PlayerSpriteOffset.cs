@@ -1,14 +1,15 @@
 using Godot;
 using System;
 
-namespace GodotGame.PlayerBehaviour
+namespace GodotGame.PlayerBehavior
 {
 
-	public class PlayerSpriteOffset : Sprite
+	public partial class PlayerSpriteOffset : Sprite2D
 	{
-		public override void _Process(float delta)
+		public override void _Process(double delta)
 		{
-			GlobalPosition = new Vector2(Mathf.Floor(Player.Instance.GlobalPosition.x), Mathf.Floor(Player.Instance.GlobalPosition.y));
+			GlobalPosition = new Vector2(Mathf.Floor(Player.Instance.GlobalPosition.X), 
+			Mathf.Floor(Player.Instance.GlobalPosition.Y));
 		}
 	}
 }

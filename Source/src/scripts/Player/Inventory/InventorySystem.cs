@@ -2,9 +2,9 @@ using Godot;
 using GodotGame.General;
 using System;
 
-namespace GodotGame.PlayerBehaviour.InventorySystem
+namespace GodotGame.PlayerBehavior.InventorySystem
 {
-    public class InventorySystem
+    public partial class InventorySystem
     {
         public static Inventory inventory = new Inventory(Inventory.Size);
 

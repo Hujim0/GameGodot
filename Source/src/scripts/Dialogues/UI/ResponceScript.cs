@@ -2,36 +2,36 @@ using Godot;
 
 namespace GodotGame.Dialogues.UI
 {
-	public class ResponceScript : Button
+	public partial class ResponseScript : Button
 	{
 		public const float ANIM_DURATION = 0.75f;
 		public const float ANIM_HEIGHT = 30f;
 
-		public DialogueResponce responce;
+		public DialogueResponse response;
 		
 		Timer timer = null;
 		Tween tween = null;
 
-		public override void _Pressed() => DialogueResponceUI.ActivateResponce(responce);
+		public override void _Pressed() => DialogueResponseUI.ActivateResponse(response);
 		public override void _EnterTree()
 		{
 			Modulate = new Color(1, 1, 1, 0);
 			timer = GetNode<Timer>("Timer");
 			tween = GetNode<Tween>("Tween");
 		}
-		public void SetResponce(DialogueResponce responce)
+		public void SetResponse(DialogueResponse response)
 		{
-			this.responce = responce;
+			this.response = response;
 
-			Text = responce.responceText;
+			Text = response.responseText;
 		}
 
 		/// <param name="size"></param>
 		/// <param name="position"></param>
 		public void SetRect(Vector2 size, Vector2 position, int count = 0)
 		{
-			RectSize = size;
-			RectPosition = position;
+			Size = size;
+			Position = position;
 
 			if (count == 0) { OnTimerTimeOut(); return; }
 			timer.Start((ANIM_DURATION / 4) * count);
@@ -39,23 +39,19 @@ namespace GodotGame.Dialogues.UI
 
 		public void OnTimerTimeOut()
 		{
-			tween.InterpolateProperty(
+			tween.TweenProperty(
 				this,
 				"rect_position",
-				null,
-				RectPosition - new Vector2(0, ANIM_HEIGHT),
-				ANIM_DURATION,
-				Tween.TransitionType.Circ,
-				Tween.EaseType.Out);
-			tween.InterpolateProperty(
+				Position - new Vector2(0, ANIM_HEIGHT),
+				ANIM_DURATION).AsRelative().SetTrans(Tween.TransitionType.Circ);
+				// Tween.EaseType.Out);
+			tween.TweenProperty(
 				this,
 				"modulate",
-				new Color(1, 1, 1, 0),
 				new Color(1, 1, 1, 1),
-				ANIM_DURATION,
-				Tween.TransitionType.Circ,
-				Tween.EaseType.Out);
-			tween.Start();
+				ANIM_DURATION).AsRelative().SetTrans(Tween.TransitionType.Circ);
+				// Tween.EaseType.Out);
+			tween.Play();
 		}
 	}
 }

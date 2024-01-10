@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class ResolutionDropdown : OptionButton
+public partial class ResolutionDropdown : OptionButton
 {
 
 }

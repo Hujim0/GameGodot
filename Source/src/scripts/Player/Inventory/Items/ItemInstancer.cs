@@ -1,9 +1,9 @@
 using Godot;
 using GodotGame.General;
-using GodotGame.PlayerBehaviour.InventorySystem;
+using GodotGame.PlayerBehavior.InventorySystem;
 using System;
 
-public class ItemInstancer : Node2D
+public partial class ItemInstancer : Node2D
 {
 	[Export] public int itemID;
 

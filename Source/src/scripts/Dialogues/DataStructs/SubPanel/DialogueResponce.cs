@@ -2,17 +2,17 @@ using Godot;
 
 namespace GodotGame.Dialogues
 {
-    public class DialogueResponce
+    public partial class DialogueResponse
     {
-        [Export] public string responceText;
+        [Export] public string responseText;
 
         [Export] public DialoguePanel[] panels;
 
         /// <param name="responceText"></param>
         /// <param name="panels"></param>
-        public DialogueResponce(string responceText, DialoguePanel[] panels)
+        public DialogueResponse(string responceText, DialoguePanel[] panels)
         {
-            this.responceText = responceText;
+            this.responseText = responceText;
             this.panels = panels;
         }
     }

@@ -6,7 +6,7 @@ using System;
 
 namespace GodotGame.UI
 {
-	public class PauseMenuUI : Control
+	public partial class PauseMenuUI : Control
 	{
 		const string INPUT_PAUSE = "ui_pause";
 		const string LOCALIZATIONFILE_NAME = "pauseMenu.json";
@@ -50,7 +50,7 @@ namespace GodotGame.UI
 			if (Instance != null) return;
 			Instance = this;
 /*
-			particles = GetNode<CanvasItem>("Particles2D");
+			particles = GetNode<CanvasItem>("GPUParticles2D");
 
 			tween = GetNode<Tween>("Tween");*/
 

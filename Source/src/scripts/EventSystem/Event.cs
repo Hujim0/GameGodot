@@ -1,6 +1,6 @@
 using Godot;
 using GodotGame.General;
-using GodotGame.PlayerBehaviour.InventorySystem;
+using GodotGame.PlayerBehavior.InventorySystem;
 using GodotGame.Serialization;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ namespace GodotGame.EventSystem
 {
 	public enum EVENT_TYPE { StartDialogue, InsertDialogue, SceneTransition, EditGameEvents, GiveItem, ScreenFade };
 
-	public class Event : EventData
+	public partial class Event : EventData
 	{
 		public Action OnEventStarted;
 
@@ -31,7 +31,7 @@ namespace GodotGame.EventSystem
 					if (string.IsNullOrEmpty(data_path))
 					{ GD.PrintErr("!!!Event construction failed: data_path is null/empty!!!"); return; }
 
-					DialogueLoader loader = new DialogueLoader(data_path, Mathf.FloorToInt(arg.x), specialarg);
+					DialogueLoader loader = new DialogueLoader(data_path, Mathf.FloorToInt(arg.X), specialarg);
 
 					OnEventStarted += loader.StartDialogue;
 
@@ -42,7 +42,7 @@ namespace GodotGame.EventSystem
 					if (string.IsNullOrEmpty(data_path))
 					{ GD.PrintErr("!!!Event construction failed: data_path is null/empty!!!"); return; }
 
-					DialogueLoader insertloader = new DialogueLoader(data_path, Mathf.FloorToInt(arg.x), specialarg);
+					DialogueLoader insertloader = new DialogueLoader(data_path, Mathf.FloorToInt(arg.X), specialarg);
 
 					OnEventStarted += insertloader.InsertDialogues;
 
@@ -53,7 +53,7 @@ namespace GodotGame.EventSystem
 					if (string.IsNullOrEmpty(data_path))
 					{ GD.PrintErr("!!!Event construction failed: data_path is null/empty!!!"); return; }
 
-					OnEventStarted += ChangeScene;
+					OnEventStarted += ChangeSceneToFile;
 
 					GD.Print($"Scene name: \"{data_path}\"");
 					GD.Print($"Spawn at: {arg}");
@@ -69,7 +69,7 @@ namespace GodotGame.EventSystem
 
 					string[] events = data_path.Split(new char[] { ',', ' ' });
 
-					if ((arg == null || arg.x == 0))
+					if (arg.X == 0.0F)
                     {
                         foreach (string @event in events)
 							GameManager.GameEvents.Remove(@event);
@@ -127,7 +127,7 @@ namespace GodotGame.EventSystem
 					if (string.IsNullOrEmpty(data_path))
 					{ GD.PrintErr("!!!Event construction failed: data_path is null/empty!!!"); return; }
 
-					DialogueLoader loader = new DialogueLoader(data_path, Mathf.FloorToInt(arg.x), specialarg);
+					DialogueLoader loader = new DialogueLoader(data_path, Mathf.FloorToInt(arg.X), specialarg);
 
 					OnEventStarted += loader.StartDialogue;
 
@@ -138,7 +138,7 @@ namespace GodotGame.EventSystem
 					if (string.IsNullOrEmpty(data_path))
 					{ GD.PrintErr("!!!Event construction failed: data_path is null/empty!!!"); return; }
 
-					DialogueLoader insertloader = new DialogueLoader(data_path, Mathf.FloorToInt(arg.x), specialarg);
+					DialogueLoader insertloader = new DialogueLoader(data_path, Mathf.FloorToInt(arg.X), specialarg);
 
 					OnEventStarted += insertloader.InsertDialogues;
 
@@ -149,7 +149,7 @@ namespace GodotGame.EventSystem
 					if (string.IsNullOrEmpty(data_path))
 					{ GD.PrintErr("!!!Event construction failed: data_path is null/empty!!!"); return; }
 
-					OnEventStarted += ChangeScene;
+					OnEventStarted += ChangeSceneToFile;
 
 					GD.Print($"Scene name: \"{data_path}\"");
 					GD.Print($"Spawn at: {arg}");
@@ -166,7 +166,7 @@ namespace GodotGame.EventSystem
 
 					string[] events = data_path.Split(new char[] { ',', ' ' });
 
-					if ((arg == null || arg.x == 0))
+					if (arg.X == 0.0F)
 					{
 						foreach (string @event in events)
 							GameManager.GameEvents.Remove(@event);
@@ -208,8 +208,8 @@ namespace GodotGame.EventSystem
 		}
 
 
-		void ChangeScene() => SceneManager.ChangeScene(data_path, arg);
-		void GiveItem() => InventorySystem.AddItem(Mathf.FloorToInt(arg.x));
+		void ChangeSceneToFile() => SceneManager.LoadSceneFromFileAsync(data_path, arg);
+		void GiveItem() => InventorySystem.AddItem(Mathf.FloorToInt(arg.X));
 
 		public void Invoke()
 		{

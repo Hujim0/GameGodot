@@ -1,41 +1,41 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://src/visuals/textures/Scenes/Test/rumka.png" type="Texture" id=1]
-[ext_resource path="res://src/visuals/textures/Scenes/Test/stinka.png" type="Texture" id=2]
-[ext_resource path="res://src/visuals/textures/Scenes/Test/pol.png" type="Texture" id=3]
-[ext_resource path="res://src/visuals/textures/Scenes/Test/Atlases/Door.atlastex" type="Texture" id=4]
+[ext_resource path="res://src/visuals/textures/Scenes/Test/rumka.png" type="Texture2D" id=1]
+[ext_resource path="res://src/visuals/textures/Scenes/Test/stinka.png" type="Texture2D" id=2]
+[ext_resource path="res://src/visuals/textures/Scenes/Test/pol.png" type="Texture2D" id=3]
+[ext_resource path="res://src/visuals/textures/Scenes/Test/Atlases/Door.atlastex" type="Texture2D" id=4]
 [ext_resource path="res://src/scripts/EventSystem/EventInteractionTrigger.cs" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 102 )
+size = Vector2( 8, 102 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 160, 10 )
+size = Vector2( 160, 10 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 12, 10 )
+size = Vector2( 12, 10 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 210, 10 )
+size = Vector2( 210, 10 )
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 27, 3 )
+size = Vector2( 27, 3 )
 
-[node name="Node2D" type="YSort"]
+[node name="Node2D" type="Node2D"]
 position = Vector2( 152, -81 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="pol" type="Sprite" parent="."]
+[node name="pol" type="Sprite2D" parent="."]
 texture = ExtResource( 3 )
 offset = Vector2( 0, 100 )
 
-[node name="rumka" type="Sprite" parent="."]
+[node name="rumka" type="Sprite2D" parent="."]
 texture = ExtResource( 1 )
 offset = Vector2( 0, 100 )
 
-[node name="stinka" type="Sprite" parent="."]
+[node name="stinka" type="Sprite2D" parent="."]
 texture = ExtResource( 2 )
 offset = Vector2( 0, 100 )
 
@@ -67,7 +67,7 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Door" type="Sprite" parent="Door"]
+[node name="Door" type="Sprite2D" parent="Door"]
 texture = ExtResource( 4 )
 offset = Vector2( 0, -32 )
 script = ExtResource( 5 )

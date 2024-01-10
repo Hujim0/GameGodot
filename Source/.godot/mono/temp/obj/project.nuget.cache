@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "omX0eicKgBtE8iJArrqW5HDif5tOChfNdAeAz7ba8ZnGKpqmYH5GtymIOB9N4GwH0ilWyTFAm6TMKMtH8MkC/A==",
+  "success": true,
+  "projectFilePath": "C:\\code\\GameGodot\\Source\\Godot- Game.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\mcZhe\\.nuget\\packages\\godot.sourcegenerators\\4.1.1\\godot.sourcegenerators.4.1.1.nupkg.sha512",
+    "C:\\Users\\mcZhe\\.nuget\\packages\\godotsharp\\4.1.1\\godotsharp.4.1.1.nupkg.sha512",
+    "C:\\Users\\mcZhe\\.nuget\\packages\\godotsharpeditor\\4.1.1\\godotsharpeditor.4.1.1.nupkg.sha512",
+    "C:\\Users\\mcZhe\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

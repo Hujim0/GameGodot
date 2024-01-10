@@ -3,7 +3,7 @@ using System;
 
 namespace GodotGame.UI.PauseMenu.Buttons
 {
-    public abstract class HideButton : LocalizedButton
+    public abstract partial class HideButton : LocalizedButton
     {
         abstract protected string pathToNode { get; }
         abstract protected bool setVisible { get; }

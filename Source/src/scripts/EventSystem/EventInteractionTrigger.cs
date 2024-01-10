@@ -1,10 +1,10 @@
 using Godot;
-using GodotGame.PlayerBehaviour.Interaction;
+using GodotGame.PlayerBehavior.Interaction;
 using System;
 
 namespace GodotGame.EventSystem
 {
-	public class EventInteractionTrigger : IInteractableHighLightable
+	public partial class EventInteractionTrigger : IIntractableHighlightable
 	{
 		[Export] public EVENT_TYPE type;
 

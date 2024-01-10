@@ -39,7 +39,7 @@ namespace GodotGame.Inputs
                 
                     actionName: action,
 
-                    events: InputMap.GetActionList(action)
+                    events: InputMap.ActionGetEvents(action)
                 ));
             }
 
@@ -53,6 +53,6 @@ namespace GodotGame.Inputs
             InputMap.ActionAddEvent(actionName, @event);
         }
 
-        public static void ResetControls() => InputMap.LoadFromGlobals();
+        public static void ResetControls() => InputMap.LoadFromProjectSettings();
     }
 }

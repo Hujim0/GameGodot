@@ -1,6 +1,6 @@
 ﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Godot- Game", "Godot- Game.csproj", "{3D00EAD8-5356-40F1-A927-2CB4DF1ABAF3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Godot- Game", "Godot- Game.csproj", "{6DA4E024-369E-4362-967A-C7A5E7C31741}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,11 +9,11 @@ Global
 	ExportRelease|Any CPU = ExportRelease|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3D00EAD8-5356-40F1-A927-2CB4DF1ABAF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3D00EAD8-5356-40F1-A927-2CB4DF1ABAF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3D00EAD8-5356-40F1-A927-2CB4DF1ABAF3}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
-		{3D00EAD8-5356-40F1-A927-2CB4DF1ABAF3}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
-		{3D00EAD8-5356-40F1-A927-2CB4DF1ABAF3}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
-		{3D00EAD8-5356-40F1-A927-2CB4DF1ABAF3}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+		{6DA4E024-369E-4362-967A-C7A5E7C31741}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DA4E024-369E-4362-967A-C7A5E7C31741}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DA4E024-369E-4362-967A-C7A5E7C31741}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{6DA4E024-369E-4362-967A-C7A5E7C31741}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{6DA4E024-369E-4362-967A-C7A5E7C31741}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{6DA4E024-369E-4362-967A-C7A5E7C31741}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -1,9 +1,9 @@
 using Godot;
 using System;
 
-namespace GodotGame.PlayerBehaviour.Interaction
+namespace GodotGame.PlayerBehavior.Interaction
 {
-	public class InteractionPoint : Position2D
+	public partial class InteractionPoint : Marker2D
 	{
 		[Export] public Vector2 offset = new Vector2(20f, 17.5f);
 
@@ -18,8 +18,8 @@ namespace GodotGame.PlayerBehaviour.Interaction
 
 			Position = offset * new Vector2
 			{
-				x = Mathf.Abs(input.x),
-				y = -input.y
+				X = Mathf.Abs(input.X),
+				Y = -input.Y
 			};
 		}
 	}

@@ -1,14 +1,14 @@
 using Godot;
 using System;
 
-namespace GodotGame.PlayerBehaviour.InventorySystem
+namespace GodotGame.PlayerBehavior.InventorySystem
 {
     [Serializable]
-    public class Item
+    public partial class Item
     {
         public string Name;
         public string Desc;
 
-        public string Sprite;
+        public string Sprite2D;
     }
 }

@@ -6,11 +6,11 @@ using GodotGame.Serialization;
 using System;
 using System.Collections.Generic;
 
-public class DialogueLoader
+public partial class DialogueLoader
 {
-    const string STANDARTDIRECTORYNAME = @"Standart\";
+    const string STANDARD_DIRECTORY_NAME = @"Standart\";
 
-    Dialogue[] resultdialogues = null;
+    Dialogue[] result_dialogues = null;
     readonly RandomNumberGenerator rng = new RandomNumberGenerator();
 
     /// <summary>
@@ -29,50 +29,47 @@ public class DialogueLoader
     /// </param>
     public DialogueLoader(string data_path, int dialogue_priority = 0, string force_eventName = "")
     {
-        string genericpath = $@"{GameManager.Preferences.language}\{SerializationSystem.PathToDialogues}{data_path}\";
+        string generic_path = $@"{GameManager.Preferences.language}\{SerializationSystem.PathToDialogues}{data_path}\";
 
-  /*      SerializationSystem.SaveDataGeneric
-            (new NPCdata() { npc_name = "null" }, $@"{SerializationSystem.PathToLanguages}{genericpath}\{NPCDATAFILENAME}");
-*/
         GD.Print($"- Targeted priority: {dialogue_priority}");
 
         List<Dialogue> dialogues = new List<Dialogue>();
 
         if (!string.IsNullOrEmpty(force_eventName))
         {
-            dialogues.AddRange(SerializationSystem.LoadDialogues($"{genericpath}{force_eventName}"));
+            dialogues.AddRange(SerializationSystem.LoadDialogues($"{generic_path}{force_eventName}"));
         }
         else
         {
-            string specialevent = string.Empty;
+            string special_event = string.Empty;
 
-            IEnumerable<string> events = SerializationSystem.GetDirectoryNames(genericpath);
+            string[] events = SerializationSystem.GetDirectoryNames(generic_path);
 
-            foreach (string eventname in events)
+            foreach (string event_name in events)
             {
-                string neweventname = System.IO.Path.GetFileName(eventname);
+                string new_event_name = System.IO.Path.GetFileName(event_name);
 
-                if (!GameManager.GameEvents.Contains(neweventname)) continue;
+                if (!GameManager.GameEvents.Contains(new_event_name)) continue;
 
-                specialevent = neweventname;
+                special_event = new_event_name;
             }
 
             string tempFileName = null;
 
-            if (specialevent == string.Empty)
+            if (special_event == string.Empty)
             {
 
-                GD.Print($"- No Special Event found, loading standart");
-                tempFileName = STANDARTDIRECTORYNAME;
+                GD.Print($"- No Special Event found, loading standard");
+                tempFileName = STANDARD_DIRECTORY_NAME;
             }
             else
             {
-                GD.Print($"- Special Event found: \"{specialevent}\"");
-                tempFileName = specialevent;
+                GD.Print($"- Special Event found: \"{special_event}\"");
+                tempFileName = special_event;
 
             }
 
-            dialogues.AddRange(SerializationSystem.LoadDialogues($"{genericpath}{tempFileName}"));
+            dialogues.AddRange(SerializationSystem.LoadDialogues($"{generic_path}{tempFileName}"));
         }
 
         for (int i = 0; i < dialogues.Count; i++)
@@ -91,24 +88,24 @@ public class DialogueLoader
             return;
         }
 
-        resultdialogues = dialogues.ToArray();
+        result_dialogues = dialogues.ToArray();
     }
 
     public void StartDialogue()
     {
-        if (resultdialogues == null) return;
+        if (result_dialogues == null) return;
 
-        if (resultdialogues.Length == 1) { DialogueSystem.StartDialogue(resultdialogues[0]); return; }
+        if (result_dialogues.Length == 1) { DialogueSystem.StartDialogue(result_dialogues[0]); return; }
 
-        DialogueSystem.StartDialogue(resultdialogues[rng.RandiRange(0, resultdialogues.Length - 1)]);
+        DialogueSystem.StartDialogue(result_dialogues[rng.RandiRange(0, result_dialogues.Length - 1)]);
     }
 
     public void InsertDialogues()
     {
-        if (resultdialogues == null) return;
+        if (result_dialogues == null) return;
 
-        if (resultdialogues.Length == 1) { DialogueSystem.InsertDialoguePanels(resultdialogues[0].panels); return; }
+        if (result_dialogues.Length == 1) { DialogueSystem.InsertDialoguePanels(result_dialogues[0].panels); return; }
 
-        DialogueSystem.InsertDialoguePanels(resultdialogues[rng.RandiRange(0, resultdialogues.Length - 1)].panels);
+        DialogueSystem.InsertDialoguePanels(result_dialogues[rng.RandiRange(0, result_dialogues.Length - 1)].panels);
     }
 }

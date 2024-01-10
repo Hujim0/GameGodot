@@ -1,9 +1,9 @@
 using Godot;
 using GodotGame;
-using GodotGame.PlayerBehaviour;
+using GodotGame.PlayerBehavior;
 using System;
 
-public class LoadingScreenUI : ColorRect
+public partial class LoadingScreenUI : ColorRect
 {
     const float TRANSITION_SPEED = 0.5f;
 
@@ -19,63 +19,59 @@ public class LoadingScreenUI : ColorRect
 
     private void StartFading()
     {
-        tween.InterpolateProperty(this,
+        tween.TweenProperty(this,
             "modulate",
-            new Color(0, 0, 0, 0),
             new Color(0, 0, 0, 1),
             TRANSITION_SPEED * 1.5f);
-        tween.Start();
+        tween.Play();
 
-        tween.Connect("tween_completed", this, "StartFadingOut");
+        tween.Connect("tween_completed", new Callable(this, "StartFadingOut"));
     }
 
-    public void StartFadingOut(Godot.Object _, NodePath __)
+    public void StartFadingOut(GodotObject _, NodePath __)
     {
         SceneManager.InvokeOnSceneInstance();
 
-        tween.InterpolateProperty(this,
+        tween.TweenProperty(this,
              "modulate",
-             new Color(0, 0, 0, 1),
              new Color(0, 0, 0, 0),
              TRANSITION_SPEED * 1.5f);
-        tween.Start();
+        tween.Play();
 
-        tween.Disconnect("tween_completed", this, "StartFadingOut");
-        tween.Connect("tween_completed", this, "StopTransition");
+        tween.Disconnect("tween_completed", new Callable(this, "StartFadingOut"));
+        tween.Connect("tween_completed", new Callable(this, "StopTransition"));
     }
 
-    public void StopTransition(Godot.Object _, NodePath __)
+    public void StopTransition(GodotObject _, NodePath __)
     {
         SceneManager.inTransition = false;
-        tween.Disconnect("tween_completed", this, "StopTransition");
+        tween.Disconnect("tween_completed", new Callable(this, "StopTransition"));
     }
 
     void StartTransition()
     {
-        tween.InterpolateProperty(this,
+        tween.TweenProperty(this,
             "modulate",
-            new Color(0,0,0,0),
             new Color(0, 0, 0, 1),
             TRANSITION_SPEED);
-        tween.Start();
+        tween.Play();
 
-        tween.Connect("tween_completed", this, "InstantiateScene");
+        tween.Connect("tween_completed", new Callable(this, "InstantiateScene"));
     }
 
-    public void InstantiateScene(Godot.Object _, NodePath __)
+    public void InstantiateScene(GodotObject _, NodePath __)
     {
         while (SceneManager.isInLoad) { /*wait*/ }
 
         SceneManager.ApplyChanges();
 
-        tween.InterpolateProperty(this,
+        tween.TweenProperty(this,
              "modulate",
-             new Color(0, 0, 0, 1),
              new Color(0, 0, 0, 0),
              TRANSITION_SPEED);
-        tween.Start();
+        tween.Play();
 
-        tween.Disconnect("tween_completed", this, "InstantiateScene");
-        tween.Connect("tween_completed", this, "StopTransition");
+        tween.Disconnect("tween_completed", new Callable(this, "InstantiateScene"));
+        tween.Connect("tween_completed", new Callable(this, "StopTransition"));
     }
 }

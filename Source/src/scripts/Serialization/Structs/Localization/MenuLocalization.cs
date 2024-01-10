@@ -4,7 +4,7 @@ using System;
 namespace GodotGame.Serialization.Localization
 {
     [Serializable]
-    public class MenuLocalization
+    public partial class MenuLocalization
     {
         public string pause_paused = "";
         public string pause_resume = "";

@@ -3,20 +3,20 @@ using System;
 
 namespace GodotGame
 {
-	public class SceneManager : Node
+	public partial class SceneManager : Node
 	{
 		const string PathToSceneFolder = "res://src/Scenes";
 
-		const string NodePathToCurrentScene = "Control/ViewportContainer/Viewport/CurrentScene";
+		const string NodePathToCurrentScene = "Control/SubViewportContainer/SubViewport/CurrentScene";
 
 		public static Node currentScene = null;
 
-		public static Action OnSceneStartedLoading;
+		public static System.Action OnSceneStartedLoading;
 
 		public delegate void SceneInstanced(Vector2 pos);
 		public static event SceneInstanced OnSceneInstance;
 
-		public static Action FadeScreen;
+		public static System.Action FadeScreen;
 
 		public static bool isInLoad = false;
 		public static bool inTransition = false;
@@ -31,14 +31,14 @@ namespace GodotGame
 		{
 			currentScene = GetNode(NodePathToCurrentScene);
 
-			ChangeScene("Puk", Vector2.Zero);
+			LoadSceneFromFileAsync("Puk", Vector2.Zero);
 		}
 
 		public static void HardSceneChange(string sceneName)
 		{
 			string path = $@"{PathToSceneFolder}/{sceneName}.tscn";
 
-			Node scene = ResourceLoader.Load<PackedScene>(path).Instance();
+			Node scene = ResourceLoader.Load<PackedScene>(path).Instantiate();
 
 			CleanScenes();
 
@@ -47,7 +47,7 @@ namespace GodotGame
 			OnSceneStartedLoading?.Invoke();
 		}
 
-		public static void ChangeScene(string sceneName, Vector2 playerPos)
+		public static void LoadSceneFromFileAsync(string sceneName, Vector2 playerPos)
 		{
 			if (inTransition) return;
 
@@ -62,25 +62,30 @@ namespace GodotGame
 
 			string path = $@"{PathToSceneFolder}/{sceneName}.tscn";
 
-			ResourceInteractiveLoader loader = ResourceLoader.LoadInteractive(path, "PackedScene");
+			Error loader_error = ResourceLoader.LoadThreadedRequest(path, "PackedScene");
+
+			if (loader_error != Error.Ok) {
+				GD.Print(loader_error.ToString());
+			}
+
+			Godot.Collections.Array progress = new Godot.Collections.Array();
 
 			while (true)
 			{
-				Error err = loader.Poll();
 
-				switch (err)
+				ResourceLoader.ThreadLoadStatus status = ResourceLoader.LoadThreadedGetStatus(path, progress);
+
+				switch (status)
 				{
-					case Error.Ok:
+					case ResourceLoader.ThreadLoadStatus.InProgress:
 						
-						GD.Print($"- {Mathf.Floor((float)loader.GetStage() / (float)loader.GetStageCount() * 100f)}%");
+						GD.Print($"- {(float)progress[0] * 100f}%");
 						
 						break;
 
-					case Error.FileEof:
+					case ResourceLoader.ThreadLoadStatus.Loaded:
 
-						Resource res = loader.GetResource();
-
-						loader.Dispose();
+						Resource res = ResourceLoader.LoadThreadedGet(path);
 
 						GD.Print("- 100%");
 
@@ -94,7 +99,7 @@ namespace GodotGame
 
 					default:
 
-						GD.PrintErr($"!!! Scene load failed! {err} !!!");
+						GD.PrintErr($"!!! Scene load failed! {status} !!!");
 
 						return;
 				}
@@ -108,7 +113,7 @@ namespace GodotGame
 			OnSceneInstance?.Invoke(playerPosToApply);
 
 			CleanScenes();
-			currentScene.AddChild(sceneToApply.Instance(), true);
+			currentScene.AddChild(sceneToApply.Instantiate(), true);
 
 			GD.Print("--- Scene instantiated -------------");
 		}

@@ -3,7 +3,7 @@ using GodotGame.Serialization.Localization;
 
 namespace GodotGame.UI.PauseMenu.Buttons
 {
-    public abstract class LocalizedLabel : Label, ILocalizedElement
+    public abstract partial class LocalizedLabel : Label, ILocalizedElement
     {
         public abstract void ApplyLocalization(MenuLocalization localization);
         public override void _EnterTree() => PauseMenuUI.LocalizationChange += ApplyLocalization;

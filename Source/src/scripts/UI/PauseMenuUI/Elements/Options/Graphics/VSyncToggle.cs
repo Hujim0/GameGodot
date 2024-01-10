@@ -4,7 +4,7 @@ using System;
 
 namespace GodotGame.UI.PauseMenu.Buttons
 {
-    public class VSyncToggle : LocalizedButton
+    public partial class VSyncToggle : LocalizedButton
     {
         public override void ApplyLocalization(MenuLocalization localization)
         {

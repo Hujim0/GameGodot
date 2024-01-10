@@ -1,9 +1,9 @@
-﻿using Godot;
+using Godot;
 
 namespace GodotGame.Dialogues
 {
     [System.Serializable]
-    public class Dialogue
+    public partial class Dialogue
     {
         /// <summary>
         /// Higher the priority is, later it will apear.
@@ -27,9 +27,9 @@ namespace GodotGame.Dialogues
             {
                 string responces = string.Empty;
 
-                foreach (DialogueResponce resp in panels[0].resps)
+                foreach (DialogueResponse resp in panels[0].resps)
                 {
-                    responces += $"/{resp.responceText}";
+                    responces += $"/{resp.responseText}";
                 }
 
                 GD.Print($"Choice: {responces}");
@@ -48,9 +48,9 @@ namespace GodotGame.Dialogues
             {
                 string responces = string.Empty;
 
-                foreach (DialogueResponce resp in dil.panels[0].resps)
+                foreach (DialogueResponse resp in dil.panels[0].resps)
                 {
-                    responces += $"/{resp.responceText}";
+                    responces += $"/{resp.responseText}";
                 }
 
                 GD.Print($"Choice: {responces}");

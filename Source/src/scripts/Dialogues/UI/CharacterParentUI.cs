@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace GodotGame.Dialogues.UI
 {
-	public class CharacterParentUI : Control
+	public partial class CharacterParentUI : Control
 	{
 		int lastCharacterCount = 0;
 
@@ -63,19 +63,19 @@ namespace GodotGame.Dialogues.UI
 			//delete existing
 			ClearCharactersList();
 
-            //instanciate new
+            //instantiate new
             for (int i = 0; i < currentExpressions.Count; i++)
             {
-				Node Instance = CharacterPrefab.Instance();
+				Node Instance = CharacterPrefab.Instantiate();
 				AddChild(Instance, true);
 
-				CharacterScript newCharacter = GetNode<CharacterScript>(Instance.Name);
+				CharacterScript newCharacter = GetNode<CharacterScript>(new NodePath(Instance.Name));
 				list.Add(newCharacter);
 			}
 
 			lastCharacterCount = currentExpressions.Count;
 
-			UpdatePositions(ViewportUI.viewport.Size);
+			UpdatePositions(GetViewportRect().Size);
 			UpdateCharactersTalk();
 		}
 
@@ -104,15 +104,15 @@ namespace GodotGame.Dialogues.UI
 			for (int i = 0; i < list.Count; i++)
 			{
 				Vector2 textureSize = list[i].Texture.GetSize();
-				Vector2 pivotOffset = new Vector2(textureSize.x / 2, textureSize.y);
-				float Scale = (textureSize.y * 0.075f) * (RectSize.y / RectSize.x);
+				Vector2 pivotOffset = new Vector2(textureSize.X / 2, textureSize.Y);
+				float Scale = (textureSize.Y * 0.075f) * (Size.Y / Size.X);
 
-                list[i].RectPivotOffset = pivotOffset;
+                list[i].PivotOffset = pivotOffset;
 
-				list[i].RectScale = new Vector2(Scale, Scale) * 0.8f; // is unhighlighted
-                list[i].RectPosition = new Vector2(
-					x: RectSize.x * (i + 1) / (list.Count + 1),
-					y: Mathf.Floor(RectSize.y))
+				list[i].Scale = new Vector2(Scale, Scale) * 0.8f; // is unhighlighted
+                list[i].Position = new Vector2(
+					Size.X * (i + 1) / (list.Count + 1),
+					Mathf.Floor(Size.Y))
 					//pivot offset
 					- pivotOffset;
             }

@@ -3,7 +3,7 @@ using GodotGame.Serialization.Localization;
 
 namespace GodotGame.UI.PauseMenu.Buttons
 {
-    public class OptionsButton : HideButton
+    public partial class OptionsButton : HideButton
     {
         protected override string pathToNode => "../../../../../../Options";
         protected override bool setVisible => true;

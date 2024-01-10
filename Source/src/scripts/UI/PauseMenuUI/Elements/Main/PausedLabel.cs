@@ -2,7 +2,7 @@ using GodotGame.Serialization.Localization;
 
 namespace GodotGame.UI.PauseMenu.Buttons
 {
-    public class PausedLabel : LocalizedLabel
+    public partial class PausedLabel : LocalizedLabel
     {
         public override void ApplyLocalization(MenuLocalization localization)
         {

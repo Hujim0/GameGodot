@@ -1,5 +1,5 @@
 using Godot;
-using GodotGame.PlayerBehaviour.InventorySystem;
+using GodotGame.PlayerBehavior.InventorySystem;
 using System;
 
 [Serializable]

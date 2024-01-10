@@ -3,15 +3,15 @@ using Godot;
 using GodotGame.Dialogues;
 using System;
 
-namespace GodotGame.PlayerBehaviour.Interaction
+namespace GodotGame.PlayerBehavior.Interaction
 {
-	public class Interactable : IInteractableHighLightable
+	public partial class Interactable : IIntractableHighlightable
 	{
 		public Action OnInteraction;
 
 		public override void OnInteracted()
 		{
-			if (!IsInteractable) return;
+			if (!IsIntractable) return;
 			OnInteraction?.Invoke();
 		}
 	}

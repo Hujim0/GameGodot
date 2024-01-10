@@ -5,7 +5,7 @@ using System;
 namespace GodotGame.UI
 {
 
-    public class TextTyper : RichTextLabel, IUIElement
+    public partial class TextTyper : RichTextLabel, IUIElement
     {
         string currentSentence = string.Empty;
 /*        int currentSentenceCharCount = 0;
@@ -15,7 +15,7 @@ namespace GodotGame.UI
         readonly char[] tagBoundary = new char[2] { '[', ']' };
         readonly char[] seperator = new char[2] { '=', ' ' };
 */
-        public Action StopedTyping;
+        public Action StoppedTyping;
 
         Timer timer;
 
@@ -39,7 +39,7 @@ namespace GodotGame.UI
         public void Reset()
         {
             Stop();
-            BbcodeText = string.Empty;
+            Text = string.Empty;
         }
 
         public void Stop()
@@ -50,7 +50,7 @@ namespace GodotGame.UI
 
             timer.Stop();
 
-            StopedTyping?.Invoke();
+            StoppedTyping?.Invoke();
         }
 
         public void TypeSentence(string text, float timeBetweenCharacters)
@@ -62,7 +62,7 @@ namespace GodotGame.UI
 
             VisibleCharacters = 0;
 
-            BbcodeText = currentSentence;;
+            Text = currentSentence;;
 
             timer.WaitTime = timeBetweenCharacters;
             timer.Start(-1);
@@ -72,7 +72,7 @@ namespace GodotGame.UI
         {
             VisibleCharacters++;
 
-            if (PercentVisible >= 1f) Stop();
+            if (VisibleRatio >= 1f) Stop();
 
         }
 /*            if (chars[lastCharIndex] == '[')
@@ -101,7 +101,7 @@ namespace GodotGame.UI
                             GD.Print($"{Text.Length}/{currentSentenceCharCount}");
                 
                 if (currentSentenceCharCount == Text.Length) Stop();
-                if (BbcodeText == currentSentence) Stop();
+                if (Text == currentSentence) Stop();
 
         OnTimerTimeout();
     }
@@ -111,7 +111,7 @@ namespace GodotGame.UI
     lastCharIndex++;
 
             if (currentSentenceCharCount == Text.Length) Stop();
-            if (BbcodeText == currentSentence) Stop();
+            if (Text == currentSentence) Stop();
 
 
 

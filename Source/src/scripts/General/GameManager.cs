@@ -1,11 +1,11 @@
-﻿using Godot;
-using GodotGame.PlayerBehaviour.InventorySystem;
+using Godot;
+using GodotGame.PlayerBehavior.InventorySystem;
 using GodotGame.Serialization;
 using System.Collections.Generic;
 
 namespace GodotGame.General
 {
-    public class GameManager : Node
+    public partial class GameManager : Node
     {
         const string ItemsFileName = "Items.json";
         const string PreferencesFileName = "Preferences.json";

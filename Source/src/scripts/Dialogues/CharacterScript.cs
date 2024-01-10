@@ -2,14 +2,14 @@ using Godot;
 
 namespace GodotGame.Dialogues
 {
-	public class CharacterScript : TextureRect
+	public partial class CharacterScript : TextureRect
 	{
 		const string nodePathToTween = "Tween";
 		const string nodePathToAnim = "AnimationPlayer";
 
 		const float highlight_anim_duration = 0.5f;
 
-		public Vector2 standartScale = Vector2.Zero;
+		public Vector2 standardScale = Vector2.Zero;
 
 		public AnimationPlayer anim = null;
 
@@ -26,48 +26,48 @@ namespace GodotGame.Dialogues
 
 				isHighlighted = value;
 
-				tween.StopAll();
+				tween.Stop();
 
-				if (standartScale == Vector2.Zero)
-					standartScale = RectScale;
+				if (standardScale == Vector2.Zero)
+					standardScale = Scale;
 
 				if (value)
 				{
-					tween.InterpolateProperty(this,
+					tween.TweenProperty(this,
 						"modulate",
-						new Color(0.75f, 0.75f, 0.75f, 1f),
+						// new Color(0.75f, 0.75f, 0.75f, 1f),
 						new Color(1f, 1f, 1f, 1f),
-						highlight_anim_duration,
-						Tween.TransitionType.Cubic,
-						Tween.EaseType.Out);
+						highlight_anim_duration).AsRelative().SetTrans(Tween.TransitionType.Cubic);
+						// Tween.TransitionType.Cubic,
+						// Tween.EaseType.Out);
 						
-					tween.InterpolateProperty(this,
+					tween.TweenProperty(this,
 						"rect_scale",
-						standartScale,
-						standartScale * 1.25f,
-						highlight_anim_duration,
-						Tween.TransitionType.Cubic,
-						Tween.EaseType.Out);
+						// standardScale,
+						standardScale * 1.25f,
+						highlight_anim_duration).AsRelative().SetTrans(Tween.TransitionType.Cubic);
+						// Tween.TransitionType.Cubic,
+						// Tween.EaseType.Out);
 				}
 				else
 				{
-					tween.InterpolateProperty(this,
+					tween.TweenProperty(this,
 						"modulate",
-						new Color(1f, 1f, 1f, 1f),
+						// new Color(1f, 1f, 1f, 1f),
 						new Color(0.75f, 0.75f, 0.75f, 1f),
-						highlight_anim_duration / 1.5f,
-						Tween.TransitionType.Cubic,
-						Tween.EaseType.Out);
-					tween.InterpolateProperty(this,
+						highlight_anim_duration / 1.5d).AsRelative().SetTrans(Tween.TransitionType.Cubic);
+						// ,
+						// Tween.EaseType.Out);
+					tween.TweenProperty(this,
 						"rect_scale",
-						standartScale * 1.25f,
-						standartScale,
-						highlight_anim_duration / 1.5f,
-						Tween.TransitionType.Cubic,
-						Tween.EaseType.Out);
+						// standardScale * 1.25f,
+						standardScale,
+						highlight_anim_duration / 1.5d).AsRelative().SetTrans(Tween.TransitionType.Cubic);
+						// Tween.TransitionType.Cubic,
+						// Tween.EaseType.Out);
 				}
 				
-				tween.Start();
+				tween.Play();
 			}
 		}
 

@@ -1,0 +1,18 @@
+C:\code\GameGodot\Source\.godot\mono\temp\obj\Debug\Godot- Game.csproj.AssemblyReference.cache
+C:\code\GameGodot\Source\.godot\mono\temp\obj\Debug\Godot- Game.GeneratedMSBuildEditorConfig.editorconfig
+C:\code\GameGodot\Source\.godot\mono\temp\obj\Debug\Godot- Game.AssemblyInfoInputs.cache
+C:\code\GameGodot\Source\.godot\mono\temp\obj\Debug\Godot- Game.AssemblyInfo.cs
+C:\code\GameGodot\Source\.godot\mono\temp\obj\Debug\Godot- Game.csproj.CoreCompileInputs.cache
+C:\code\GameGodot\Source\.godot\mono\temp\bin\Debug\Godot- Game.deps.json
+C:\code\GameGodot\Source\.godot\mono\temp\bin\Debug\Godot- Game.runtimeconfig.json
+C:\code\GameGodot\Source\.godot\mono\temp\bin\Debug\Godot- Game.dll
+C:\code\GameGodot\Source\.godot\mono\temp\bin\Debug\Godot- Game.pdb
+C:\code\GameGodot\Source\.godot\mono\temp\bin\Debug\GodotSharp.dll
+C:\code\GameGodot\Source\.godot\mono\temp\bin\Debug\GodotSharpEditor.dll
+C:\code\GameGodot\Source\.godot\mono\temp\bin\Debug\Newtonsoft.Json.dll
+C:\code\GameGodot\Source\.godot\mono\temp\obj\Debug\Godot- Game.csproj.CopyComplete
+C:\code\GameGodot\Source\.godot\mono\temp\obj\Debug\Godot- Game.dll
+C:\code\GameGodot\Source\.godot\mono\temp\obj\Debug\refint\Godot- Game.dll
+C:\code\GameGodot\Source\.godot\mono\temp\obj\Debug\Godot- Game.pdb
+C:\code\GameGodot\Source\.godot\mono\temp\obj\Debug\Godot- Game.genruntimeconfig.cache
+C:\code\GameGodot\Source\.godot\mono\temp\obj\Debug\ref\Godot- Game.dll

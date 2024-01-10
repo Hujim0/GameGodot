@@ -1,9 +1,9 @@
 using Godot;
 using System;
 
-namespace GodotGame.PlayerBehaviour.Interaction
+namespace GodotGame.PlayerBehavior.Interaction
 {
-	public abstract class IInteractableHighLightable : IInteractable
+	public abstract partial class IIntractableHighlightable : IIntractable
 	{
 		static readonly string pathToHighlightMaterial = @"res://src/visuals/Shaders/OutlineShader/OutlineMaterial.material";
 
@@ -14,7 +14,7 @@ namespace GodotGame.PlayerBehaviour.Interaction
 
 			set
 			{
-				if (!IsInteractable) return;
+				if (!IsIntractable) return;
 				Material = value ? HighLightedMat : null;
 
 				isHighLighted = value;

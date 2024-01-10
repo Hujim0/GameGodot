@@ -3,7 +3,7 @@ using System;
 
 namespace GodotGame.UI
 {
-	public class AnchorUI : Control
+	public partial class AnchorUI : Control
 	{
 		[Export(PropertyHint.Enum)] public AnchorType anchorType;
 
@@ -19,31 +19,31 @@ namespace GodotGame.UI
 			switch (anchorType)
 			{
 				case AnchorType.Horizontal:
-					RectPosition = new Vector2(offset.x, RectPosition.y);
-					RectSize = new Vector2(size.x - offset.x, RectSize.y);
+					Position = new Vector2(offset.X, Position.Y);
+					Size = new Vector2(size.X - offset.X, Size.Y);
 					return;
 				case AnchorType.Vertical:
-					RectSize = new Vector2(RectSize.x, size.y);
+					Size = new Vector2(Size.X, size.Y);
 					return;
 				case AnchorType.HorizontalBottom:
-					RectSize = new Vector2(size.x, RectSize.y);
-					GD.Print(MarginBottom);
-					GD.Print(RectPosition);
+					Size = new Vector2(size.X, Size.Y);
+					GD.Print(OffsetBottom);
+					GD.Print(Position);
 					return;
 				case AnchorType.HorizontalTop:
-					RectSize = new Vector2(RectSize.x, size.y);
-					GD.Print("Bottom: " + MarginBottom);
-					GD.Print("Top: " + MarginTop);
-					GD.Print(RectPosition);
+					Size = new Vector2(Size.X, size.Y);
+					GD.Print("Bottom: " + OffsetBottom);
+					GD.Print("Top: " + OffsetTop);
+					GD.Print(Position);
 					return;
-				case AnchorType.Viewport:
-					RectSize = new Vector2(size.x, size.y);
+				case AnchorType.SubViewport:
+					Size = new Vector2(size.X, size.Y);
 					return;
 				case AnchorType.Center:
-					RectPosition = new Vector2
+					Position = new Vector2
 					{
-						x = size.x - ViewportUI.viewportSize.x,
-						y = size.y - ViewportUI.viewportSize.y,
+						X = size.X - ViewportUI.viewportSize.X,
+						Y = size.Y - ViewportUI.viewportSize.Y,
 					};
 					return;
 				default:

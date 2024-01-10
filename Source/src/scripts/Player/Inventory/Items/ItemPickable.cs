@@ -1,12 +1,12 @@
 using Godot;
 using GodotGame.General;
-using GodotGame.PlayerBehaviour.Interaction;
+using GodotGame.PlayerBehavior.Interaction;
 using GodotGame.Serialization;
 using System;
 
-namespace GodotGame.PlayerBehaviour.InventorySystem
+namespace GodotGame.PlayerBehavior.InventorySystem
 {
-	public class ItemPickable : IInteractableHighLightable
+	public partial class ItemPickable : IIntractableHighlightable
 	{
 		const string PathToPrefab = "res://resrc/Prefabs/Item.scn";
 
@@ -19,9 +19,9 @@ namespace GodotGame.PlayerBehaviour.InventorySystem
 
 			set
             {
-				Texture = GD.Load<Texture>($"{InventoryUI.PathToItemsFolder}/{GameManager.GetItem(value).Sprite}");
+				Texture = GD.Load<Texture2D>($"{InventoryUI.PathToItemsFolder}/{GameManager.GetItem(value).Sprite2D}");
 
-				Offset = new Vector2(0, -Texture.GetSize().y / 2);
+				Offset = new Vector2(0, -Texture.GetSize().Y / 2);
 
 				id = value;
 			}
@@ -35,9 +35,9 @@ namespace GodotGame.PlayerBehaviour.InventorySystem
 		
 		public static Node loadItem(int id)
 		{
-			Node node = itemPrefab.Instance();
+			Node node = itemPrefab.Instantiate();
 
-			node.GetNode<ItemPickable>("Sprite").Id = id;
+			node.GetNode<ItemPickable>("Sprite2D").Id = id;
 
 			return node;
 		}

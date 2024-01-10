@@ -3,9 +3,9 @@ using System;
 
 namespace GodotGame.UI
 {
-	public enum AnchorType { Horizontal, Vertical, HorizontalBottom, HorizontalTop, VerticalLeft, VerticalRight, Viewport, Center }
+	public enum AnchorType { Horizontal, Vertical, HorizontalBottom, HorizontalTop, VerticalLeft, VerticalRight, SubViewport, Center }
 
-	public class ViewportUI : Control
+	public partial class ViewportUI : Control
 	{
 
 		public static Viewport viewport = null;
@@ -19,43 +19,43 @@ namespace GodotGame.UI
 
 		public override void _EnterTree()
 		{
-			viewport = GetViewport();
+			// viewport = GetViewport();
 
-			viewport.Connect("size_changed", this, nameof(SizeChange));
+			// viewport.Connect("size_changed", new Callable(this, nameof(SizeChange)));
 
-			RectSize = viewport.Size;
+			// Size = viewport.GetVisibleRect().Size;
 
 			
 		}
 
 		public void SizeChange()
 		{
-			OnSizeChange?.Invoke(viewport.Size);
-			RectSize = viewport.Size;
+			// OnSizeChange?.Invoke(Size);
+			// Size = viewport.Size;
 		}
 
 		public static void ChangeResolution(Vector2 res)
 		{
-			viewport.Size = res;
+			// viewport.Size = new Vector2I((int)res.X, (int)res.Y);
 		}
 
 		public static void SetFullScreen(bool value)
 		{
-			OS.WindowFullscreen = value;
+			// OS. = value;
 
-			if (value)
-			{
-				OS.WindowSize = OS.GetScreenSize();
-				return;
-			}
+			// if (value)
+			// {
+			// 	OS.WindowSize = OS.GetScreenSize();
+			// 	return;
+			// }
 
-			OS.WindowSize = new Vector2(1280, 720);
-			OS.CenterWindow();
+			// OS.WindowSize = new Vector2(1280, 720);
+			// OS.CenterWindow();
 		}
 
 		public static void SetVsync(bool value)
 		{
-			OS.VsyncEnabled = value;
+			// OS.VsyncEnabled = value;
 		}
 	}
 }

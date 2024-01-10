@@ -4,7 +4,7 @@ using System;
 namespace GodotGame.EventSystem
 {
 	[Serializable]
-	public class EventData
+	public partial class EventData
 	{
 		[Export] public EVENT_TYPE type;
 

@@ -2,9 +2,9 @@ using Godot;
 using GodotGame.Dialogues;
 using System;
 
-namespace GodotGame.PlayerBehaviour
+namespace GodotGame.PlayerBehavior
 {
-	public class Player : KinematicBody2D
+	public partial class Player : CharacterBody2D
 	{
 		public Vector2 input { get; private set; }
 		public Vector2 velocity { get; private set; }
@@ -47,8 +47,8 @@ namespace GodotGame.PlayerBehaviour
 
 		Vector2 PlayerSpeed = new Vector2
 		{
-			x = PLAYER_SPEED,
-			y = -PLAYER_SPEED,
+			X = PLAYER_SPEED,
+			Y = -PLAYER_SPEED,
 		};
 
 
@@ -69,7 +69,7 @@ namespace GodotGame.PlayerBehaviour
 
 		private void SetPauseTrue() => SetPause(true);
 
-        public override void _Process(float delta)
+        public override void _Process(double delta)
 		{
 			//0.375 for first step
 			//0.45 for one step
@@ -119,9 +119,11 @@ namespace GodotGame.PlayerBehaviour
 		}
 
 */
-		public override void _PhysicsProcess(float delta)
+		public override void _PhysicsProcess(double delta)
 		{
-			velocity = MoveAndSlide(input.Normalized() * PlayerSpeed);
+			velocity = input.Normalized() * PlayerSpeed;
+
+			MoveAndSlide();
 
 			isRunning = velocity.Abs() > Vector2.Zero;
 		}
@@ -131,15 +133,15 @@ namespace GodotGame.PlayerBehaviour
 
 			input = new Vector2()
 			{
-				x = Input.GetActionStrength(INPUT_MOVE_RIGHT) - Input.GetActionStrength(INPUT_MOVE_LEFT),
-				y = Input.GetActionStrength(INPUT_MOVE_UP) - Input.GetActionStrength(INPUT_MOVE_DOWN),
+				X = Input.GetActionStrength(INPUT_MOVE_RIGHT) - Input.GetActionStrength(INPUT_MOVE_LEFT),
+				Y = Input.GetActionStrength(INPUT_MOVE_UP) - Input.GetActionStrength(INPUT_MOVE_DOWN),
 			};
 
 			InputUpdated?.Invoke(input);
 
 			if (input == Vector2.Zero) return;
 
-			if ((IsFacingRight && input.x < 0) || (!IsFacingRight && input.x > 0)) IsFacingRight = !IsFacingRight;
+			if ((IsFacingRight && input.X < 0) || (!IsFacingRight && input.X > 0)) IsFacingRight = !IsFacingRight;
 		}
 
 		void FlipPlayer() => ApplyScale(new Vector2(-1f, 1f));

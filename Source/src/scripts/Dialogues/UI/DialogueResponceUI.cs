@@ -3,17 +3,17 @@ using System.Collections.Generic;
 
 namespace GodotGame.Dialogues.UI
 {
-	public class DialogueResponceUI : Control
+	public partial class DialogueResponseUI : Control
 	{
 		const string PathToPrefab = "res://src/prefabs/ResponceButton.tscn";
 
 		readonly float buttonHeight = 15f;
 
-		public static DialogueResponceUI Instance = null;
+		public static DialogueResponseUI Instance = null;
 
 		public static bool inChoose = false;
 
-		static List<ResponceScript> responcesList;
+		static List<ResponseScript> responsesList;
 
 		[Export] public Vector2 offset = new Vector2(20f, 20f);
 
@@ -24,81 +24,81 @@ namespace GodotGame.Dialogues.UI
 		{
 			if (Instance == null) Instance = this;
 
-			responcesList = new List<ResponceScript>();
+			responsesList = new List<ResponseScript>();
 		}
 
-		public void InstantiateButtons(DialogueResponce[] responces)
+		public void InstantiateButtons(DialogueResponse[] responses)
 		{
 			inChoose = true;
 
-			foreach (DialogueResponce responce in responces)
+			foreach (DialogueResponse response in responses)
 			{
-				Node newInstance = prefab.Instance();
+				Node newInstance = prefab.Instantiate();
 				AddChild(newInstance, true);
 
-				ResponceScript responceNode = GetNode<ResponceScript>(newInstance.Name);
+				ResponseScript responseNode = GetNode<ResponseScript>(new NodePath(newInstance.Name));
 
-				responceNode.SetResponce(responce);
+				responseNode.SetResponse(response);
 
-				responcesList.Add(responceNode);
+				responsesList.Add(responseNode);
 			}
 			
 			//focus set
-			for (int i = 0; i < responcesList.Count; i++)
+			for (int i = 0; i < responsesList.Count; i++)
             {
-				if (i != responcesList.Count - 1) responcesList[i].FocusNeighbourRight = responcesList[i + 1].GetPath();
+				if (i != responsesList.Count - 1) responsesList[i].FocusNeighborRight = responsesList[i + 1].GetPath();
 
-				if (i != 0) responcesList[i].FocusNeighbourLeft = responcesList[i - 1].GetPath();
+				if (i != 0) responsesList[i].FocusNeighborLeft = responsesList[i - 1].GetPath();
 
 				FocusMode = FocusModeEnum.All;
 			}
 
-			responcesList[0].GrabFocus();
+			responsesList[0].GrabFocus();
 
-			UpdatePositions(RectSize);
+			UpdatePositions(Size);
 		}
 		
 		void UpdatePositions(Vector2 marginSize)
 		{
-			float buttonWidth = (marginSize.x - (offset.x * (responcesList.Count + 1))) / responcesList.Count;
+			float buttonWidth = (marginSize.X - (offset.X * (responsesList.Count + 1))) / responsesList.Count;
 
-			for (int i = 0; i < responcesList.Count; i++)
+			for (int i = 0; i < responsesList.Count; i++)
 			{
-				responcesList[i].SetRect(
+				responsesList[i].SetRect(
 					size: new Vector2
 					{
-						x = buttonWidth,
-						y = buttonHeight
+						X = buttonWidth,
+						Y = buttonHeight
 					},
 
 					position: new Vector2
 					{
-						x = (buttonWidth * i) + (offset.x * (i + 1)),
-						y = ((marginSize.y - buttonHeight) / 2) + ResponceScript.ANIM_HEIGHT,
+						X = (buttonWidth * i) + (offset.X * (i + 1)),
+						Y = ((marginSize.Y - buttonHeight) / 2) + ResponseScript.ANIM_HEIGHT,
 					},
 					/*<summary>
 						|--|---------|--|---------|--|
 						  ^       ^
-						offset  button	|	|	offsetCount = responcesCount + 1
+						offset  button	|	|	offsetCount = responsesCount + 1
 					</summary>*/
 					i
 				);
 			}
 		}
 
-		public static void ActivateResponce(DialogueResponce responce)
+		public static void ActivateResponse(DialogueResponse response)
 		{
 			inChoose = false;
 
-			foreach (Node node in responcesList)
+			foreach (Node node in responsesList)
             {
 				if (node.Name == "Tween") continue;
 				node.QueueFree();
             }
 
-			responcesList.Clear();
+			responsesList.Clear();
 			
-			if (responce.panels != null) DialogueSystem.InsertDialoguePanels(responce.panels);
+			if (response.panels != null) DialogueSystem.InsertDialoguePanels(response.panels);
 			DialogueSystem.NextSentence();
 		}
 	}

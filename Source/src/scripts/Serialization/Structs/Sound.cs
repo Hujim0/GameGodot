@@ -1,16 +1,16 @@
-﻿
+
 
 using Godot;
 
 namespace GodotGame.Serialization.Structs
 {
-    public class Sound
+    public partial class Sound
     {
-/*        [Export] public AudioStreamSample Clip;*/
+/*        [Export] public AudioStreamWAV Clip;*/
         [Export] public float Volume;
         [Export] public float Pitch;
 
-        public Sound (/*AudioStreamSample Clip,*/ float Volume, float Pitch)
+        public Sound (/*AudioStreamWAV Clip,*/ float Volume, float Pitch)
         {
 /*            this.Clip = Clip;*/
             this.Volume = Volume;

@@ -2,7 +2,7 @@ using GodotGame.Serialization.Localization;
 
 namespace GodotGame.UI.PauseMenu.Buttons
 {
-    public class QuitButton : LocalizedButton
+    public partial class QuitButton : LocalizedButton
     {
         public override void _Pressed() => SceneManager.QuitApplication();
 

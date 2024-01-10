@@ -1,14 +1,14 @@
 using Godot;
 using GodotGame.Dialogues;
-using GodotGame.PlayerBehaviour;
+using GodotGame.PlayerBehavior;
 using System;
 using System.Collections.Generic;
 
-namespace GodotGame.PlayerBehaviour.Interaction
+namespace GodotGame.PlayerBehavior.Interaction
 {
-	public class PlayerInteraction : Area2D
+	public partial class PlayerInteraction : Area2D
 	{
-		List<IInteractable> list = new List<IInteractable>();
+		List<IIntractable> list = new List<IIntractable>();
 
 		int lastIndexInList = 0;
 
@@ -18,7 +18,7 @@ namespace GodotGame.PlayerBehaviour.Interaction
 		{
 			if (!@event.IsActionPressed(Player.INPUT_INTERACT) || list.Count == 0) return;
 
-			if (list[lastIndexInList].IsInteractable) list[lastIndexInList].OnInteracted();
+			if (list[lastIndexInList].IsIntractable) list[lastIndexInList].OnInteracted();
 
 			if (list.Count - 1 != lastIndexInList) { lastIndexInList++; return; }
 
@@ -27,24 +27,24 @@ namespace GodotGame.PlayerBehaviour.Interaction
 
 		public void OnAreaEntered(PhysicsBody2D node)
         {
-			if (!(node.GetChildOrNull<IInteractable>(0) is IInteractable interactable)
-				||	!interactable.IsInteractable) return;
+			if (!(node.GetChildOrNull<IIntractable>(0) is IIntractable intractable)
+				||	!intractable.IsIntractable) return;
 
-            interactable.IsHighLighted = true;
+            intractable.IsHighLighted = true;
 
-            list.Add(interactable);
+            list.Add(intractable);
 
             lastIndexInList = 0;
         }
 
         public void OnAreaExited(PhysicsBody2D node)
 		{
-			if (!(node.GetChildOrNull<IInteractable>(0) is IInteractable interactable)
-				|| !interactable.IsInteractable) return;
+			if (!(node.GetChildOrNull<IIntractable>(0) is IIntractable intractable)
+				|| !intractable.IsIntractable) return;
 
-			interactable.IsHighLighted = false;
+			intractable.IsHighLighted = false;
 
-			list.Remove(interactable);
+			list.Remove(intractable);
 
 			lastIndexInList = 0;
 		}

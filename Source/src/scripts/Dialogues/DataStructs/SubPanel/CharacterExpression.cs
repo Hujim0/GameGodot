@@ -1,9 +1,9 @@
-﻿using Godot;
+using Godot;
 
 namespace GodotGame.Dialogues
 {
     [System.Serializable]
-    public class CharacterExpression
+    public partial class CharacterExpression
     {
         public string talk;
 

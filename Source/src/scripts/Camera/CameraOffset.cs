@@ -1,7 +1,7 @@
 using Godot;
-using GodotGame.PlayerBehaviour;
+using GodotGame.PlayerBehavior;
 
-public class CameraOffset : Position2D
+public partial class CameraOffset : Marker2D
 {
 	[Export] public Vector2 offset;
 
@@ -12,14 +12,14 @@ public class CameraOffset : Position2D
 		Instance = this;
     }
 
-    public override void _Process(float delta)
+    public override void _Process(double delta)
 	{
 		if (Player.Instance == null) return;
 
 		Position = new Vector2
 		{
-			x = Mathf.Abs(Player.Instance.velocity.x * offset.x),
-			y = Player.Instance.velocity.y * offset.y
+			X = Mathf.Abs(Player.Instance.velocity.X * offset.X),
+			Y = Player.Instance.velocity.Y * offset.Y
 		};
 	}
 }

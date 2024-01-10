@@ -2,7 +2,7 @@ using Godot;
 using GodotGame.General;
 using System;
 
-public class LanguageDropbox : OptionButton
+public partial class LanguageDropbox : OptionButton
 {
     public override void _Ready()
     {
